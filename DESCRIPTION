@@ -8,13 +8,15 @@ Authors@R: c(
 Depends:
     httr,
     jsonlite
-Description: R client for the Cumulocity API.
-License: GPL-3 | file LICENSE
-Encoding: UTF-8
-LazyData: true
 Suggests: 
     testthat,
     knitr,
     rmarkdown
+Description: R client for the Cumulocity API.
+License: GPL-3 | file LICENSE
+URL: https://softwareag.github.io/cumulocityr/, https://github.com/SoftwareAG/cumulocityr
+BugReports: https://github.com/SoftwareAG/cumulocityr/issues
+Encoding: UTF-8
+LazyData: true
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
