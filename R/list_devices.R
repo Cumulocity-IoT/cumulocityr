@@ -17,6 +17,34 @@
 # GNU General Public License for details (http://www.gnu.org/licenses/).
 # #############################################################################
 
-hello <- function() {
+#' List available devices or group of devices for a tenant.
+#'
+#'
+#' @param param1 The first parameter.
+#'
+#' @return R object containing the raw data, the transformed data and data
+#' statistics.
+#'
+#' @details
+#' For a device or group of homogeneous devices, the API will also display the
+#' measurements associated with that device/device group.
+#'
+#'
+#' @author Dmitriy Bolotov
+#'
+#' @references
+#' \href{https://cumulocity.com/guides/reference/inventory/}{Cumulocity inventory API}
+#'
+#'
+#' @examples
+#' \dontrun{
+#' print("example goes here")
+#' }
+#'
+#' @import httr
+#' @import jsonlite
+#' @export
+list_devices <- function(param1) {
   print("Hello, world!")
+  print(param1)
 }
