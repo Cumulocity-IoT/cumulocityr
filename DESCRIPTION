@@ -12,3 +12,5 @@ Description: R client for the Cumulocity API.
 License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
+Suggests: 
+    testthat
