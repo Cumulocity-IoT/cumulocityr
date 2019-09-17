@@ -1,0 +1,11 @@
+Package: cumulocityr
+Type: Package
+Title: R client for the Cumulocity API
+Version: 0.1.0
+Authors@R: c(
+    person("Dmitriy", "Bolotov", email = "rpmmlsupport@softwareag.com", role = c("aut", "cre")),
+    person("Software AG", role = c("cph")))
+Description: R client for the Cumulocity API.
+License: GPL-3 | file LICENSE
+Encoding: UTF-8
+LazyData: true
