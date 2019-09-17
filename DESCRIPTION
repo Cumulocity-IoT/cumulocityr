@@ -5,6 +5,9 @@ Version: 0.1.0
 Authors@R: c(
     person("Dmitriy", "Bolotov", email = "rpmmlsupport@softwareag.com", role = c("aut", "cre")),
     person("Software AG", role = c("cph")))
+Depends:
+    httr,
+    jsonlite
 Description: R client for the Cumulocity API.
 License: GPL-3 | file LICENSE
 Encoding: UTF-8
