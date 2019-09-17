@@ -7,6 +7,8 @@
 
 [![Travis build
 status](https://travis-ci.org/SoftwareAG/cumulocityr.svg?branch=master)](https://travis-ci.org/SoftwareAG/cumulocityr)
+[![Codecov test
+coverage](https://codecov.io/gh/SoftwareAG/cumulocityr/branch/master/graph/badge.svg)](https://codecov.io/gh/SoftwareAG/cumulocityr?branch=master)
 <!-- badges: end -->
 
 R client for the Cumulocity API.

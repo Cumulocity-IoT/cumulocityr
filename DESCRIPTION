@@ -11,7 +11,8 @@ Depends:
 Suggests: 
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    covr
 Description: R client for the Cumulocity API.
 License: GPL-3 | file LICENSE
 URL: https://softwareag.github.io/cumulocityr/, https://github.com/SoftwareAG/cumulocityr
