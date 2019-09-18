@@ -22,12 +22,10 @@
 #'
 #' @param param1 The first parameter.
 #'
-#' @return R object containing the raw data, the transformed data and data
-#' statistics.
+#' @return R object listing available devices.
 #'
 #' @details
-#' For a device or group of homogeneous devices, the API will also display the
-#' measurements associated with that device/device group.
+#' List available devices or group of devices for a tenant.
 #'
 #'
 #' @author Dmitriy Bolotov
@@ -38,13 +36,20 @@
 #'
 #' @examples
 #' \dontrun{
-#' print("example goes here")
+#' list_devices()
 #' }
 #'
 #' @import httr
 #' @import jsonlite
 #' @export
 list_devices <- function(param1) {
-  print("Hello, world!")
-  print(param1)
+
+  url <- paste0(.get_cumulocity_base_url(),
+                "/inventory/managedObjects?fragmentType=c8y_IsDevice",
+               collapse="")
+
+  r <- httr::GET(url = url,
+                 httr::authenticate(.get_cumulocity_usr(),
+                                    .get_cumulocity_pwd()))
+  httr::content(r, "text")
 }

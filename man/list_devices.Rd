@@ -10,15 +10,13 @@ list_devices(param1)
 \item{param1}{The first parameter.}
 }
 \value{
-R object containing the raw data, the transformed data and data
-statistics.
+R object listing available devices.
 }
 \description{
 List available devices or group of devices for a tenant.
 }
 \details{
-For a device or group of homogeneous devices, the API will also display the
-measurements associated with that device/device group.
+List available devices or group of devices for a tenant.
 }
 \examples{
 \dontrun{
