@@ -20,7 +20,7 @@ List available devices or group of devices for a tenant.
 }
 \examples{
 \dontrun{
-print("example goes here")
+list_devices()
 }
 
 }
