@@ -5,8 +5,7 @@ Version: 0.1.0
 Authors@R: c(
     person("Dmitriy", "Bolotov", email = "rpmmlsupport@softwareag.com", role = c("aut", "cre")),
     person("Software AG", role = c("cph")))
-Depends:
-    httr,
+Imports: httr,
     jsonlite
 Suggests: 
     testthat,
