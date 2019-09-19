@@ -51,5 +51,10 @@ list_devices <- function(param1) {
   r <- httr::GET(url = url,
                  httr::authenticate(.get_cumulocity_usr(),
                                     .get_cumulocity_pwd()))
-  httr::content(r, "text")
+
+  cont <- httr::content(r, "text")
+
+  cont_parsed <- jsonlite::fromJSON(cont)
+
+  return(cont_parsed)
 }
