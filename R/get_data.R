@@ -17,48 +17,30 @@
 # GNU General Public License for details (http://www.gnu.org/licenses/).
 # #############################################################################
 
-#' List available devices or group of devices for a tenant.
+#' Get the measurements for a device for a time period.
 #'
 #'
-#' @param param1 The first parameter.
+#' @param device_id The device id.
+#' @param time_period The time period.
 #'
-#' @return R object listing available devices.
+#' @return R object with measurements.
 #'
 #' @details
-#' List available devices or group of devices for a tenant.
+#' Get the measurements for a device for a time period.
 #'
 #'
 #' @author Dmitriy Bolotov
 #'
 #' @references
-#' \href{https://cumulocity.com/guides/reference/inventory/}{Cumulocity Inventory API}
+#' \href{https://cumulocity.com/guides/reference/events/}{Cumulocity Events API}
+#' \href{https://cumulocity.com/guides/reference/measurements/}{Cumulocity Measurements API}
 #'
 #'
 #' @examples
 #' \dontrun{
-#' list_devices()
+#' get_data()
 #' }
-#'
-#' @import httr
-#' @import jsonlite
 #' @export
-list_devices <- function(param1) {
-  url <- paste0(.get_cumulocity_base_url(),
-    "/inventory/managedObjects?fragmentType=c8y_IsDevice",
-    collapse = ""
-  )
-
-  r <- httr::GET(
-    url = url,
-    httr::authenticate(
-      .get_cumulocity_usr(),
-      .get_cumulocity_pwd()
-    )
-  )
-
-  cont <- httr::content(r, "text")
-
-  cont_parsed <- jsonlite::fromJSON(cont)
-
-  return(cont_parsed)
+get_data <- function(device_id, time_period) {
+  warning("empty function")
 }

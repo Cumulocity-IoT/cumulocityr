@@ -25,7 +25,7 @@ list_devices()
 
 }
 \references{
-\href{https://cumulocity.com/guides/reference/inventory/}{Cumulocity inventory API}
+\href{https://cumulocity.com/guides/reference/inventory/}{Cumulocity Inventory API}
 }
 \author{
 Dmitriy Bolotov
