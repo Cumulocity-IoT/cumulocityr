@@ -48,7 +48,7 @@ list_devices <- function(param1) {
     collapse = ""
   )
 
-  r <- httr::GET(
+  response <- httr::GET(
     url = url,
     httr::authenticate(
       .get_cumulocity_usr(),
@@ -56,7 +56,7 @@ list_devices <- function(param1) {
     )
   )
 
-  cont <- httr::content(r, "text")
+  cont <- httr::content(response, "text")
 
   cont_parsed <- jsonlite::fromJSON(cont)
 

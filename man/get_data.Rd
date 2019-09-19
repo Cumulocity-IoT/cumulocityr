@@ -4,7 +4,7 @@
 \alias{get_data}
 \title{Get the measurements for a device for a time period.}
 \usage{
-get_data(device_id, time_period)
+get_data(device_id, time_period = NULL)
 }
 \arguments{
 \item{device_id}{The device id.}

@@ -41,6 +41,23 @@
 #' get_data()
 #' }
 #' @export
-get_data <- function(device_id, time_period) {
-  warning("empty function")
+get_data <- function(device_id, time_period = NULL) {
+
+  url <- paste0(.get_cumulocity_base_url(),
+                "/measurement/measurements",
+                collapse = ""
+  )
+
+  response <- GET(url = url,
+           query = list(source=device_id, pageSize="20"),
+           httr::authenticate(
+             .get_cumulocity_usr(),
+             .get_cumulocity_pwd()
+           ))
+
+  cont <- httr::content(response, "text")
+
+  cont_parsed <- jsonlite::fromJSON(cont)
+
+  return(cont_parsed)
 }
