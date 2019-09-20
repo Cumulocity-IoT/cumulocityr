@@ -22,7 +22,7 @@ Get the measurements for a device for a time period.
 }
 \examples{
 \dontrun{
-get_data()
+get_data(device_id, time_period)
 }
 }
 \references{

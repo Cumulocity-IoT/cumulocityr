@@ -43,22 +43,12 @@
 #' @import jsonlite
 #' @export
 list_devices <- function(param1) {
-  url <- paste0(.get_cumulocity_base_url(),
-    "/inventory/managedObjects?fragmentType=c8y_IsDevice",
-    collapse = ""
-  )
-
-  response <- httr::GET(
-    url = url,
-    httr::authenticate(
-      .get_cumulocity_usr(),
-      .get_cumulocity_pwd()
-    )
-  )
+  response <- .get_devices()
 
   cont <- httr::content(response, "text")
-
   cont_parsed <- jsonlite::fromJSON(cont)
 
-  return(cont_parsed)
+  .check_response(response, cont_parsed)
+
+  return(cont_parsed$managedObjects)
 }

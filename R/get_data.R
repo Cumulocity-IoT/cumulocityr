@@ -38,26 +38,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_data()
+#' get_data(device_id, time_period)
 #' }
 #' @export
 get_data <- function(device_id, time_period = NULL) {
-
-  url <- paste0(.get_cumulocity_base_url(),
-                "/measurement/measurements",
-                collapse = ""
-  )
-
-  response <- GET(url = url,
-           query = list(source=device_id, pageSize="20"),
-           httr::authenticate(
-             .get_cumulocity_usr(),
-             .get_cumulocity_pwd()
-           ))
+  response <- .get_measurements(device_id, time_period)
 
   cont <- httr::content(response, "text")
-
   cont_parsed <- jsonlite::fromJSON(cont)
 
-  return(cont_parsed)
+  .check_response(response, cont_parsed)
+
+  return(cont_parsed$measurements)
 }
