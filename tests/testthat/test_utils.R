@@ -1,6 +1,13 @@
 context("test utils")
 
 
+test_that(".get_cumulocity_* does not result in error", {
+  expect_error(.get_cumulocity_base_url(), NA)
+  expect_error(.get_cumulocity_usr(), NA)
+  expect_error(.get_cumulocity_pwd(), NA)
+})
+
+
 test_that(".get_env throws error if var is not found", {
   expect_error(.get_env("dummy_var_00"), "env var 'dummy_var_00' not found.")
 })
