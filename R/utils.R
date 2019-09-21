@@ -21,6 +21,9 @@
   .get_env("CUMULOCITY_pwd")
 }
 
+.get_cumulocity_device_id <- function() {
+  .get_env("CUMULOCITY_device_id")
+}
 
 
 .get_devices <- function() {
@@ -101,9 +104,23 @@
 
   # the_date <- as.character(the_date)
 
-  if (!is.character(the_date)) {
+  if (!is.null(the_date) & !is.character(the_date)) {
     stop("Dates must be of class character.")
   }
+}
 
-  return(the_date)
+
+.form_query <- function(device_id, date_from, date_to, page_size) {
+  # Form the query for GET in get_data.
+  if (is.null(date_from) & is.null(date_to)) {
+    query <- list(source = device_id, pageSize = page_size)
+  } else if (!is.null(date_from) & !is.null(date_to)) {
+    query <- list(source = device_id, dateFrom = date_from, dateTo = date_to)
+  } else if (!is.null(date_from)) {
+    query <- list(source = device_id, dateFrom = date_from, pageSize = page_size)
+  } else if (!is.null(date_to)) {
+    query <- list(source = device_id, dateTo = date_to, pageSize = page_size)
+  }
+
+  return(query)
 }

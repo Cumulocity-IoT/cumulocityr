@@ -56,21 +56,16 @@ get_data <- function(device_id,
                      parse_time = TRUE) {
   # response <- .get_measurements(device_id, date_from, date_to)
 
-  date_from <- .check_date(date_from)
-  date_to <- .check_date(date_to)
+  .check_date(date_from)
+  .check_date(date_to)
 
   url <- paste0(.get_cumulocity_base_url(),
     "/measurement/measurements",
     collapse = ""
   )
 
-  if (is.null(date_from) & is.null(date_to)) {
-    query <- list(source = device_id, pageSize = page_size)
-  } else if (!is.null(date_from)) {
-    query <- list(source = device_id, dateFrom = date_from, pageSize = page_size)
-  } else if (!is.null(date_to)) {
-    query <- list(source = device_id, dateTo = date_to, pageSize = page_size)
-  }
+  query <- .form_query(device_id, date_from, date_to, page_size)
+
 
   response <- GET(
     url = url,
