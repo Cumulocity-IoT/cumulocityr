@@ -4,12 +4,21 @@
 \alias{get_data}
 \title{Get the measurements for a device for a time period.}
 \usage{
-get_data(device_id, time_period = NULL)
+get_data(device_id, date_from = NULL, date_to = NULL, page_size = 10,
+  abridged = TRUE, parse_time = TRUE)
 }
 \arguments{
 \item{device_id}{The device id.}
 
-\item{time_period}{The time period.}
+\item{date_from}{The starting datetime.}
+
+\item{date_to}{The ending datetime.}
+
+\item{page_size}{The page size.}
+
+\item{abridged}{If TRUE, exclude "self" and "source" fields from results.}
+
+\item{parse_time}{If TRUE, parse "time" field from char to POSIXlt.}
 }
 \value{
 R object with measurements.
@@ -19,10 +28,13 @@ Get the measurements for a device for a time period.
 }
 \details{
 Get the measurements for a device for a time period.
+
+The parameter \code{page_size} is only used if \code{date_from}
+or \code{date_to} are NULL, or both are NULL.
 }
 \examples{
 \dontrun{
-get_data(device_id, time_period)
+get_data(device_id)
 }
 }
 \references{

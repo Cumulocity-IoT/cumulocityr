@@ -21,12 +21,19 @@
 #'
 #'
 #' @param device_id The device id.
-#' @param time_period The time period.
+#' @param date_from The starting datetime.
+#' @param date_to The ending datetime.
+#' @param page_size The page size.
+#' @param abridged If TRUE, exclude "self" and "source" fields from results.
+#' @param parse_time If TRUE, parse "time" field from char to POSIXlt.
 #'
 #' @return R object with measurements.
 #'
 #' @details
 #' Get the measurements for a device for a time period.
+#'
+#' The parameter \code{page_size} is only used if \code{date_from}
+#' or \code{date_to} are NULL, or both are NULL.
 #'
 #'
 #' @author Dmitriy Bolotov
@@ -38,16 +45,57 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_data(device_id, time_period)
+#' get_data(device_id)
 #' }
 #' @export
-get_data <- function(device_id, time_period = NULL) {
-  response <- .get_measurements(device_id, time_period)
+get_data <- function(device_id,
+                     date_from = NULL,
+                     date_to = NULL,
+                     page_size = 10,
+                     abridged = TRUE,
+                     parse_time = TRUE) {
+  # response <- .get_measurements(device_id, date_from, date_to)
+
+  date_from <- .check_date(date_from)
+  date_to <- .check_date(date_to)
+
+  url <- paste0(.get_cumulocity_base_url(),
+    "/measurement/measurements",
+    collapse = ""
+  )
+
+  if (is.null(date_from) & is.null(date_to)) {
+    query <- list(source = device_id, pageSize = page_size)
+  } else if (!is.null(date_from)) {
+    query <- list(source = device_id, dateFrom = date_from, pageSize = page_size)
+  } else if (!is.null(date_to)) {
+    query <- list(source = device_id, dateTo = date_to, pageSize = page_size)
+  }
+
+  response <- GET(
+    url = url,
+    query = query,
+    httr::authenticate(
+      .get_cumulocity_usr(),
+      .get_cumulocity_pwd()
+    )
+  )
 
   cont <- httr::content(response, "text")
   cont_parsed <- jsonlite::fromJSON(cont)
 
   .check_response(response, cont_parsed)
 
-  return(cont_parsed$measurements)
+
+  measurements <- cont_parsed$measurements
+
+  if (abridged) {
+    measurements <- measurements[, -which(names(measurements) %in% c("self", "source"))]
+  }
+
+  if (parse_time) {
+    measurements$time <- strptime(measurements$time, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "Z")
+  }
+
+  return(measurements)
 }
