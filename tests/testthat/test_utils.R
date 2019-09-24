@@ -104,34 +104,34 @@ test_that(".check_response_for_error returns error for bad credentials", {
 })
 
 
-# test_that(".check_response_for_error uses $error if $message is null", {
-#
-#   cont_parsed_03_null_message <- cont_parsed_03
-#   cont_parsed_03_null_message$message <- NULL
-#
-#   exp_error <- paste("Cumulocity API request failed with status code 401.\n",
-#                      "Category:         Client error",
-#                      "Reason:           Unauthorized",
-#                      "Status message:   Client error: (401) Unauthorized",
-#                      "Response message: security/Unauthorized",
-#                      sep = "\n")
-#   expect_error(.check_response_for_error(result_03, cont_parsed_03_null_message),exp_error, fixed = TRUE)
-# })
-#
-#
-# test_that(".check_response_for_error returns blank for
-#           Response message if $message and $error are null", {
-#
-#   cont_parsed_03_both_null <- cont_parsed_03
-#   cont_parsed_03_both_null$message <- NULL
-#   cont_parsed_03_both_null$error <- NULL
-#
-#   exp_error <- paste("Cumulocity API request failed with status code 401.\n",
-#                      "Category:         Client error",
-#                      "Reason:           Unauthorized",
-#                      "Status message:   Client error: (401) Unauthorized",
-#                      "Response message: ",
-#                      sep = "\n")
-#   expect_error(.check_response_for_error(result_03, cont_parsed_03_both_null),exp_error, fixed = TRUE)
-# })
+test_that(".check_response_for_error uses $error if $message is null", {
+
+  cont_parsed_03_null_message <- cont_parsed_03
+  cont_parsed_03_null_message$message <- NULL
+
+  exp_error <- paste("Cumulocity API request failed with status code 401.\n",
+                     "Category:         Client error",
+                     "Reason:           Unauthorized",
+                     "Status message:   Client error: (401) Unauthorized",
+                     "Response message: security/Unauthorized",
+                     sep = "\n")
+  expect_error(.check_response_for_error(result_03, cont_parsed_03_null_message),exp_error, fixed = TRUE)
+})
+
+
+test_that(".check_response_for_error returns blank for
+          Response message if $message and $error are null", {
+
+  cont_parsed_03_both_null <- cont_parsed_03
+  cont_parsed_03_both_null$message <- NULL
+  cont_parsed_03_both_null$error <- NULL
+
+  exp_error <- paste("Cumulocity API request failed with status code 401.\n",
+                     "Category:         Client error",
+                     "Reason:           Unauthorized",
+                     "Status message:   Client error: (401) Unauthorized",
+                     "Response message: ",
+                     sep = "\n")
+  expect_error(.check_response_for_error(result_03, cont_parsed_03_both_null),exp_error, fixed = TRUE)
+})
 
