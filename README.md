@@ -26,8 +26,11 @@ devtools::install_github("SoftwareAG/cumulocityr")
 ## Example
 
 ``` r
-# library(cumulocityr)
-## basic example code
+library(cumulocityr)
+
+devices <- list_devices()
+
+measurements <- get_data(device_id = 1234)
 ```
 
 -----
