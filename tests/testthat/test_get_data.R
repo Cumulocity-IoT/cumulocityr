@@ -15,3 +15,7 @@ test_that("time is parsed or not depending on parse_time", {
   expect_true(inherits(result_01$time[1], "POSIXlt"))
   expect_false(inherits(result_02$time[1], "POSIXlt"))
 })
+
+test_that("warning message is issues when measurements list is empty", {
+  expect_warning(get_data(123), "No measurements found.")
+})

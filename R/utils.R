@@ -54,7 +54,7 @@
     } else if (!is.null(cont_parsed$error)) {
       message_2 <- cont_parsed$error
     } else {
-      message_2 <- "."
+      message_2 <- ""
     }
 
     error_message <- sprintf(

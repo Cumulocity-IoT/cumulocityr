@@ -84,6 +84,11 @@ get_data <- function(device_id,
 
   measurements <- cont_parsed$measurements
 
+  if (!length(measurements)) {
+    warning("No measurements found.")
+    return(measurements)
+  }
+
   if (abridged) {
     measurements <- measurements[, -which(names(measurements) %in% c("self", "source"))]
   }
