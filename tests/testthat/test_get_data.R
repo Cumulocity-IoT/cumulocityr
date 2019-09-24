@@ -1,12 +1,13 @@
 context("test get_data")
 
 
-# test_that("when abridged=TRUE, 'self' and 'source' fields are excluded from results", {
-#   skip_on_travis()
-#   expect_null(result_01$self)
-#   expect_null(result_01$source)
-# })
-#
+test_that("when abridged=TRUE, 'self' and 'source' fields are excluded from results", {
+  result_01 <- get_data(device_id = .get_cumulocity_device_id(), page_size = 2)
+
+  expect_null(result_01$self)
+  expect_null(result_01$source)
+})
+
 # test_that("page_size controls number of records returned", {
 #   skip_on_travis()
 #   expect_equal(NROW(result_01), 2)
