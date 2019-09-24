@@ -79,3 +79,15 @@ test_that("query is formed correctly", {
   expect_null(query_04$dateTo)
   expect_equal(query_04$pageSize, 99)
 })
+
+test_that(".get_devices does not throw error", {
+  expect_error(.get_devices(),NA)
+  expect_equal(.get_devices()$status_code, 200)
+})
+
+
+test_that(".get_devices does not throw error", {
+  expect_error(.get_devices(),NA)
+  expect_equal(.get_devices()$status_code, 200)
+})
+

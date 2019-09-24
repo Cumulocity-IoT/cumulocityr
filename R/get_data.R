@@ -79,7 +79,7 @@ get_data <- function(device_id,
   cont <- httr::content(response, "text")
   cont_parsed <- jsonlite::fromJSON(cont)
 
-  .check_response(response, cont_parsed)
+  .check_response_for_error(response, cont_parsed)
 
 
   measurements <- cont_parsed$measurements

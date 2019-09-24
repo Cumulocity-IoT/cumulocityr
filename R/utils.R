@@ -44,32 +44,8 @@
 }
 
 
-.get_measurements <- function(device_id, date_from, date_to) {
-  # Get measurements for a device.
-  url <- paste0(.get_cumulocity_base_url(),
-    "/measurement/measurements",
-    collapse = ""
-  )
 
-  if (is.null(date_from) | is.null(date_to)) {
-    query <- list(source = device_id, pageSize = "20")
-  } else {
-    query <- list(source = device_id, dateFrom = date_from, dateTo = date_to)
-  }
-
-  response <- GET(
-    url = url,
-    query = query,
-    httr::authenticate(
-      .get_cumulocity_usr(),
-      .get_cumulocity_pwd()
-    )
-  )
-  return(response)
-}
-
-
-.check_response <- function(response, cont_parsed) {
+.check_response_for_error <- function(response, cont_parsed) {
   # Check for http error; if TRUE, print an error message.
   error_resp <- httr::http_error(response)
   if (error_resp) {
@@ -124,3 +100,30 @@
 
   return(query)
 }
+
+
+
+# .get_measurements <- function(device_id, date_from, date_to) {
+#   # Get measurements for a device.
+#   url <- paste0(.get_cumulocity_base_url(),
+#     "/measurement/measurements",
+#     collapse = ""
+#   )
+#
+#   if (is.null(date_from) | is.null(date_to)) {
+#     query <- list(source = device_id, pageSize = "20")
+#   } else {
+#     query <- list(source = device_id, dateFrom = date_from, dateTo = date_to)
+#   }
+#
+#   response <- GET(
+#     url = url,
+#     query = query,
+#     httr::authenticate(
+#       .get_cumulocity_usr(),
+#       .get_cumulocity_pwd()
+#     )
+#   )
+#   return(response)
+# }
+#
