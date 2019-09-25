@@ -4,8 +4,8 @@
 \alias{get_data}
 \title{Get the measurements for a device for a time period.}
 \usage{
-get_data(device_id, date_from = NULL, date_to = NULL, page_size = 10,
-  abridged = TRUE, parse_time = TRUE)
+get_data(device_id, date_from = NULL, date_to = NULL,
+  page_size = NULL, abridged = TRUE, parse_time = TRUE)
 }
 \arguments{
 \item{device_id}{The device id.}
@@ -14,14 +14,22 @@ get_data(device_id, date_from = NULL, date_to = NULL, page_size = 10,
 
 \item{date_to}{The ending datetime.}
 
-\item{page_size}{The page size.}
+\item{page_size}{The page size; used when at least one of the dates is NULL.}
 
 \item{abridged}{If TRUE, exclude "self" and "source" fields from results.}
 
 \item{parse_time}{If TRUE, parse "time" field from char to POSIXlt.}
 }
 \value{
-R object with measurements.
+R \code{data.frame} with measurements.
+
+Note that some columns in the data frame contain data frames themselves.
+For example, \code{c8y_Mobile} is a \code{data.frame} of 11 variables.
+
+If both \code{date_from} and \code{date_to} are present, \code{page_size}
+is not used.
+
+If \code{page_size} and both dates are NULL, the function will return up to 5 rows of data.
 }
 \description{
 Get the measurements for a device for a time period.

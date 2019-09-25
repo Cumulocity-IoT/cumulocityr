@@ -120,8 +120,8 @@
     <p>Get the measurements for a device for a time period.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_data</span>(<span class='no'>device_id</span>, <span class='kw'>date_from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>date_to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>abridged</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>parse_time</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_data</span>(<span class='no'>device_id</span>, <span class='kw'>date_from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>date_to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>page_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>abridged</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>parse_time</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,7 +140,7 @@
     </tr>
     <tr>
       <th>page_size</th>
-      <td><p>The page size.</p></td>
+      <td><p>The page size; used when at least one of the dates is NULL.</p></td>
     </tr>
     <tr>
       <th>abridged</th>
@@ -154,7 +154,12 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>R object with measurements.</p>
+    <p>R <code>data.frame</code> with measurements.</p>
+<p>Note that some columns in the data frame contain data frames themselves.
+For example, <code>c8y_Mobile</code> is a <code>data.frame</code> of 11 variables.</p>
+<p>If both <code>date_from</code> and <code>date_to</code> are present, <code>page_size</code>
+is not used.</p>
+<p>If <code>page_size</code> and both dates are NULL, the function will return up to 5 rows of data.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Get the measurements for a device for a time period.</p>

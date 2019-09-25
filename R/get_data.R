@@ -23,11 +23,19 @@
 #' @param device_id The device id.
 #' @param date_from The starting datetime.
 #' @param date_to The ending datetime.
-#' @param page_size The page size.
+#' @param page_size The page size; used when at least one of the dates is NULL.
 #' @param abridged If TRUE, exclude "self" and "source" fields from results.
 #' @param parse_time If TRUE, parse "time" field from char to POSIXlt.
 #'
-#' @return R object with measurements.
+#' @return R \code{data.frame} with measurements.
+#'
+#' Note that some columns in the data frame contain data frames themselves.
+#' For example, \code{c8y_Mobile} is a \code{data.frame} of 11 variables.
+#'
+#' If both \code{date_from} and \code{date_to} are present, \code{page_size}
+#' is not used.
+#'
+#' If \code{page_size} and both dates are NULL, the function will return up to 5 rows of data.
 #'
 #' @details
 #' Get the measurements for a device for a time period.
@@ -51,7 +59,7 @@
 get_data <- function(device_id,
                      date_from = NULL,
                      date_to = NULL,
-                     page_size = 10,
+                     page_size = NULL,
                      abridged = TRUE,
                      parse_time = TRUE) {
   # response <- .get_measurements(device_id, date_from, date_to)
