@@ -38,7 +38,7 @@ library(cumulocityr)
 
 devices <- list_devices()
 
-measurements <- get_data(device_id = 1234)
+measurements <- get_measurements(device_id = 1234)
 
 ```
 

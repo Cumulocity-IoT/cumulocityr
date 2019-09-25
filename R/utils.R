@@ -88,7 +88,7 @@
 
 
 .form_query <- function(device_id, date_from, date_to, page_size) {
-  # Form the query for GET in get_data.
+  # Form the query for GET in get_measurements.
   if (is.null(date_from) & is.null(date_to)) {
     query <- list(source = device_id, pageSize = page_size)
   } else if (!is.null(date_from) & !is.null(date_to)) {

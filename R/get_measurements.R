@@ -53,10 +53,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_data(device_id)
+#' get_measurements(device_id)
 #' }
 #' @export
-get_data <- function(device_id,
+get_measurements <- function(device_id,
                      date_from = NULL,
                      date_to = NULL,
                      page_size = NULL,
