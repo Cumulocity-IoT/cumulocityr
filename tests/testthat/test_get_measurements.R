@@ -1,4 +1,4 @@
-context("test get_data")
+context("test get_measurements")
 
 
 test_that("when abridged=TRUE, 'self' and 'source' fields are excluded from results", {
@@ -17,5 +17,5 @@ test_that("time is parsed or not depending on parse_time", {
 })
 
 test_that("warning message is issues when measurements list is empty", {
-  expect_warning(get_data(123), "No measurements found.")
+  expect_warning(get_measurements(123), "No measurements found.")
 })

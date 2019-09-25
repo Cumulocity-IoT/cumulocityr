@@ -1,8 +1,8 @@
 
 
-# results used in test_get_data.R
-result_01 <- get_data(device_id = .get_cumulocity_device_id(), page_size = 2)
-result_02 <- get_data(device_id = .get_cumulocity_device_id(), page_size = 11, parse_time = FALSE)
+# results used in test_get_measurements.R
+result_01 <- get_measurements(device_id = .get_cumulocity_device_id(), page_size = 2)
+result_02 <- get_measurements(device_id = .get_cumulocity_device_id(), page_size = 11, parse_time = FALSE)
 
 # results used in test_utils.R
 url_01 <- paste0(.get_cumulocity_base_url(),

@@ -42,7 +42,7 @@ or \code{date_to} are NULL, or both are NULL.
 }
 \examples{
 \dontrun{
-get_data(device_id)
+get_measurements(device_id)
 }
 }
 \references{
