@@ -81,14 +81,8 @@ test_that("query is formed correctly", {
 })
 
 test_that(".get_devices does not throw error", {
-  expect_error(.get_devices(),NA)
-  expect_equal(.get_devices()$status_code, 200)
-})
-
-
-test_that(".get_devices does not throw error", {
-  expect_error(.get_devices(),NA)
-  expect_equal(.get_devices()$status_code, 200)
+  expect_error(.get_devices(page_size = 3),NA)
+  expect_equal(.get_devices(page_size = 20)$status_code, 200)
 })
 
 

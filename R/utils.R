@@ -26,7 +26,7 @@
 }
 
 
-.get_devices <- function() {
+.get_devices <- function(page_size) {
   # Get object with devices.
   url <- paste0(.get_cumulocity_base_url(),
     "/inventory/managedObjects?fragmentType=c8y_IsDevice",
@@ -35,6 +35,7 @@
 
   response <- httr::GET(
     url = url,
+    query = list(pageSize = page_size),
     httr::authenticate(
       .get_cumulocity_usr(),
       .get_cumulocity_pwd()

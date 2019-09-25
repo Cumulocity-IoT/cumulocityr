@@ -4,10 +4,10 @@
 \alias{list_devices}
 \title{List available devices or group of devices for a tenant.}
 \usage{
-list_devices(param1)
+list_devices(page_size = NULL)
 }
 \arguments{
-\item{param1}{The first parameter.}
+\item{page_size}{The page size.}
 }
 \value{
 R object listing available devices.

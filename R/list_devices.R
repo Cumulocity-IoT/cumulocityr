@@ -20,7 +20,7 @@
 #' List available devices or group of devices for a tenant.
 #'
 #'
-#' @param param1 The first parameter.
+#' @param page_size The page size.
 #'
 #' @return R object listing available devices.
 #'
@@ -42,8 +42,9 @@
 #' @import httr
 #' @import jsonlite
 #' @export
-list_devices <- function(param1) {
-  response <- .get_devices()
+list_devices <- function(page_size = NULL) {
+
+  response <- .get_devices(page_size)
 
   cont <- httr::content(response, "text")
   cont_parsed <- jsonlite::fromJSON(cont)
