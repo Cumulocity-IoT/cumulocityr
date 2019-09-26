@@ -24,12 +24,12 @@
 #' @param date_from The starting datetime.
 #' @param date_to The ending datetime.
 #' @param page_size The page size; used when at least one of the dates is NULL.
-#' @param abridged If TRUE, exclude "self" and "source" fields from results.
+#' @param abridged If TRUE, exclude "self" and "source" fields from the result.
 #' @param parse_time If TRUE, parse "time" field from char to POSIXlt.
 #'
-#' @return R \code{data.frame} with measurements.
+#' @return A \code{data.frame} with measurements.
 #'
-#' Note that some columns in the data frame contain data frames themselves.
+#' Note that some columns in the returned data frame contain data frames themselves.
 #' For example, \code{c8y_Mobile} is a \code{data.frame} of 11 variables.
 #'
 #' If both \code{date_from} and \code{date_to} are present, \code{page_size}

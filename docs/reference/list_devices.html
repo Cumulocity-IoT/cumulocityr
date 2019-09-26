@@ -120,7 +120,7 @@
     <p>List available devices or group of devices for a tenant.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>list_devices</span>(<span class='kw'>page_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>list_devices</span>(<span class='kw'>page_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>abridged</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -129,14 +129,23 @@
       <th>page_size</th>
       <td><p>The page size.</p></td>
     </tr>
+    <tr>
+      <th>abridged</th>
+      <td><p>If TRUE, exclude several fields from the result.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>R object listing available devices.</p>
+    <p>A <code>data.frame</code> with measurements.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>List available devices or group of devices for a tenant.</p>
+<p>Note that some columns in the returned data frame contain data frames themselves.
+For example, <code>c8y_Availability</code> is a <code>data.frame</code> of 2 variables.</p>
+<p>When <code>abridged = TRUE</code>, the following fields are excluded from
+the returned data frame: <code>additionParents, childDevices, childAssets,
+childAdditions, assetParents, deviceParents, self</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://cumulocity.com/guides/reference/inventory/'>Cumulocity Inventory API</a></p>
