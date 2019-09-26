@@ -2,5 +2,3 @@
 
 export(get_measurements)
 export(list_devices)
-import(httr)
-import(jsonlite)

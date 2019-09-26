@@ -75,7 +75,7 @@ get_measurements <- function(device_id,
   query <- .form_query(device_id, date_from, date_to, page_size)
 
 
-  response <- GET(
+  response <- httr::GET(
     url = url,
     query = query,
     httr::authenticate(

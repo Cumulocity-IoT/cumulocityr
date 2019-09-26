@@ -46,8 +46,6 @@
 #' list_devices()
 #' }
 #'
-#' @import httr
-#' @import jsonlite
 #' @export
 list_devices <- function(page_size = NULL, abridged = TRUE) {
 
