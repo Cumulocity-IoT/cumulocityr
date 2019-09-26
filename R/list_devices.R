@@ -20,7 +20,7 @@
 #' List available devices or group of devices for a tenant.
 #'
 #'
-#' @param page_size The page size.
+#' @param page_size The page size, set to 2000 (maximum) by default.
 #' @param abridged If TRUE, exclude several fields from the result.
 #'
 #' @return A \code{data.frame} with measurements.
@@ -47,7 +47,8 @@
 #' }
 #'
 #' @export
-list_devices <- function(page_size = NULL, abridged = TRUE) {
+list_devices <- function(page_size = 2000,
+                         abridged = TRUE) {
 
   response <- .get_devices(page_size)
 

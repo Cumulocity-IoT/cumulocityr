@@ -23,7 +23,8 @@
 #' @param device_id The device id.
 #' @param date_from The starting datetime.
 #' @param date_to The ending datetime.
-#' @param page_size The page size; used when at least one of the dates is NULL.
+#' @param page_size The page size, set to 2000 (maximum) by default. Used
+#' when at least one of the dates is NULL.
 #' @param abridged If TRUE, exclude "self" and "source" fields from the result.
 #' @param parse_time If TRUE, parse "time" field from char to POSIXlt.
 #'
@@ -59,7 +60,7 @@
 get_measurements <- function(device_id,
                      date_from = NULL,
                      date_to = NULL,
-                     page_size = NULL,
+                     page_size = 2000,
                      abridged = TRUE,
                      parse_time = TRUE) {
   # response <- .get_measurements(device_id, date_from, date_to)
