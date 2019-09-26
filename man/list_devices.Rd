@@ -4,12 +4,15 @@
 \alias{list_devices}
 \title{List available devices or group of devices for a tenant.}
 \usage{
-list_devices(page_size = NULL, abridged = TRUE)
+list_devices(page_size = 2000, abridged = TRUE,
+  parse_datetime = TRUE)
 }
 \arguments{
-\item{page_size}{The page size.}
+\item{page_size}{The page size, set to 2000 (maximum) by default.}
 
 \item{abridged}{If TRUE, exclude several fields from the result.}
+
+\item{parse_datetime}{If TRUE, parse datetime fields from char to POSIXlt.}
 }
 \value{
 A \code{data.frame} with measurements.
@@ -26,6 +29,9 @@ For example, \code{c8y_Availability} is a \code{data.frame} of 2 variables.
 When \code{abridged = TRUE}, the following fields are excluded from
 the returned data frame: \code{additionParents, childDevices, childAssets,
 childAdditions, assetParents, deviceParents, self}.
+
+When \code{parse_datetime = TRUE}, the following fields are parsed from char to
+POSIXlt: \code{creationTime, lastUpdated, c8y_Availability.lastMessage}.
 }
 \examples{
 \dontrun{

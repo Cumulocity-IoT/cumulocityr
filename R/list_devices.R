@@ -22,6 +22,7 @@
 #'
 #' @param page_size The page size, set to 2000 (maximum) by default.
 #' @param abridged If TRUE, exclude several fields from the result.
+#' @param parse_datetime If TRUE, parse datetime fields from char to POSIXlt.
 #'
 #' @return A \code{data.frame} with measurements.
 #'
@@ -34,6 +35,9 @@
 #' When \code{abridged = TRUE}, the following fields are excluded from
 #' the returned data frame: \code{additionParents, childDevices, childAssets,
 #' childAdditions, assetParents, deviceParents, self}.
+#'
+#' When \code{parse_datetime = TRUE}, the following fields are parsed from char to
+#' POSIXlt: \code{creationTime, lastUpdated, c8y_Availability.lastMessage}.
 #'
 #' @author Dmitriy Bolotov
 #'
@@ -48,7 +52,8 @@
 #'
 #' @export
 list_devices <- function(page_size = 2000,
-                         abridged = TRUE) {
+                         abridged = TRUE,
+                         parse_datetime = TRUE) {
 
   response <- .get_devices(page_size)
 
@@ -63,6 +68,12 @@ list_devices <- function(page_size = 2000,
     exclude_list <- c("additionParents", "childDevices", "childAssets", "childAdditions",
                       "assetParents", "deviceParents", "self")
     managed_objects <- managed_objects[, -which(names(managed_objects) %in% exclude_list)]
+  }
+
+  if (parse_datetime) {
+    managed_objects$creationTime <- .parse_datetime(managed_objects$creationTime)
+    managed_objects$lastUpdated <- .parse_datetime(managed_objects$lastUpdated)
+    managed_objects$c8y_Availability$lastMessage <- .parse_datetime(managed_objects$c8y_Availability$lastMessage)
   }
 
   return(managed_objects)

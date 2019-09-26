@@ -121,7 +121,7 @@
     </div>
 
     <pre class="usage"><span class='fu'>get_measurements</span>(<span class='no'>device_id</span>, <span class='kw'>date_from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>date_to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>page_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>abridged</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>parse_time</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>abridged</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>parse_datetime</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,14 +140,15 @@
     </tr>
     <tr>
       <th>page_size</th>
-      <td><p>The page size; used when at least one of the dates is NULL.</p></td>
+      <td><p>The page size, set to 2000 (maximum) by default. Used
+when at least one of the dates is NULL.</p></td>
     </tr>
     <tr>
       <th>abridged</th>
       <td><p>If TRUE, exclude "self" and "source" fields from the result.</p></td>
     </tr>
     <tr>
-      <th>parse_time</th>
+      <th>parse_datetime</th>
       <td><p>If TRUE, parse "time" field from char to POSIXlt.</p></td>
     </tr>
     </table>

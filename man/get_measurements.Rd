@@ -5,7 +5,7 @@
 \title{Get the measurements for a device for a time period.}
 \usage{
 get_measurements(device_id, date_from = NULL, date_to = NULL,
-  page_size = NULL, abridged = TRUE, parse_time = TRUE)
+  page_size = 2000, abridged = TRUE, parse_datetime = TRUE)
 }
 \arguments{
 \item{device_id}{The device id.}
@@ -14,11 +14,12 @@ get_measurements(device_id, date_from = NULL, date_to = NULL,
 
 \item{date_to}{The ending datetime.}
 
-\item{page_size}{The page size; used when at least one of the dates is NULL.}
+\item{page_size}{The page size, set to 2000 (maximum) by default. Used
+when at least one of the dates is NULL.}
 
 \item{abridged}{If TRUE, exclude "self" and "source" fields from the result.}
 
-\item{parse_time}{If TRUE, parse "time" field from char to POSIXlt.}
+\item{parse_datetime}{If TRUE, parse "time" field from char to POSIXlt.}
 }
 \value{
 A \code{data.frame} with measurements.

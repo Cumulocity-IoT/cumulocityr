@@ -103,6 +103,11 @@
 }
 
 
+.parse_datetime <- function(the_time) {
+  # Parse datetime from char to POSIXlt.
+  strptime(the_time, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "Z")
+}
+
 
 # .get_measurements <- function(device_id, date_from, date_to) {
 #   # Get measurements for a device.

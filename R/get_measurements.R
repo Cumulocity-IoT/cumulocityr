@@ -26,7 +26,7 @@
 #' @param page_size The page size, set to 2000 (maximum) by default. Used
 #' when at least one of the dates is NULL.
 #' @param abridged If TRUE, exclude "self" and "source" fields from the result.
-#' @param parse_time If TRUE, parse "time" field from char to POSIXlt.
+#' @param parse_datetime If TRUE, parse "time" field from char to POSIXlt.
 #'
 #' @return A \code{data.frame} with measurements.
 #'
@@ -62,7 +62,7 @@ get_measurements <- function(device_id,
                      date_to = NULL,
                      page_size = 2000,
                      abridged = TRUE,
-                     parse_time = TRUE) {
+                     parse_datetime = TRUE) {
   # response <- .get_measurements(device_id, date_from, date_to)
 
   .check_date(date_from)
@@ -102,8 +102,10 @@ get_measurements <- function(device_id,
     measurements <- measurements[, -which(names(measurements) %in% c("self", "source"))]
   }
 
-  if (parse_time) {
-    measurements$time <- strptime(measurements$time, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "Z")
+  if (parse_datetime) {
+
+    # measurements$time <- strptime(measurements$time, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "Z")
+    measurements$time <- .parse_datetime(measurements$time)
   }
 
   return(measurements)

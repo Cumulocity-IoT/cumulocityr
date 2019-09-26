@@ -11,9 +11,9 @@ test_that("page_size controls number of records returned", {
   expect_equal(NROW(result_02), 11)
 })
 
-test_that("time is parsed or not depending on parse_time", {
+test_that("time is parsed or not depending on parse_datetime", {
   expect_true(inherits(result_01$time[1], "POSIXlt"))
-  expect_false(inherits(result_02$time[1], "POSIXlt"))
+  expect_true(is.character(result_02$time[1]))
 })
 
 test_that("warning message is issues when measurements list is empty", {

@@ -120,18 +120,23 @@
     <p>List available devices or group of devices for a tenant.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>list_devices</span>(<span class='kw'>page_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>abridged</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>list_devices</span>(<span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>abridged</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>parse_datetime</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>page_size</th>
-      <td><p>The page size.</p></td>
+      <td><p>The page size, set to 2000 (maximum) by default.</p></td>
     </tr>
     <tr>
       <th>abridged</th>
       <td><p>If TRUE, exclude several fields from the result.</p></td>
+    </tr>
+    <tr>
+      <th>parse_datetime</th>
+      <td><p>If TRUE, parse datetime fields from char to POSIXlt.</p></td>
     </tr>
     </table>
 
@@ -146,6 +151,8 @@ For example, <code>c8y_Availability</code> is a <code>data.frame</code> of 2 var
 <p>When <code>abridged = TRUE</code>, the following fields are excluded from
 the returned data frame: <code>additionParents, childDevices, childAssets,
 childAdditions, assetParents, deviceParents, self</code>.</p>
+<p>When <code>parse_datetime = TRUE</code>, the following fields are parsed from char to
+POSIXlt: <code>creationTime, lastUpdated, c8y_Availability.lastMessage</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://cumulocity.com/guides/reference/inventory/'>Cumulocity Inventory API</a></p>
