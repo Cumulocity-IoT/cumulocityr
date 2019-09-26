@@ -4,19 +4,28 @@
 \alias{list_devices}
 \title{List available devices or group of devices for a tenant.}
 \usage{
-list_devices(page_size = NULL)
+list_devices(page_size = NULL, abridged = TRUE)
 }
 \arguments{
 \item{page_size}{The page size.}
+
+\item{abridged}{If TRUE, exclude several fields from the result.}
 }
 \value{
-R object listing available devices.
+A \code{data.frame} with measurements.
 }
 \description{
 List available devices or group of devices for a tenant.
 }
 \details{
 List available devices or group of devices for a tenant.
+
+Note that some columns in the returned data frame contain data frames themselves.
+For example, \code{c8y_Availability} is a \code{data.frame} of 2 variables.
+
+When \code{abridged = TRUE}, the following fields are excluded from
+the returned data frame: \code{additionParents, childDevices, childAssets,
+childAdditions, assetParents, deviceParents, self}.
 }
 \examples{
 \dontrun{

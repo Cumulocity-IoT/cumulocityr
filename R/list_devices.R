@@ -21,12 +21,19 @@
 #'
 #'
 #' @param page_size The page size.
+#' @param abridged If TRUE, exclude several fields from the result.
 #'
-#' @return R object listing available devices.
+#' @return A \code{data.frame} with measurements.
 #'
 #' @details
 #' List available devices or group of devices for a tenant.
 #'
+#' Note that some columns in the returned data frame contain data frames themselves.
+#' For example, \code{c8y_Availability} is a \code{data.frame} of 2 variables.
+#'
+#' When \code{abridged = TRUE}, the following fields are excluded from
+#' the returned data frame: \code{additionParents, childDevices, childAssets,
+#' childAdditions, assetParents, deviceParents, self}.
 #'
 #' @author Dmitriy Bolotov
 #'
@@ -42,7 +49,7 @@
 #' @import httr
 #' @import jsonlite
 #' @export
-list_devices <- function(page_size = NULL) {
+list_devices <- function(page_size = NULL, abridged = TRUE) {
 
   response <- .get_devices(page_size)
 
@@ -51,5 +58,13 @@ list_devices <- function(page_size = NULL) {
 
   .check_response_for_error(response, cont_parsed)
 
-  return(cont_parsed$managedObjects)
+  managed_objects <- cont_parsed$managedObjects
+
+  if (abridged) {
+    exclude_list <- c("additionParents", "childDevices", "childAssets", "childAdditions",
+                      "assetParents", "deviceParents", "self")
+    managed_objects <- managed_objects[, -which(names(managed_objects) %in% exclude_list)]
+  }
+
+  return(managed_objects)
 }
