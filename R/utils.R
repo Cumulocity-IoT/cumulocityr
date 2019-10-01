@@ -100,20 +100,20 @@
 }
 
 
-.form_query <- function(device_id, date_from, date_to, page_size) {
-  # Form the query for GET in get_measurements.
-  if (is.null(date_from) & is.null(date_to)) {
-    query <- list(source = device_id, pageSize = page_size)
-  } else if (!is.null(date_from) & !is.null(date_to)) {
-    query <- list(source = device_id, dateFrom = date_from, dateTo = date_to)
-  } else if (!is.null(date_from)) {
-    query <- list(source = device_id, dateFrom = date_from, pageSize = page_size)
-  } else if (!is.null(date_to)) {
-    query <- list(source = device_id, dateTo = date_to, pageSize = page_size)
-  }
-
-  return(query)
-}
+# .form_query <- function(device_id, date_from, date_to, page_size) {
+#   # Form the query for GET in get_measurements.
+#   if (is.null(date_from) & is.null(date_to)) {
+#     query <- list(source = device_id, pageSize = page_size)
+#   } else if (!is.null(date_from) & !is.null(date_to)) {
+#     query <- list(source = device_id, dateFrom = date_from, dateTo = date_to)
+#   } else if (!is.null(date_from)) {
+#     query <- list(source = device_id, dateFrom = date_from, pageSize = page_size)
+#   } else if (!is.null(date_to)) {
+#     query <- list(source = device_id, dateTo = date_to, pageSize = page_size)
+#   }
+#
+#   return(query)
+# }
 
 
 .parse_datetime <- function(the_time) {
@@ -122,14 +122,22 @@
 }
 
 
-.issue_measurement_warning <- function(cur_page) {
-  warning(paste("No measurements found on page ",
-    toString(cur_page), ".",
-    sep = ""
-  ))
+.issue_em_warning <- function(cur_page, type) {
+  if (type == "meas") {
+    warning(paste("No measurements found on page ",
+      toString(cur_page), ".",
+      sep = ""
+    ))
+  } else if (type == "event") {
+    warning(paste("No events found on page ",
+      toString(cur_page), ".",
+      sep = ""
+    ))
+  }
 }
 
-.get_measurements_from_response <- function(response, cur_page) {
+.get_em_from_response <- function(response, cur_page, type) {
+  # Get events or measurements from response
   # parse content, check response for error, and issue warning if empty
 
   cont <- httr::content(response, "text")
@@ -137,16 +145,24 @@
 
   .check_response_for_error(response, cont_parsed)
 
-  measurements <- cont_parsed$measurements
-
-  if (!length(measurements)) {
-    .issue_measurement_warning(cur_page)
+  if (type == "meas") {
+    dat <- cont_parsed$measurements
+    if (!length(dat)) {
+      .issue_em_warning(cur_page, "meas")
+    }
+  } else if (type == "event") {
+    dat <- cont_parsed$events
+    if (!length(dat)) {
+      .issue_em_warning(cur_page, "event")
+    }
   }
 
-  return(measurements)
+
+
+  return(dat)
 }
 
-.get_content_from_response <- function(response, cur_page) {
+.get_content_from_response <- function(response, cur_page, type) {
   # Check repsponse for error, get content without parsing, and issue warning if empty
 
   .check_response_for_error(response = response)
@@ -154,35 +170,8 @@
   cont <- httr::content(response, "text")
 
   if (grepl("measurements\\\":\\[]", cont)) {
-    .issue_measurement_warning(cur_page)
+    .issue_em_warning(cur_page, type)
   }
 
   return(cont)
 }
-
-
-
-# .get_measurements <- function(device_id, date_from, date_to) {
-#   # Get measurements for a device.
-#   url <- paste0(.get_cumulocity_base_url(),
-#     "/measurement/measurements",
-#     collapse = ""
-#   )
-#
-#   if (is.null(date_from) | is.null(date_to)) {
-#     query <- list(source = device_id, pageSize = "20")
-#   } else {
-#     query <- list(source = device_id, dateFrom = date_from, dateTo = date_to)
-#   }
-#
-#   response <- GET(
-#     url = url,
-#     query = query,
-#     httr::authenticate(
-#       .get_cumulocity_usr(),
-#       .get_cumulocity_pwd()
-#     )
-#   )
-#   return(response)
-# }
-#

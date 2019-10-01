@@ -16,3 +16,7 @@ cont_parsed_03 <- jsonlite::fromJSON(cont_03)
 # results used in test_get_devices.R
 result_04 <- get_devices(page_size = 2)
 result_05 <- get_devices(page_size = 10, parse_datetime = FALSE)
+
+# results used in test_get_events.R
+result_06 <- get_events(device_id = .get_cumulocity_device_id(), page_size = 2)
+result_07 <- get_events(device_id = .get_cumulocity_device_id(), page_size = 4, parse_datetime = FALSE)
