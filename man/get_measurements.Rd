@@ -30,9 +30,6 @@ get_measurements(device_id, date_from = NULL, date_to = NULL,
 \value{
 A \code{data.frame} with measurements.
 
-Note that some columns in the returned data frame contain data frames themselves.
-For example, \code{c8y_Mobile} is a \code{data.frame} of 11 variables.
-
 If both \code{date_from} and \code{date_to} are present, \code{page_size}
 is not used.
 

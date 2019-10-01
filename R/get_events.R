@@ -24,13 +24,6 @@
 #'
 #' @return A \code{data.frame} with events.
 #'
-#' Note that some columns in the returned data frame contain data frames themselves.
-#' For example, \code{c8y_Mobile} is a \code{data.frame} of 11 variables.
-#'
-#' If both \code{date_from} and \code{date_to} are present, \code{page_size}
-#' is not used.
-#'
-#' If \code{page_size} and both dates are NULL, the function will return up to 5 rows of data.
 #'
 #' If \code{parse} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
 #' before being returned. The data is converted to a single flattened data frame.

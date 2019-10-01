@@ -30,9 +30,6 @@
 #' @details
 #' Get the devices or group of devices for a tenant.
 #'
-#' Note that some columns in the returned data frame contain data frames themselves.
-#' For example, \code{c8y_Availability} is a \code{data.frame} of 2 variables.
-#'
 #' If \code{drop_fields = TRUE}, the following fields are excluded from
 #' the returned data frame: \code{additionParents, childDevices, childAssets,
 #' childAdditions, assetParents, deviceParents, self}.
