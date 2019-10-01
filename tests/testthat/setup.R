@@ -6,12 +6,13 @@ result_02 <- get_measurements(device_id = .get_cumulocity_device_id(), page_size
 
 # results used in test_utils.R
 url_01 <- paste0(.get_cumulocity_base_url(),
-              "/inventory/managedObjects?fragmentType=c8y_IsDevice",
-              collapse = "")
-result_03 <- httr::GET(url = url_01, httr::authenticate("foo","bar"))
+  "/inventory/managedObjects?fragmentType=c8y_IsDevice",
+  collapse = ""
+)
+result_03 <- httr::GET(url = url_01, httr::authenticate("foo", "bar"))
 cont_03 <- httr::content(result_03, "text")
 cont_parsed_03 <- jsonlite::fromJSON(cont_03)
 
-# results used in test_list_devices.R
-result_04 <- list_devices(page_size = 2)
-result_05 <- list_devices(page_size = 2, parse_datetime = FALSE)
+# results used in test_get_devices.R
+result_04 <- get_devices(page_size = 2)
+result_05 <- get_devices(page_size = 10, parse_datetime = FALSE)

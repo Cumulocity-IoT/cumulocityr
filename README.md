@@ -28,7 +28,7 @@ devtools::install_github("SoftwareAG/cumulocityr")
 ``` r
 library(cumulocityr)
 
-devices <- list_devices()
+devices <- get_devices()
 
 measurements <- get_measurements(device_id = 1234)
 ```

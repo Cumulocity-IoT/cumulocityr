@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the measurements for a device for a time period. — get_measurements • cumulocityr</title>
+<title>Get the measurements for a device for a time period. — get_measurements_0 • cumulocityr</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,7 @@
 
 
 
-<meta property="og:title" content="Get the measurements for a device for a time period. — get_measurements" />
+<meta property="og:title" content="Get the measurements for a device for a time period. — get_measurements_0" />
 <meta property="og:description" content="Get the measurements for a device for a time period." />
 <meta name="twitter:card" content="summary" />
 
@@ -112,17 +112,16 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get the measurements for a device for a time period.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SoftwareAG/cumulocityr/blob/master/R/get_measurements.R'><code>R/get_measurements.R</code></a></small>
-    <div class="hidden name"><code>get_measurements.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/SoftwareAG/cumulocityr/blob/master/R/get_measurements_0.R'><code>R/get_measurements_0.R</code></a></small>
+    <div class="hidden name"><code>get_measurements_0.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Get the measurements for a device for a time period.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_measurements</span>(<span class='no'>device_id</span>, <span class='kw'>date_from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>date_to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>pages_per_query</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>start_page</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>drop_fields</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>parse_datetime</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_measurements_0</span>(<span class='no'>device_id</span>, <span class='kw'>date_from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>date_to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>abridged</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>parse_datetime</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,27 +140,16 @@
     </tr>
     <tr>
       <th>page_size</th>
-      <td><p>The page size, set to 2000 (maximum) by default.</p></td>
+      <td><p>The page size, set to 2000 (maximum) by default. Used
+when at least one of the dates is NULL.</p></td>
     </tr>
     <tr>
-      <th>pages_per_query</th>
-      <td><p>The number of pages to return per function call.</p></td>
-    </tr>
-    <tr>
-      <th>start_page</th>
-      <td><p>The first page used in the query.</p></td>
-    </tr>
-    <tr>
-      <th>drop_fields</th>
+      <th>abridged</th>
       <td><p>If TRUE, exclude "self" and "source" fields from the result.</p></td>
     </tr>
     <tr>
       <th>parse_datetime</th>
       <td><p>If TRUE, parse "time" field from char to POSIXlt.</p></td>
-    </tr>
-    <tr>
-      <th>parse</th>
-      <td><p>If TRUE, parse the JSON object into a data frame.</p></td>
     </tr>
     </table>
 
@@ -173,12 +161,6 @@ For example, <code>c8y_Mobile</code> is a <code>data.frame</code> of 11 variable
 <p>If both <code>date_from</code> and <code>date_to</code> are present, <code>page_size</code>
 is not used.</p>
 <p>If <code>page_size</code> and both dates are NULL, the function will return up to 5 rows of data.</p>
-<p>If <code>parse</code> is TRUE, the JSON object is parsed using <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::fromJSON</a></code>
-before being returned. The data is converted to a single flattened data frame.
-If a page does not contain any measurements, it does not get added to the data frame.</p>
-<p>If <code>parse</code> is FALSE, the JSON object is returned as a JSON string. For queries with multiple pages, a
-list of such objects is returned. All pages are added to the list, even if there are no measurements.
-The params <code>drop_fields</code> and <code>parse_datetime</code> have no effect.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Get the measurements for a device for a time period.</p>
@@ -186,11 +168,12 @@ The params <code>drop_fields</code> and <code>parse_datetime</code> have no effe
 or <code>date_to</code> are NULL, or both are NULL.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://cumulocity.com/guides/reference/measurements/'>Cumulocity Measurements API</a></p>
+    <p><a href='https://cumulocity.com/guides/reference/events/'>Cumulocity Events API</a>
+<a href='https://cumulocity.com/guides/reference/measurements/'>Cumulocity Measurements API</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>get_measurements</span>(<span class='no'>device_id</span>)
+<span class='fu'><a href='get_measurements.html'>get_measurements</a></span>(<span class='no'>device_id</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

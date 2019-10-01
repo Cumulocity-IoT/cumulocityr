@@ -33,15 +33,6 @@
     collapse = ""
   )
 
-  # response <- httr::GET(
-  #   url = url,
-  #   query = list(pageSize = page_size),
-  #   httr::authenticate(
-  #     .get_cumulocity_usr(),
-  #     .get_cumulocity_pwd()
-  #   )
-  # )
-
   query <- list(pageSize = page_size)
   response <- .get_with_query(url, query)
 
@@ -64,10 +55,10 @@
 .check_response_for_error <- function(response, cont_parsed = NULL) {
   # Check for http error; if TRUE, print an error message.
 
-  if(is.null(cont_parsed)) {
+  if (is.null(cont_parsed)) {
     cont <- httr::content(response, "text")
     cont_parsed <- jsonlite::fromJSON(cont)
-    }
+  }
 
   error_resp <- httr::http_error(response)
   if (error_resp) {
@@ -90,34 +81,6 @@
     stop(error_message, call. = FALSE)
   }
 }
-#
-# .check_response_for_error_2 <- function(response) {
-#   # Check for http error; if TRUE, print an error message.
-#   # This version parses content in this function.
-#
-#   cont_parsed <- jsonlite::fromJSON(cont)
-#
-#   error_resp <- httr::http_error(response)
-#   if (error_resp) {
-#     if (!is.null(cont_parsed$message)) {
-#       message_2 <- cont_parsed$message
-#     } else if (!is.null(cont_parsed$error)) {
-#       message_2 <- cont_parsed$error
-#     } else {
-#       message_2 <- ""
-#     }
-#
-#     error_message <- sprintf(
-#       "Cumulocity API request failed with status code %s.\n\n%s\n%s\n%s\n%s",
-#       httr::status_code(response),
-#       paste("Category:         ", httr::http_status(response)$category, sep = ""),
-#       paste("Reason:           ", httr::http_status(response)$reason, sep = ""),
-#       paste("Status message:   ", httr::http_status(response)$message, sep = ""),
-#       paste("Response message: ", message_2, sep = "")
-#     )
-#     stop(error_message, call. = FALSE)
-#   }
-# }
 
 
 .check_date <- function(the_date) {
@@ -161,7 +124,9 @@
 
 .issue_measurement_warning <- function(cur_page) {
   warning(paste("No measurements found on page ",
-                toString(cur_page), ".", sep = ""))
+    toString(cur_page), ".",
+    sep = ""
+  ))
 }
 
 .get_measurements_from_response <- function(response, cur_page) {
@@ -174,19 +139,23 @@
 
   measurements <- cont_parsed$measurements
 
-  if (!length(measurements)) {.issue_measurement_warning(cur_page)}
+  if (!length(measurements)) {
+    .issue_measurement_warning(cur_page)
+  }
 
   return(measurements)
 }
 
-.get_content_from_response <- function(response, cur_page){
+.get_content_from_response <- function(response, cur_page) {
   # Check repsponse for error, get content without parsing, and issue warning if empty
 
   .check_response_for_error(response = response)
 
   cont <- httr::content(response, "text")
 
-  if(grepl("measurements\\\":\\[]",cont)) {.issue_measurement_warning(cur_page)}
+  if (grepl("measurements\\\":\\[]", cont)) {
+    .issue_measurement_warning(cur_page)
+  }
 
   return(cont)
 }

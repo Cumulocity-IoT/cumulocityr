@@ -11,7 +11,7 @@ This package contains functions to interact with the Cumulocity API.
 \section{Functions}{
 
 \itemize{
-\item \code{\link{list_devices}} returns available devices.
+\item \code{\link{get_devices}} returns available devices for a tenant.
 \item \code{\link{get_measurements}} returns measurements for a device.
 }
 }

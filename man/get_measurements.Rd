@@ -5,7 +5,8 @@
 \title{Get the measurements for a device for a time period.}
 \usage{
 get_measurements(device_id, date_from = NULL, date_to = NULL,
-  page_size = 2000, abridged = TRUE, parse_datetime = TRUE)
+  page_size = 2000, pages_per_query = 1, start_page = 1,
+  drop_fields = TRUE, parse_datetime = TRUE, parse = TRUE)
 }
 \arguments{
 \item{device_id}{The device id.}
@@ -14,12 +15,17 @@ get_measurements(device_id, date_from = NULL, date_to = NULL,
 
 \item{date_to}{The ending datetime.}
 
-\item{page_size}{The page size, set to 2000 (maximum) by default. Used
-when at least one of the dates is NULL.}
+\item{page_size}{The page size, set to 2000 (maximum) by default.}
 
-\item{abridged}{If TRUE, exclude "self" and "source" fields from the result.}
+\item{pages_per_query}{The number of pages to return per function call.}
+
+\item{start_page}{The first page used in the query.}
+
+\item{drop_fields}{If TRUE, exclude "self" and "source" fields from the result.}
 
 \item{parse_datetime}{If TRUE, parse "time" field from char to POSIXlt.}
+
+\item{parse}{If TRUE, parse the JSON object into a data frame.}
 }
 \value{
 A \code{data.frame} with measurements.
@@ -31,6 +37,14 @@ If both \code{date_from} and \code{date_to} are present, \code{page_size}
 is not used.
 
 If \code{page_size} and both dates are NULL, the function will return up to 5 rows of data.
+
+If \code{parse} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
+before being returned. The data is converted to a single flattened data frame.
+If a page does not contain any measurements, it does not get added to the data frame.
+
+If \code{parse} is FALSE, the JSON object is returned as a JSON string. For queries with multiple pages, a
+list of such objects is returned. All pages are added to the list, even if there are no measurements.
+The params \code{drop_fields} and \code{parse_datetime} have no effect.
 }
 \description{
 Get the measurements for a device for a time period.
@@ -47,7 +61,6 @@ get_measurements(device_id)
 }
 }
 \references{
-\href{https://cumulocity.com/guides/reference/events/}{Cumulocity Events API}
 \href{https://cumulocity.com/guides/reference/measurements/}{Cumulocity Measurements API}
 }
 \author{
