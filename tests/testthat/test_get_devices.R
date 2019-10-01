@@ -28,3 +28,8 @@ test_that("time is parsed or not depending on parse_datetime", {
   expect_true(is.character(result_05_row$lastUpdated[1]))
   expect_true(is.character(result_05_row$c8y_Availability.lastMessage[1]))
 })
+
+
+test_that("parse = FALSE returns character string", {
+  expect_true(inherits(result_09[[1]],"character"))
+})

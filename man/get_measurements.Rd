@@ -30,11 +30,6 @@ get_measurements(device_id, date_from = NULL, date_to = NULL,
 \value{
 A \code{data.frame} with measurements.
 
-If both \code{date_from} and \code{date_to} are present, \code{page_size}
-is not used.
-
-If \code{page_size} and both dates are NULL, the function will return up to 5 rows of data.
-
 If \code{parse} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
 before being returned. The data is converted to a single flattened data frame.
 If a page does not contain any measurements, it does not get added to the data frame.
