@@ -76,9 +76,11 @@ get_devices <- function(page_size = 2000,
 
     if (drop_fields) {
       exclude_list <- c(
-        "additionParents", "childDevices", "childAssets", "childAdditions",
-        "assetParents", "deviceParents", "self"
-      )
+        "additionParents.self", "additionParents.references", "childDevices.self",
+        "childDevices.references", "childAssets.self", "childAssets.references", "childAdditions.self",
+        "childAdditions.references","deviceParents.self", "deviceParents.references",
+        "assetParents.self", "assetParents.references", "self")
+
       managed_objects <- managed_objects[, -which(names(managed_objects) %in% exclude_list)]
     }
 

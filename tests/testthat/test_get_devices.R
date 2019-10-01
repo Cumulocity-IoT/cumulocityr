@@ -8,11 +8,11 @@ test_that("when drop_fields = TRUE, certain fields are excluded from results", {
   aa <- get_devices(page_size = 5, drop_fields = TRUE)
 
   exclude_list <- c(
-    "additionParents", "childDevices",
-    "childAssets", "childAdditions",
-    "assetParents", "deviceParents",
-    "self"
-  )
+    "additionParents.self", "additionParents.references", "childDevices.self",
+    "childDevices.references", "childAssets.self", "childAssets.references", "childAdditions.self",
+    "childAdditions.references","deviceParents.self", "deviceParents.references",
+    "assetParents.self", "assetParents.references", "self")
+
   expect_false(any(names(aa) %in% exclude_list))
 })
 
