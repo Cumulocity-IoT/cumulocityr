@@ -129,6 +129,7 @@
 <ul>
 <li><p><code><a href='get_devices.html'>get_devices</a></code> returns available devices for a tenant.</p></li>
 <li><p><code><a href='get_measurements.html'>get_measurements</a></code> returns measurements for a device.</p></li>
+<li><p><code><a href='get_events.html'>get_events</a></code> returns events for a device.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="authentication"><a class="anchor" href="#authentication"></a>Authentication</h2>
@@ -136,20 +137,25 @@
     
 
 
-<p>Environment variables used for authentication are stored in a local .Renviron file:</p><ul>
-<li><p><code class="env">CUMULOCITY_base_url = "[tenant url]"</code><br /></p></li>
-<li><p><code class="env">CUMULOCITY_usr = "[username]"</code><br /></p></li>
-<li><p><code class="env">CUMULOCITY_pwd = "[password]"</code><br /></p></li>
-<li><p><code class="env">CUMULOCITY_device_id = "[an example device id]"</code></p></li>
-</ul>
+<p>The package expects a local .Renviron file with credentials defined as follows:</p>
+<pre>
+CUMULOCITY_base_url = "[tenant url]"
+CUMULOCITY_usr = "[username]"
+CUMULOCITY_pwd = "[password]"
+CUMULOCITY_device_id = "[an example device id]"
+</pre>
 
-<p>The tenant url should be of the form <code>"https://tenant_name.cumulocity.com"</code>.</p>
+<p>The tenant url should be of the form <code>"https://tenant_name.cumulocity.com"</code>.
+<code>CUMULOCITY_device_id</code> is not required by any of the main functions.</p>
+<p><code>.Renviron</code> can be edited with <code><a href='https://usethis.r-lib.org/reference/edit.html'>usethis::edit_r_environ()</a></code>.</p>
     <h2 class="hasAnchor" id="other-considerations"><a class="anchor" href="#other-considerations"></a>Other considerations</h2>
 
     
 
 
-<p>There is a limit of 2000 on <code>pageSize</code> for each call.</p>
+<p>Cumulocity has a limit of 2000 on <code>pageSize</code> per call. To get more than 2000
+records when using <code>get_measurements</code> and <code>get_events</code>, increase
+<code>pages_per_query</code>. This makes a REST call once per each page.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     

@@ -168,9 +168,6 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>data.frame</code> with measurements.</p>
-<p>If both <code>date_from</code> and <code>date_to</code> are present, <code>page_size</code>
-is not used.</p>
-<p>If <code>page_size</code> and both dates are NULL, the function will return up to 5 rows of data.</p>
 <p>If <code>parse</code> is TRUE, the JSON object is parsed using <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::fromJSON</a></code>
 before being returned. The data is converted to a single flattened data frame.
 If a page does not contain any measurements, it does not get added to the data frame.</p>

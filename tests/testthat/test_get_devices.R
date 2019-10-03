@@ -10,8 +10,9 @@ test_that("when drop_fields = TRUE, certain fields are excluded from results", {
   exclude_list <- c(
     "additionParents.self", "additionParents.references", "childDevices.self",
     "childDevices.references", "childAssets.self", "childAssets.references", "childAdditions.self",
-    "childAdditions.references","deviceParents.self", "deviceParents.references",
-    "assetParents.self", "assetParents.references", "self")
+    "childAdditions.references", "deviceParents.self", "deviceParents.references",
+    "assetParents.self", "assetParents.references", "self"
+  )
 
   expect_false(any(names(aa) %in% exclude_list))
 })
@@ -31,5 +32,5 @@ test_that("time is parsed or not depending on parse_datetime", {
 
 
 test_that("parse = FALSE returns character string", {
-  expect_true(inherits(result_09[[1]],"character"))
+  expect_true(inherits(result_09[[1]], "character"))
 })

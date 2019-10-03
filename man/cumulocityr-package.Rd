@@ -13,27 +13,34 @@ This package contains functions to interact with the Cumulocity API.
 \itemize{
 \item \code{\link{get_devices}} returns available devices for a tenant.
 \item \code{\link{get_measurements}} returns measurements for a device.
+\item \code{\link{get_events}} returns events for a device.
 }
 }
 
 \section{Authentication}{
 
 
-Environment variables used for authentication are stored in a local .Renviron file:
-\itemize{
-\item \env{CUMULOCITY_base_url = "[tenant url]"}\cr
-\item \env{CUMULOCITY_usr = "[username]"}\cr
-\item \env{CUMULOCITY_pwd = "[password]"}\cr
-\item \env{CUMULOCITY_device_id = "[an example device id]"}
+The package expects a local .Renviron file with credentials defined as follows:
+
+\preformatted{
+CUMULOCITY_base_url = "[tenant url]"
+CUMULOCITY_usr = "[username]"
+CUMULOCITY_pwd = "[password]"
+CUMULOCITY_device_id = "[an example device id]"
 }
 
 The tenant url should be of the form \code{"https://tenant_name.cumulocity.com"}.
+\code{CUMULOCITY_device_id} is not required by any of the main functions.
+
+\code{.Renviron} can be edited with \code{usethis::edit_r_environ()}.
 }
 
 \section{Other considerations}{
 
 
-There is a limit of 2000 on \code{pageSize} for each call.
+Cumulocity has a limit of 2000 on \code{pageSize} per call. To get more than 2000
+records when using \code{get_measurements} and \code{get_events}, increase
+\code{pages_per_query}. This makes a REST call once per each page.
 }
 
 \section{References}{
