@@ -11,8 +11,28 @@ test_that("time is parsed or not depending on parse_datetime", {
   expect_true(is.character(result_02$time[1]))
 })
 
+
+# test_that("what happens when num_rows is NULL?", {
+#   get_measurements(device_id = .get_cumulocity_device_id(),
+#                    date_from = "2019-09-30T20:00:00Z")
+# })
+
+# test_that("what happens when num_rows is very large but there is only data on page 1?", {
+#   get_measurements(device_id = .get_cumulocity_device_id(),
+#                    date_from = "2019-10-01T02:00:00Z")
+# })
+
+
+
 test_that("warning message is issued when measurements list is empty", {
-  expect_warning(get_measurements(123), "No measurements found on page 1.", fixed = TRUE)
+  # Measurements list is empty because the device_id does not exist.
+  expect_warning(get_measurements(
+    device_id = 123,
+    date_from = "2019-09-30T20:00:00Z"
+  ),
+  "No measurements found on page 1.",
+  fixed = TRUE
+  )
 })
 
 test_that("parse_json = FALSE returns character string", {

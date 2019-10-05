@@ -22,8 +22,10 @@
 #'
 #' @inheritParams get_measurements
 #'
-#' @return A \code{data.frame} with events.
+#' @return A \code{data.frame} if \code{parse_json = TRUE},
+#' and a character string otherwise.
 #'
+#' If \code{date_to} is null, it is set to the current time.
 #'
 #' If \code{parse_json} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
 #' before being returned. The data is converted to a single flattened data frame.
@@ -33,14 +35,8 @@
 #' list of such objects is returned. All pages are added to the list, even if there are no events.
 #' The parameter \code{parse_datetime} has no effect.
 #'
-#'
-#'
 #' @details
 #' Get the events for a device for a time period.
-#'
-#' The parameter \code{page_size} is only used if \code{date_from}
-#' or \code{date_to} are NULL, or both are NULL.
-#'
 #'
 #' @author Dmitriy Bolotov
 #'
@@ -50,19 +46,25 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_events(device_id)
+#' get_events(device_id, date_from = "2019-09-30T20:00:00Z")
 #' }
 #' @export
 get_events <- function(device_id,
-                       date_from = NULL,
+                       date_from,
                        date_to = NULL,
-                       page_size = 2000,
-                       pages_per_query = 1,
-                       start_page = 1,
-                       parse_datetime = TRUE,
-                       parse_json = TRUE) {
+                       num_rows = NULL,
+                       parse_json = TRUE,
+                       parse_datetime = TRUE) {
   .check_date(date_from)
   .check_date(date_to)
+
+  if (is.null(date_to)) {
+    date_to <- format(Sys.time(), format = "%Y-%m-%dT%H:%M:%OSZ")
+  }
+
+  if (is.null(num_rows)) {
+    num_rows <- 1000000
+  }
 
   url <- paste0(.get_cumulocity_base_url(),
     "/event/events",
@@ -72,14 +74,16 @@ get_events <- function(device_id,
 
   df_list <- list()
   df_list_counter <- 1
+  page_size <- 2000
+  pages_per_query <- ceiling(num_rows / page_size)
+  page_sizes <- .create_page_sizes(num_rows, pages_per_query)
 
 
   if (parse_json == FALSE) { # do not parse result
 
-
-    for (cur_page in c(start_page:pages_per_query)) {
+    for (cur_page in c(1:pages_per_query)) {
       query <- list(
-        source = device_id, pageSize = page_size,
+        source = device_id, pageSize = page_sizes[cur_page],
         currentPage = cur_page, dateFrom = date_from,
         dateTo = date_to
       )
@@ -88,16 +92,21 @@ get_events <- function(device_id,
 
       cont <- .get_content_from_response(response, cur_page, "event")
 
-      df_list[[df_list_counter]] <- cont
-      df_list_counter <- df_list_counter + 1
+      if (grepl("events\\\":\\[]", cont)) {
+        # If there are no events, exit the loop
+        break
+      } else {
+        df_list[[df_list_counter]] <- cont
+        df_list_counter <- df_list_counter + 1
+      }
     }
 
     return(df_list)
   } else { # parse result
 
-    for (cur_page in c(start_page:pages_per_query)) {
+    for (cur_page in c(1:pages_per_query)) {
       query <- list(
-        source = device_id, pageSize = page_size,
+        source = device_id, pageSize = page_sizes[cur_page],
         currentPage = cur_page, dateFrom = date_from,
         dateTo = date_to
       )
@@ -106,10 +115,12 @@ get_events <- function(device_id,
 
       dat <- .get_em_from_response(response, cur_page, "event")
 
-      if (length(dat) > 0) { # Only add if dat is not an empty list.
+      if (length(dat) > 0) {
         # Flatten to avoid error when stacking nested data frames.
         df_list[[df_list_counter]] <- jsonlite::flatten(dat)
         df_list_counter <- df_list_counter + 1
+      } else {
+        break
       }
     }
 

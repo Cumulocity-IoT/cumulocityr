@@ -23,13 +23,14 @@
 #' @param device_id The device id.
 #' @param date_from The starting datetime.
 #' @param date_to The ending datetime.
-#' @param page_size The page size, set to 2000 (maximum) by default.
-#' @param pages_per_query The number of pages to return per function call.
-#' @param start_page The first page used in the query.
-#' @param parse_datetime If TRUE, parse "time" field from char to POSIXlt.
+#' @param num_rows Number of rows of data to return.
 #' @param parse_json If TRUE, parse the JSON object into a data frame.
+#' @param parse_datetime If TRUE, parse "time" field from char to POSIXlt.
 #'
-#' @return A \code{data.frame} with measurements.
+#' @return A \code{data.frame} if \code{parse_json = TRUE},
+#' and a character string otherwise.
+#'
+#' If \code{date_to} is null, it is set to the current time.
 #'
 #' If \code{parse_json} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
 #' before being returned. The data is converted to a single flattened data frame.
@@ -42,10 +43,6 @@
 #' @details
 #' Get the measurements for a device for a time period.
 #'
-#' The parameter \code{page_size} is only used if \code{date_from}
-#' or \code{date_to} are NULL, or both are NULL.
-#'
-#'
 #' @author Dmitriy Bolotov
 #'
 #' @references
@@ -54,19 +51,25 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_measurements(device_id)
+#' get_measurements(device_id, date_from = "2019-09-30T20:00:00Z")
 #' }
 #' @export
 get_measurements <- function(device_id,
-                             date_from = NULL,
+                             date_from,
                              date_to = NULL,
-                             page_size = 2000,
-                             pages_per_query = 1,
-                             start_page = 1,
-                             parse_datetime = TRUE,
-                             parse_json = TRUE) {
+                             num_rows = NULL,
+                             parse_json = TRUE,
+                             parse_datetime = TRUE) {
   .check_date(date_from)
   .check_date(date_to)
+
+  if (is.null(date_to)) {
+    date_to <- format(Sys.time(), format = "%Y-%m-%dT%H:%M:%OSZ")
+  }
+
+  if (is.null(num_rows)) {
+    num_rows <- 1000000
+  }
 
   url <- paste0(.get_cumulocity_base_url(),
     "/measurement/measurements",
@@ -76,14 +79,16 @@ get_measurements <- function(device_id,
 
   df_list <- list()
   df_list_counter <- 1
+  page_size <- 2000
+  pages_per_query <- ceiling(num_rows / page_size)
+  page_sizes <- .create_page_sizes(num_rows, pages_per_query)
 
 
   if (parse_json == FALSE) { # do not parse result
 
-
-    for (cur_page in c(start_page:pages_per_query)) {
+    for (cur_page in c(1:pages_per_query)) {
       query <- list(
-        source = device_id, pageSize = page_size,
+        source = device_id, pageSize = page_sizes[cur_page],
         currentPage = cur_page, dateFrom = date_from,
         dateTo = date_to
       )
@@ -92,16 +97,21 @@ get_measurements <- function(device_id,
 
       cont <- .get_content_from_response(response, cur_page, "meas")
 
-      df_list[[df_list_counter]] <- cont
-      df_list_counter <- df_list_counter + 1
+      if (grepl("measurements\\\":\\[]", cont)) {
+        # If there are no measurements, exit the loop.
+        break
+      } else {
+        df_list[[df_list_counter]] <- cont
+        df_list_counter <- df_list_counter + 1
+      }
     }
 
     return(df_list)
   } else { # parse result
 
-    for (cur_page in c(start_page:pages_per_query)) {
+    for (cur_page in c(1:pages_per_query)) {
       query <- list(
-        source = device_id, pageSize = page_size,
+        source = device_id, pageSize = page_sizes[cur_page],
         currentPage = cur_page, dateFrom = date_from,
         dateTo = date_to
       )
@@ -110,10 +120,12 @@ get_measurements <- function(device_id,
 
       dat <- .get_em_from_response(response, cur_page, "meas")
 
-      if (length(dat) > 0) { # Only add if dat is not an empty list.
+      if (length(dat) > 0) {
         # Flatten to avoid error when stacking nested data frames.
         df_list[[df_list_counter]] <- jsonlite::flatten(dat)
         df_list_counter <- df_list_counter + 1
+      } else {
+        break
       }
     }
 

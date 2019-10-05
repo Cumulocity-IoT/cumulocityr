@@ -100,20 +100,6 @@
 }
 
 
-# .form_query <- function(device_id, date_from, date_to, page_size) {
-#   # Form the query for GET in get_measurements.
-#   if (is.null(date_from) & is.null(date_to)) {
-#     query <- list(source = device_id, pageSize = page_size)
-#   } else if (!is.null(date_from) & !is.null(date_to)) {
-#     query <- list(source = device_id, dateFrom = date_from, dateTo = date_to)
-#   } else if (!is.null(date_from)) {
-#     query <- list(source = device_id, dateFrom = date_from, pageSize = page_size)
-#   } else if (!is.null(date_to)) {
-#     query <- list(source = device_id, dateTo = date_to, pageSize = page_size)
-#   }
-#
-#   return(query)
-# }
 
 
 .parse_datetime <- function(the_time) {
@@ -162,6 +148,7 @@
   return(dat)
 }
 
+
 .get_content_from_response <- function(response, cur_page, type) {
   # Check repsponse for error, get content without parsing, and issue warning if empty
 
@@ -169,9 +156,25 @@
 
   cont <- httr::content(response, "text")
 
-  if (grepl("measurements\\\":\\[]", cont)) {
+  if ((type == "meas") & grepl("measurements\\\":\\[]", cont)) {
+    .issue_em_warning(cur_page, type)
+  }
+
+  if ((type == "event") & grepl("events\\\":\\[]", cont)) {
     .issue_em_warning(cur_page, type)
   }
 
   return(cont)
+}
+
+
+.create_page_sizes <- function(num_rows, pages_per_query) {
+  # Create vector of page sizes. Each entry except the last should be 2000.
+  if (pages_per_query == 1) {
+    page_sizes <- c(num_rows)
+  } else {
+    page_sizes <- rep(2000, pages_per_query - 1)
+    page_sizes[pages_per_query] <- num_rows %% 2000
+  }
+  return(page_sizes)
 }

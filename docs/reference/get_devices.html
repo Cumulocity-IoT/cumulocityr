@@ -120,8 +120,8 @@
     <p>Get the devices or group of devices for a tenant.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_devices</span>(<span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>parse_datetime</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>parse_json</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_devices</span>(<span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>parse_json</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>parse_datetime</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -131,18 +131,19 @@
       <td><p>The page size, set to 2000 (maximum) by default.</p></td>
     </tr>
     <tr>
-      <th>parse_datetime</th>
-      <td><p>If TRUE, parse datetime fields from char to POSIXlt.</p></td>
-    </tr>
-    <tr>
       <th>parse_json</th>
       <td><p>If TRUE, parse the JSON object into a data frame.</p></td>
+    </tr>
+    <tr>
+      <th>parse_datetime</th>
+      <td><p>If TRUE, parse datetime fields from char to POSIXlt.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>data.frame</code> with measurements.</p>
+    <p>A <code>data.frame</code> if <code>parse_json = TRUE</code>,
+and a character string otherwise.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Get the devices or group of devices for a tenant.</p>

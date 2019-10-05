@@ -4,9 +4,8 @@
 \alias{get_measurements}
 \title{Get the measurements for a device.}
 \usage{
-get_measurements(device_id, date_from = NULL, date_to = NULL,
-  page_size = 2000, pages_per_query = 1, start_page = 1,
-  parse_datetime = TRUE, parse_json = TRUE)
+get_measurements(device_id, date_from, date_to = NULL, num_rows = NULL,
+  parse_json = TRUE, parse_datetime = TRUE)
 }
 \arguments{
 \item{device_id}{The device id.}
@@ -15,18 +14,17 @@ get_measurements(device_id, date_from = NULL, date_to = NULL,
 
 \item{date_to}{The ending datetime.}
 
-\item{page_size}{The page size, set to 2000 (maximum) by default.}
-
-\item{pages_per_query}{The number of pages to return per function call.}
-
-\item{start_page}{The first page used in the query.}
-
-\item{parse_datetime}{If TRUE, parse "time" field from char to POSIXlt.}
+\item{num_rows}{Number of rows of data to return.}
 
 \item{parse_json}{If TRUE, parse the JSON object into a data frame.}
+
+\item{parse_datetime}{If TRUE, parse "time" field from char to POSIXlt.}
 }
 \value{
-A \code{data.frame} with measurements.
+A \code{data.frame} if \code{parse_json = TRUE},
+and a character string otherwise.
+
+If \code{date_to} is null, it is set to the current time.
 
 If \code{parse_json} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
 before being returned. The data is converted to a single flattened data frame.
@@ -41,13 +39,10 @@ Get the measurements for a device.
 }
 \details{
 Get the measurements for a device for a time period.
-
-The parameter \code{page_size} is only used if \code{date_from}
-or \code{date_to} are NULL, or both are NULL.
 }
 \examples{
 \dontrun{
-get_measurements(device_id)
+get_measurements(device_id, date_from = "2019-09-30T20:00:00Z")
 }
 }
 \references{

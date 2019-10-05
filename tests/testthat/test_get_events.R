@@ -12,7 +12,10 @@ test_that("time is parsed or not depending on parse_datetime", {
 })
 
 test_that("warning message is issued when measurements list is empty", {
-  expect_warning(get_events(123), "No events found on page 1.", fixed = TRUE)
+  expect_warning(get_events(123, date_from = "2019-09-30T20:00:00Z"),
+    "No events found on page 1.",
+    fixed = TRUE
+  )
 })
 
 test_that("parse_json = FALSE returns character string", {

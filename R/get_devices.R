@@ -21,10 +21,11 @@
 #'
 #'
 #' @param page_size The page size, set to 2000 (maximum) by default.
-#' @param parse_datetime If TRUE, parse datetime fields from char to POSIXlt.
 #' @param parse_json If TRUE, parse the JSON object into a data frame.
+#' @param parse_datetime If TRUE, parse datetime fields from char to POSIXlt.
 #'
-#' @return A \code{data.frame} with measurements.
+#' @return A \code{data.frame} if \code{parse_json = TRUE},
+#' and a character string otherwise.
 #'
 #' @details
 #' Get the devices or group of devices for a tenant.
@@ -52,9 +53,8 @@
 #'
 #' @export
 get_devices <- function(page_size = 2000,
-                        parse_datetime = TRUE,
-                        parse_json = TRUE) {
-
+                        parse_json = TRUE,
+                        parse_datetime = TRUE) {
   response <- .get_devices(page_size)
 
   cont <- httr::content(response, "text")
