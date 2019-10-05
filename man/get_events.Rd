@@ -6,7 +6,7 @@
 \usage{
 get_events(device_id, date_from = NULL, date_to = NULL,
   page_size = 2000, pages_per_query = 1, start_page = 1,
-  drop_fields = TRUE, parse_datetime = TRUE, parse_json = TRUE)
+  parse_datetime = TRUE, parse_json = TRUE)
 }
 \arguments{
 \item{device_id}{The device id.}
@@ -20,8 +20,6 @@ get_events(device_id, date_from = NULL, date_to = NULL,
 \item{pages_per_query}{The number of pages to return per function call.}
 
 \item{start_page}{The first page used in the query.}
-
-\item{drop_fields}{If TRUE, exclude "self" and "source" fields from the result.}
 
 \item{parse_datetime}{If TRUE, parse "time" field from char to POSIXlt.}
 
@@ -37,7 +35,7 @@ If a page does not contain any events, it does not get added to the data frame.
 
 If \code{parse_json} is FALSE, the JSON object is returned as a JSON string. For queries with multiple pages, a
 list of such objects is returned. All pages are added to the list, even if there are no events.
-The params \code{drop_fields} and \code{parse_datetime} have no effect.
+The parameter \code{parse_datetime} has no effect.
 }
 \description{
 Get the events for a device.

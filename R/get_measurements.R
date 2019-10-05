@@ -26,7 +26,6 @@
 #' @param page_size The page size, set to 2000 (maximum) by default.
 #' @param pages_per_query The number of pages to return per function call.
 #' @param start_page The first page used in the query.
-#' @param drop_fields If TRUE, exclude "self" and "source" fields from the result.
 #' @param parse_datetime If TRUE, parse "time" field from char to POSIXlt.
 #' @param parse_json If TRUE, parse the JSON object into a data frame.
 #'
@@ -38,9 +37,7 @@
 #'
 #' If \code{parse_json} is FALSE, the JSON object is returned as a JSON string. For queries with multiple pages, a
 #' list of such objects is returned. All pages are added to the list, even if there are no measurements.
-#' The params \code{drop_fields} and \code{parse_datetime} have no effect.
-#'
-#'
+#' The parameter \code{parse_datetime} has no effect.
 #'
 #' @details
 #' Get the measurements for a device for a time period.
@@ -66,7 +63,6 @@ get_measurements <- function(device_id,
                              page_size = 2000,
                              pages_per_query = 1,
                              start_page = 1,
-                             drop_fields = TRUE,
                              parse_datetime = TRUE,
                              parse_json = TRUE) {
   .check_date(date_from)
@@ -122,11 +118,6 @@ get_measurements <- function(device_id,
     }
 
     the_data <- do.call("rbind", df_list)
-
-
-    if (drop_fields) {
-      the_data <- the_data[, -which(names(the_data) %in% c("self", "source.self", "source.id"))]
-    }
 
     if (parse_datetime) {
       the_data$time <- .parse_datetime(the_data$time)

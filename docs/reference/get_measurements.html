@@ -122,7 +122,7 @@
 
     <pre class="usage"><span class='fu'>get_measurements</span>(<span class='no'>device_id</span>, <span class='kw'>date_from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>date_to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>pages_per_query</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>start_page</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>drop_fields</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>parse_datetime</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>parse_json</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>parse_datetime</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>parse_json</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,10 +152,6 @@
       <td><p>The first page used in the query.</p></td>
     </tr>
     <tr>
-      <th>drop_fields</th>
-      <td><p>If TRUE, exclude "self" and "source" fields from the result.</p></td>
-    </tr>
-    <tr>
       <th>parse_datetime</th>
       <td><p>If TRUE, parse "time" field from char to POSIXlt.</p></td>
     </tr>
@@ -173,7 +169,7 @@ before being returned. The data is converted to a single flattened data frame.
 If a page does not contain any measurements, it does not get added to the data frame.</p>
 <p>If <code>parse_json</code> is FALSE, the JSON object is returned as a JSON string. For queries with multiple pages, a
 list of such objects is returned. All pages are added to the list, even if there are no measurements.
-The params <code>drop_fields</code> and <code>parse_datetime</code> have no effect.</p>
+The parameter <code>parse_datetime</code> has no effect.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Get the measurements for a device for a time period.</p>

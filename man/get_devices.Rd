@@ -4,13 +4,11 @@
 \alias{get_devices}
 \title{Get the devices or group of devices for a tenant.}
 \usage{
-get_devices(page_size = 2000, drop_fields = TRUE,
-  parse_datetime = TRUE, parse_json = TRUE)
+get_devices(page_size = 2000, parse_datetime = TRUE,
+  parse_json = TRUE)
 }
 \arguments{
 \item{page_size}{The page size, set to 2000 (maximum) by default.}
-
-\item{drop_fields}{If TRUE, exclude several fields from the result.}
 
 \item{parse_datetime}{If TRUE, parse datetime fields from char to POSIXlt.}
 
@@ -25,10 +23,6 @@ Get the devices or group of devices for a tenant.
 \details{
 Get the devices or group of devices for a tenant.
 
-If \code{drop_fields = TRUE}, the following fields are excluded from
-the returned data frame: \code{additionParents, childDevices, childAssets,
-childAdditions, assetParents, deviceParents, self}.
-
 If \code{parse_datetime = TRUE}, the following fields are parsed from char to
 POSIXlt: \code{creationTime, lastUpdated, c8y_Availability.lastMessage}.
 
@@ -36,7 +30,7 @@ If \code{parse_json} is TRUE, the JSON object is parsed using \code{jsonlite::fr
 before being returned. The data is converted to a single flattened data frame.
 
 If \code{parse_json} is FALSE, the JSON object is returned as a JSON string.
-The params \code{drop_fields} and \code{parse_datetime} have no effect.
+The parameter \code{parse_datetime} has no effect.
 }
 \examples{
 \dontrun{

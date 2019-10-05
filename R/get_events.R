@@ -31,7 +31,7 @@
 #'
 #' If \code{parse_json} is FALSE, the JSON object is returned as a JSON string. For queries with multiple pages, a
 #' list of such objects is returned. All pages are added to the list, even if there are no events.
-#' The params \code{drop_fields} and \code{parse_datetime} have no effect.
+#' The parameter \code{parse_datetime} has no effect.
 #'
 #'
 #'
@@ -59,7 +59,6 @@ get_events <- function(device_id,
                        page_size = 2000,
                        pages_per_query = 1,
                        start_page = 1,
-                       drop_fields = TRUE,
                        parse_datetime = TRUE,
                        parse_json = TRUE) {
   .check_date(date_from)
@@ -115,11 +114,6 @@ get_events <- function(device_id,
     }
 
     the_data <- do.call("rbind", df_list)
-
-
-    if (drop_fields) {
-      the_data <- the_data[, -which(names(the_data) %in% c("self", "source.self", "source.id"))]
-    }
 
     if (parse_datetime) {
       the_data$time <- .parse_datetime(the_data$time)

@@ -4,19 +4,6 @@ test_that("get_devices returns data.frame", {
   expect_equal(is.data.frame(get_devices(page_size = 3)), TRUE)
 })
 
-test_that("when drop_fields = TRUE, certain fields are excluded from results", {
-  aa <- get_devices(page_size = 5, drop_fields = TRUE)
-
-  exclude_list <- c(
-    "additionParents.self", "additionParents.references", "childDevices.self",
-    "childDevices.references", "childAssets.self", "childAssets.references", "childAdditions.self",
-    "childAdditions.references", "deviceParents.self", "deviceParents.references",
-    "assetParents.self", "assetParents.references", "self"
-  )
-
-  expect_false(any(names(aa) %in% exclude_list))
-})
-
 
 test_that("time is parsed or not depending on parse_datetime", {
   expect_true(inherits(result_04$creationTime[1], "POSIXlt"))
