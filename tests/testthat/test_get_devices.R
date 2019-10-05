@@ -31,6 +31,6 @@ test_that("time is parsed or not depending on parse_datetime", {
 })
 
 
-test_that("parse = FALSE returns character string", {
+test_that("parse_json = FALSE returns character string", {
   expect_true(inherits(result_09[[1]], "character"))
 })

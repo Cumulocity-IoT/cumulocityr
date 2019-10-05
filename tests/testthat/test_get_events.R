@@ -21,6 +21,6 @@ test_that("warning message is issued when measurements list is empty", {
   expect_warning(get_events(123), "No events found on page 1.", fixed = TRUE)
 })
 
-test_that("parse = FALSE returns character string", {
+test_that("parse_json = FALSE returns character string", {
   expect_true(inherits(result_10[[1]], "character"))
 })

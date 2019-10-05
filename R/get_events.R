@@ -25,11 +25,11 @@
 #' @return A \code{data.frame} with events.
 #'
 #'
-#' If \code{parse} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
+#' If \code{parse_json} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
 #' before being returned. The data is converted to a single flattened data frame.
 #' If a page does not contain any events, it does not get added to the data frame.
 #'
-#' If \code{parse} is FALSE, the JSON object is returned as a JSON string. For queries with multiple pages, a
+#' If \code{parse_json} is FALSE, the JSON object is returned as a JSON string. For queries with multiple pages, a
 #' list of such objects is returned. All pages are added to the list, even if there are no events.
 #' The params \code{drop_fields} and \code{parse_datetime} have no effect.
 #'
@@ -61,7 +61,7 @@ get_events <- function(device_id,
                        start_page = 1,
                        drop_fields = TRUE,
                        parse_datetime = TRUE,
-                       parse = TRUE) {
+                       parse_json = TRUE) {
   .check_date(date_from)
   .check_date(date_to)
 
@@ -75,7 +75,7 @@ get_events <- function(device_id,
   df_list_counter <- 1
 
 
-  if (parse == FALSE) { # do not parse result
+  if (parse_json == FALSE) { # do not parse result
 
 
     for (cur_page in c(start_page:pages_per_query)) {

@@ -23,7 +23,7 @@
 #' @param page_size The page size, set to 2000 (maximum) by default.
 #' @param drop_fields If TRUE, exclude several fields from the result.
 #' @param parse_datetime If TRUE, parse datetime fields from char to POSIXlt.
-#' @param parse If TRUE, parse the JSON object into a data frame.
+#' @param parse_json If TRUE, parse the JSON object into a data frame.
 #'
 #' @return A \code{data.frame} with measurements.
 #'
@@ -37,10 +37,10 @@
 #' If \code{parse_datetime = TRUE}, the following fields are parsed from char to
 #' POSIXlt: \code{creationTime, lastUpdated, c8y_Availability.lastMessage}.
 #'
-#' If \code{parse} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
+#' If \code{parse_json} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
 #' before being returned. The data is converted to a single flattened data frame.
 #'
-#' If \code{parse} is FALSE, the JSON object is returned as a JSON string.
+#' If \code{parse_json} is FALSE, the JSON object is returned as a JSON string.
 #' The params \code{drop_fields} and \code{parse_datetime} have no effect.
 #'
 #'
@@ -59,12 +59,12 @@
 get_devices <- function(page_size = 2000,
                         drop_fields = TRUE,
                         parse_datetime = TRUE,
-                        parse = TRUE) {
+                        parse_json = TRUE) {
   response <- .get_devices(page_size)
 
   cont <- httr::content(response, "text")
 
-  if (parse == FALSE) {
+  if (parse_json == FALSE) {
     .check_response_for_error(response)
     return(cont)
   } else {
