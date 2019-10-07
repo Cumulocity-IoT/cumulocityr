@@ -24,7 +24,11 @@ get_events(device_id, date_from, date_to = NULL, num_rows = NULL,
 A \code{data.frame} if \code{parse_json = TRUE},
 and a character string otherwise.
 
+\code{date_from} and \code{date_from} are expected to be strings in the format "YYYY-MM-DDTHH:MM:SSZ".
+
 If \code{date_to} is null, it is set to the current time.
+
+If num_rows and both dates are specified, the lesser of the two ranges is returned.
 
 If \code{parse_json} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
 before being returned. The data is converted to a single flattened data frame.

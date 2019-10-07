@@ -7,12 +7,14 @@ test_that("page_size controls number of records returned", {
   result_06 <- get_events(
     device_id = .get_cumulocity_device_id(),
     date_from = "2019-09-30T20:00:00Z",
-    num_rows = 2)
+    num_rows = 2
+  )
 
   result_07 <- get_events(
     device_id = .get_cumulocity_device_id(),
     date_from = "2019-09-30T20:00:00Z",
-    num_rows = 4, parse_datetime = FALSE)
+    num_rows = 4, parse_datetime = FALSE
+  )
 
   expect_equal(NROW(result_06), 2)
   expect_equal(NROW(result_07), 4)
@@ -24,12 +26,14 @@ test_that("time is parsed or not depending on parse_datetime", {
   result_06 <- get_events(
     device_id = .get_cumulocity_device_id(),
     date_from = "2019-09-30T20:00:00Z",
-    num_rows = 2)
+    num_rows = 2
+  )
 
   result_07 <- get_events(
     device_id = .get_cumulocity_device_id(),
     date_from = "2019-09-30T20:00:00Z",
-    num_rows = 4, parse_datetime = FALSE)
+    num_rows = 4, parse_datetime = FALSE
+  )
 
   expect_true(inherits(result_06$time[1], "POSIXlt"))
   expect_true(is.character(result_07$time[1]))
@@ -49,7 +53,8 @@ test_that("parse_json = FALSE returns character string", {
   result_10 <- get_events(
     device_id = .get_cumulocity_device_id(),
     date_from = "2019-09-30T20:00:00Z",
-    num_rows = 7, parse_json = FALSE)
+    num_rows = 7, parse_json = FALSE
+  )
 
   expect_true(inherits(result_10[[1]], "character"))
 })

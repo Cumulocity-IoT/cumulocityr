@@ -48,9 +48,6 @@
 #'
 #' Time should be in the following format: "YYYY-MM-DDTHH:MM:SSZ"
 #'
-#' Cumulocity has a limit of 2000 on \code{pageSize} per call. To get more than 2000
-#' records when using \code{get_measurements} and \code{get_events}, increase
-#' \code{pages_per_query}. This makes a REST call once per each page.
 #'
 #' @section References:
 #' \itemize{

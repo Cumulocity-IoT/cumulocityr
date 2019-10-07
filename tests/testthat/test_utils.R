@@ -45,11 +45,13 @@ test_that(".check_response_for_error returns error for bad credentials", {
     "Reason:           Unauthorized",
     "Status message:   Client error: (401) Unauthorized",
     "Response message: Invalid credentials! : Bad credentials",
-    sep = "\n")
+    sep = "\n"
+  )
 
   url_01 <- paste0(.get_cumulocity_base_url(),
-                   "/inventory/managedObjects?fragmentType=c8y_IsDevice",
-                   collapse = "")
+    "/inventory/managedObjects?fragmentType=c8y_IsDevice",
+    collapse = ""
+  )
 
   result_03 <- httr::GET(url = url_01, httr::authenticate("foo", "bar"))
   cont_03 <- httr::content(result_03, "text")
@@ -63,8 +65,9 @@ test_that(".check_response_for_error uses $error if $message is null", {
   skip_on_cran()
 
   url_01 <- paste0(.get_cumulocity_base_url(),
-                   "/inventory/managedObjects?fragmentType=c8y_IsDevice",
-                   collapse = "")
+    "/inventory/managedObjects?fragmentType=c8y_IsDevice",
+    collapse = ""
+  )
 
   result_03 <- httr::GET(url = url_01, httr::authenticate("foo", "bar"))
   cont_03 <- httr::content(result_03, "text")
@@ -89,8 +92,9 @@ test_that(".check_response_for_error returns blank for
   skip_on_cran()
 
   url_01 <- paste0(.get_cumulocity_base_url(),
-                   "/inventory/managedObjects?fragmentType=c8y_IsDevice",
-                   collapse = "")
+    "/inventory/managedObjects?fragmentType=c8y_IsDevice",
+    collapse = ""
+  )
 
   result_03 <- httr::GET(url = url_01, httr::authenticate("foo", "bar"))
   cont_03 <- httr::content(result_03, "text")
@@ -166,4 +170,3 @@ test_that(".parse_datetime returns POSIXlt object", {
 #   expect_null(query_04$dateTo)
 #   expect_equal(query_04$pageSize, 99)
 # })
-

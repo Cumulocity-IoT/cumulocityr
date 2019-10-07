@@ -156,7 +156,9 @@
 
     <p>A <code>data.frame</code> if <code>parse_json = TRUE</code>,
 and a character string otherwise.</p>
+<p><code>date_from</code> and <code>date_from</code> are expected to be strings in the format "YYYY-MM-DDTHH:MM:SSZ".</p>
 <p>If <code>date_to</code> is null, it is set to the current time.</p>
+<p>If num_rows and both dates are specified, the lesser of the two ranges is returned.</p>
 <p>If <code>parse_json</code> is TRUE, the JSON object is parsed using <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::fromJSON</a></code>
 before being returned. The data is converted to a single flattened data frame.
 If a page does not contain any measurements, it does not get added to the data frame.</p>
