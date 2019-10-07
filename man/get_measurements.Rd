@@ -34,9 +34,10 @@ If \code{parse_json} is TRUE, the JSON object is parsed using \code{jsonlite::fr
 before being returned. The data is converted to a single flattened data frame.
 If a page does not contain any measurements, it does not get added to the data frame.
 
-If \code{parse_json} is FALSE, the JSON object is returned as a JSON string. For queries with multiple pages, a
-list of such objects is returned. All pages are added to the list, even if there are no measurements.
-The parameter \code{parse_datetime} has no effect.
+If \code{parse_json} is FALSE, the JSON object is returned as a JSON string.
+For queries with multiple pages, a list of such objects is returned. Each
+element in this list contains up to 2000 records. The parameter \code{parse_datetime}
+has no effect.
 }
 \description{
 Get the measurements for a device.

@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>cumulocityr • cumulocityr</title>
+<title>Introduction to cumulocityr • cumulocityr</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="cumulocityr">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to cumulocityr">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -73,7 +73,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>cumulocityr</h1>
+      <h1>Introduction to cumulocityr</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/SoftwareAG/cumulocityr/blob/master/vignettes/cumulocityr.Rmd"><code>vignettes/cumulocityr.Rmd</code></a></small>
@@ -83,7 +83,148 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(cumulocityr)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(cumulocityr)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(knitr)</a></code></pre></div>
+<div id="authentication" class="section level3">
+<h3 class="hasAnchor">
+<a href="#authentication" class="anchor"></a>Authentication</h3>
+<p>Credentials and url for cumulocity are stored in a user’s private <code>.Renviron</code> file.</p>
+</div>
+<div id="get-devices" class="section level3">
+<h3 class="hasAnchor">
+<a href="#get-devices" class="anchor"></a>Get devices</h3>
+<p>Get devices for the tenant and display a few columns</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devices &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_devices.html">get_devices</a></span>()</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(devices[,<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"type"</span>, <span class="st">"name"</span>, <span class="st">"id"</span>)])</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;              type           name    id</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; 1 c8y_SensorPhone     Pixel 2 XL  1200</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; 2        c8y_Demo  A demo device   200</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; 3            &lt;NA&gt;     DemoDevice 51868</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; 4  c8y_MQTTDevice Temperature #1 53700</span></a></code></pre></div>
+</div>
+<div id="get-measurements" class="section level3">
+<h3 class="hasAnchor">
+<a href="#get-measurements" class="anchor"></a>Get measurements</h3>
+<p>Get measurements for device “Temperature #1” and plot the result.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">meas &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_measurements.html">get_measurements</a></span>(<span class="dt">device_id =</span> <span class="dv">53700</span>,</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">                         <span class="dt">num_rows =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">                         <span class="dt">date_from =</span> <span class="st">"2019-09-30T19:59:00Z"</span>)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(meas[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"time"</span>, <span class="st">"type"</span>, <span class="st">"c8y_Temperature.T.value"</span>)]))</a></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">time</th>
+<th align="left">type</th>
+<th align="right">c8y_Temperature.T.value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2019-09-30 19:59:00</td>
+<td align="left">c8y_Temperature</td>
+<td align="right">2.079117</td>
+</tr>
+<tr class="even">
+<td align="left">2019-09-30 19:59:05</td>
+<td align="left">c8y_Temperature</td>
+<td align="right">9.135455</td>
+</tr>
+<tr class="odd">
+<td align="left">2019-09-30 19:59:10</td>
+<td align="left">c8y_Temperature</td>
+<td align="right">8.090170</td>
+</tr>
+<tr class="even">
+<td align="left">2019-09-30 19:59:15</td>
+<td align="left">c8y_Temperature</td>
+<td align="right">6.691306</td>
+</tr>
+<tr class="odd">
+<td align="left">2019-09-30 19:59:20</td>
+<td align="left">c8y_Temperature</td>
+<td align="right">5.000000</td>
+</tr>
+<tr class="even">
+<td align="left">2019-09-30 19:59:25</td>
+<td align="left">c8y_Temperature</td>
+<td align="right">3.090170</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(meas<span class="op">$</span>time, meas<span class="op">$</span>c8y_Temperature.T.value, <span class="dt">type =</span> <span class="st">"l"</span>,</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">     <span class="dt">xlab =</span> <span class="st">"Time"</span>, <span class="dt">ylab =</span> <span class="st">"Temperature (deg C)"</span>)</a></code></pre></div>
+<p><img src="cumulocityr_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+</div>
+<div id="get-events" class="section level3">
+<h3 class="hasAnchor">
+<a href="#get-events" class="anchor"></a>Get events</h3>
+<p>Similarly, we can get events for the same device:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">events &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_events.html">get_events</a></span>(<span class="dt">device_id =</span> <span class="dv">53700</span>,</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">                     <span class="dt">num_rows =</span> <span class="dv">6</span>,</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">                     <span class="dt">date_from =</span> <span class="st">"2019-09-30T19:59:00Z"</span>)</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(events[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"type"</span>, <span class="st">"time"</span>, <span class="st">"c8y_Position.lng"</span>, <span class="st">"c8y_Position.alt"</span>)])</a></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">type</th>
+<th align="left">time</th>
+<th align="right">c8y_Position.lng</th>
+<th align="right">c8y_Position.alt</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">c8y_LocationUpdate</td>
+<td align="left">2019-10-01 04:53:57</td>
+<td align="right">77</td>
+<td align="right">88</td>
+</tr>
+<tr class="even">
+<td align="left">c8y_LocationUpdate</td>
+<td align="left">2019-10-01 04:53:52</td>
+<td align="right">33</td>
+<td align="right">44</td>
+</tr>
+<tr class="odd">
+<td align="left">c8y_LocationUpdate</td>
+<td align="left">2019-10-01 04:53:47</td>
+<td align="right">22</td>
+<td align="right">33</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">2019-10-01 04:53:42</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">c8y_LocationUpdate</td>
+<td align="left">2019-10-01 04:51:27</td>
+<td align="right">77</td>
+<td align="right">88</td>
+</tr>
+<tr class="even">
+<td align="left">c8y_LocationUpdate</td>
+<td align="left">2019-10-01 04:51:22</td>
+<td align="right">33</td>
+<td align="right">44</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="unparsed-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#unparsed-data" class="anchor"></a>Unparsed data</h3>
+<p>By default, the content is parsed, but it is possible to return a list of JSON objects.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">meas_<span class="dv">03</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_measurements.html">get_measurements</a></span>(<span class="dt">device_id =</span> <span class="dv">53700</span>,</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">                            <span class="dt">num_rows =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">                            <span class="dt">date_from =</span> <span class="st">"2019-09-30T19:59:00Z"</span>,</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">                            <span class="dt">parse_json =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(meas_<span class="dv">03</span>)</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; [1] "{\"next\":\"https://mg.cumulocity.com/measurement/measurements?dateTo=2019-10-07T15:25:27Z&amp;pageSize=2&amp;source=53700&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=2\",\"self\":\"https://mg.cumulocity.com/measurement/measurements?dateTo=2019-10-07T15:25:27Z&amp;pageSize=2&amp;source=53700&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=1\",\"statistics\":{\"totalPages\":null,\"currentPage\":1,\"pageSize\":2},\"measurements\":[{\"self\":\"https://mg.cumulocity.com/measurement/measurements/53701\",\"time\":\"2019-09-30T19:59:00.850Z\",\"id\":\"53701\",\"source\":{\"self\":\"https://mg.cumulocity.com/inventory/managedObjects/53700\",\"id\":\"53700\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":2.0791169082</span><span class="re">}}}</span><span class="co">,{\"self\":\"https://mg.cumulocity.com/measurement/measurements/53702\",\"time\":\"2019-09-30T19:59:05.851Z\",\"id\":\"53702\",\"source\":{\"self\":\"https://mg.cumulocity.com/inventory/managedObjects/53700\",\"id\":\"53700\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":9.1354545764</span><span class="re">}}}</span><span class="co">]}"</span></a></code></pre></div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -1,8 +1,15 @@
 ---
-title: "cumulocityr"
-output: rmarkdown::html_vignette
+title: "Introduction to cumulocityr"
+output:
+  html_document:
+    theme: cerulean
+    highlight: textmate
+    fig_width: 6
+    fig_height: 4
+    toc: true
+    toc_depth: 2
 vignette: >
-  %\VignetteIndexEntry{cumulocityr}
+  %\VignetteIndexEntry{Introduction to cumulocityr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,4 +23,63 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(cumulocityr)
+library(knitr)
+
+```
+
+
+### Authentication
+
+Credentials and url for cumulocity are stored in a user's private `.Renviron` file.
+
+
+
+### Get devices
+
+Get devices for the tenant and display a few columns
+
+```{r}
+devices <- get_devices()
+print(devices[,c("type", "name", "id")])
+```
+
+
+### Get measurements
+
+Get measurements for device "Temperature #1" and plot the result.
+```{r}
+
+meas <- get_measurements(device_id = 53700,
+                         num_rows = 100,
+                         date_from = "2019-09-30T19:59:00Z")
+kable(head(meas[c("time", "type", "c8y_Temperature.T.value")]))
+
+plot(meas$time, meas$c8y_Temperature.T.value, type = "l",
+     xlab = "Time", ylab = "Temperature (deg C)")
+
+```
+
+
+### Get events
+
+Similarly, we can get events for the same device:
+```{r}
+
+events <- get_events(device_id = 53700,
+                     num_rows = 6,
+                     date_from = "2019-09-30T19:59:00Z")
+
+kable(events[c("type", "time", "c8y_Position.lng", "c8y_Position.alt")])
+```
+
+### Unparsed data
+
+By default, the content is parsed, but it is possible to return a list of JSON objects.
+```{r}
+meas_03 <- get_measurements(device_id = 53700,
+                            num_rows = 2,
+                            date_from = "2019-09-30T19:59:00Z",
+                            parse_json = FALSE)
+
+print(meas_03)
 ```
