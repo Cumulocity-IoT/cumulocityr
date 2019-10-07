@@ -30,7 +30,7 @@ library(cumulocityr)
 
 devices <- get_devices()
 
-measurements <- get_measurements(device_id = 1234)
+get_measurements(device_id = 1234, date_from = "2019-09-30T20:00:00Z")
 ```
 
 -----
