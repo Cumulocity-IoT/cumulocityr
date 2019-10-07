@@ -81,14 +81,14 @@ test_that(".check_date throws error if input is not of character class", {
 # })
 
 test_that(".get_devices does not throw error", {
-  skip_on_cran("skip on cran")
+  skip_on_cran()
   expect_error(.get_devices(page_size = 3), NA)
   expect_equal(.get_devices(page_size = 20)$status_code, 200)
 })
 
 
 test_that(".check_response_for_error returns error for bad credentials", {
-  skip_on_cran("skip on cran")
+  skip_on_cran()
   exp_error <- paste("Cumulocity API request failed with status code 401.\n",
     "Category:         Client error",
     "Reason:           Unauthorized",
@@ -101,7 +101,7 @@ test_that(".check_response_for_error returns error for bad credentials", {
 
 
 test_that(".check_response_for_error uses $error if $message is null", {
-  skip_on_cran("skip on cran")
+  skip_on_cran()
   cont_parsed_03_null_message <- cont_parsed_03
   cont_parsed_03_null_message$message <- NULL
 
@@ -118,7 +118,7 @@ test_that(".check_response_for_error uses $error if $message is null", {
 
 test_that(".check_response_for_error returns blank for
           Response message if $message and $error are null", {
-  skip_on_cran("skip on cran")
+  skip_on_cran()
   cont_parsed_03_both_null <- cont_parsed_03
   cont_parsed_03_both_null$message <- NULL
   cont_parsed_03_both_null$error <- NULL

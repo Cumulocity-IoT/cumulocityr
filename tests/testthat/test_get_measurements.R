@@ -2,13 +2,13 @@ context("test get_measurements")
 
 
 test_that("page_size controls number of records returned", {
-  skip_on_cran("skip on cran")
+  skip_on_cran()
   expect_equal(NROW(result_01), 2)
   expect_equal(NROW(result_02), 11)
 })
 
 test_that("time is parsed or not depending on parse_datetime", {
-  skip_on_cran("skip on cran")
+  skip_on_cran()
   expect_true(inherits(result_01$time[1], "POSIXlt"))
   expect_true(is.character(result_02$time[1]))
 })
@@ -27,7 +27,7 @@ test_that("time is parsed or not depending on parse_datetime", {
 
 
 test_that("warning message is issued when measurements list is empty", {
-  skip_on_cran("skip on cran")
+  skip_on_cran()
   # Measurements list is empty because the device_id does not exist.
   expect_warning(get_measurements(
     device_id = 123,
@@ -39,6 +39,6 @@ test_that("warning message is issued when measurements list is empty", {
 })
 
 test_that("parse_json = FALSE returns character string", {
-  skip_on_cran("skip on cran")
+  skip_on_cran()
   expect_true(inherits(result_08[[1]], "character"))
 })
