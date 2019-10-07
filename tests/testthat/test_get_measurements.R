@@ -3,12 +3,34 @@ context("test get_measurements")
 
 test_that("page_size controls number of records returned", {
   skip_on_cran()
+
+  result_01 <- get_measurements(
+    device_id = .get_cumulocity_device_id(),
+    date_from = "2019-09-30T20:00:00Z",
+    num_rows = 2)
+
+  result_02 <- get_measurements(
+    device_id = .get_cumulocity_device_id(),
+    date_from = "2019-09-30T20:00:00Z",
+    num_rows = 11, parse_datetime = FALSE)
+
   expect_equal(NROW(result_01), 2)
   expect_equal(NROW(result_02), 11)
 })
 
 test_that("time is parsed or not depending on parse_datetime", {
   skip_on_cran()
+
+  result_01 <- get_measurements(
+    device_id = .get_cumulocity_device_id(),
+    date_from = "2019-09-30T20:00:00Z",
+    num_rows = 2)
+
+  result_02 <- get_measurements(
+    device_id = .get_cumulocity_device_id(),
+    date_from = "2019-09-30T20:00:00Z",
+    num_rows = 11, parse_datetime = FALSE)
+
   expect_true(inherits(result_01$time[1], "POSIXlt"))
   expect_true(is.character(result_02$time[1]))
 })
@@ -40,5 +62,9 @@ test_that("warning message is issued when measurements list is empty", {
 
 test_that("parse_json = FALSE returns character string", {
   skip_on_cran()
+  result_08 <- get_measurements(
+    device_id = .get_cumulocity_device_id(),
+    date_from = "2019-09-30T20:00:00Z",
+    num_rows = 7, parse_json = FALSE)
   expect_true(inherits(result_08[[1]], "character"))
 })

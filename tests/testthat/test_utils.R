@@ -2,6 +2,7 @@ context("test utils")
 
 
 test_that(".get_cumulocity_* does not result in error", {
+  skip_on_cran()
   expect_error(.get_cumulocity_base_url(), NA)
   expect_error(.get_cumulocity_usr(), NA)
   expect_error(.get_cumulocity_pwd(), NA)
@@ -29,6 +30,92 @@ test_that(".check_date throws error if input is not of character class", {
     "Dates must be of class character."
   )
 })
+
+test_that(".get_devices does not throw error", {
+  skip_on_cran()
+  expect_error(.get_devices(page_size = 3), NA)
+  expect_equal(.get_devices(page_size = 20)$status_code, 200)
+})
+
+
+test_that(".check_response_for_error returns error for bad credentials", {
+  skip_on_cran()
+  exp_error <- paste("Cumulocity API request failed with status code 401.\n",
+    "Category:         Client error",
+    "Reason:           Unauthorized",
+    "Status message:   Client error: (401) Unauthorized",
+    "Response message: Invalid credentials! : Bad credentials",
+    sep = "\n")
+
+  url_01 <- paste0(.get_cumulocity_base_url(),
+                   "/inventory/managedObjects?fragmentType=c8y_IsDevice",
+                   collapse = "")
+
+  result_03 <- httr::GET(url = url_01, httr::authenticate("foo", "bar"))
+  cont_03 <- httr::content(result_03, "text")
+  cont_parsed_03 <- jsonlite::fromJSON(cont_03)
+
+  expect_error(.check_response_for_error(result_03, cont_parsed_03), exp_error, fixed = TRUE)
+})
+
+
+test_that(".check_response_for_error uses $error if $message is null", {
+  skip_on_cran()
+
+  url_01 <- paste0(.get_cumulocity_base_url(),
+                   "/inventory/managedObjects?fragmentType=c8y_IsDevice",
+                   collapse = "")
+
+  result_03 <- httr::GET(url = url_01, httr::authenticate("foo", "bar"))
+  cont_03 <- httr::content(result_03, "text")
+  cont_parsed_03 <- jsonlite::fromJSON(cont_03)
+
+  cont_parsed_03_null_message <- cont_parsed_03
+  cont_parsed_03_null_message$message <- NULL
+
+  exp_error <- paste("Cumulocity API request failed with status code 401.\n",
+    "Category:         Client error",
+    "Reason:           Unauthorized",
+    "Status message:   Client error: (401) Unauthorized",
+    "Response message: security/Unauthorized",
+    sep = "\n"
+  )
+  expect_error(.check_response_for_error(result_03, cont_parsed_03_null_message), exp_error, fixed = TRUE)
+})
+
+
+test_that(".check_response_for_error returns blank for
+          Response message if $message and $error are null", {
+  skip_on_cran()
+
+  url_01 <- paste0(.get_cumulocity_base_url(),
+                   "/inventory/managedObjects?fragmentType=c8y_IsDevice",
+                   collapse = "")
+
+  result_03 <- httr::GET(url = url_01, httr::authenticate("foo", "bar"))
+  cont_03 <- httr::content(result_03, "text")
+  cont_parsed_03 <- jsonlite::fromJSON(cont_03)
+
+  cont_parsed_03_both_null <- cont_parsed_03
+  cont_parsed_03_both_null$message <- NULL
+  cont_parsed_03_both_null$error <- NULL
+
+  exp_error <- paste("Cumulocity API request failed with status code 401.\n",
+    "Category:         Client error",
+    "Reason:           Unauthorized",
+    "Status message:   Client error: (401) Unauthorized",
+    "Response message: ",
+    sep = "\n"
+  )
+  expect_error(.check_response_for_error(result_03, cont_parsed_03_both_null), exp_error, fixed = TRUE)
+})
+
+
+test_that(".parse_datetime returns POSIXlt object", {
+  expect_true(inherits(.parse_datetime("2119-09-10T13:06:34.161Z"), "POSIXlt"))
+})
+
+
 
 # test_that("query is formed correctly", {
 #   query_01 <- .form_query(
@@ -80,60 +167,3 @@ test_that(".check_date throws error if input is not of character class", {
 #   expect_equal(query_04$pageSize, 99)
 # })
 
-test_that(".get_devices does not throw error", {
-  skip_on_cran()
-  expect_error(.get_devices(page_size = 3), NA)
-  expect_equal(.get_devices(page_size = 20)$status_code, 200)
-})
-
-
-test_that(".check_response_for_error returns error for bad credentials", {
-  skip_on_cran()
-  exp_error <- paste("Cumulocity API request failed with status code 401.\n",
-    "Category:         Client error",
-    "Reason:           Unauthorized",
-    "Status message:   Client error: (401) Unauthorized",
-    "Response message: Invalid credentials! : Bad credentials",
-    sep = "\n"
-  )
-  expect_error(.check_response_for_error(result_03, cont_parsed_03), exp_error, fixed = TRUE)
-})
-
-
-test_that(".check_response_for_error uses $error if $message is null", {
-  skip_on_cran()
-  cont_parsed_03_null_message <- cont_parsed_03
-  cont_parsed_03_null_message$message <- NULL
-
-  exp_error <- paste("Cumulocity API request failed with status code 401.\n",
-    "Category:         Client error",
-    "Reason:           Unauthorized",
-    "Status message:   Client error: (401) Unauthorized",
-    "Response message: security/Unauthorized",
-    sep = "\n"
-  )
-  expect_error(.check_response_for_error(result_03, cont_parsed_03_null_message), exp_error, fixed = TRUE)
-})
-
-
-test_that(".check_response_for_error returns blank for
-          Response message if $message and $error are null", {
-  skip_on_cran()
-  cont_parsed_03_both_null <- cont_parsed_03
-  cont_parsed_03_both_null$message <- NULL
-  cont_parsed_03_both_null$error <- NULL
-
-  exp_error <- paste("Cumulocity API request failed with status code 401.\n",
-    "Category:         Client error",
-    "Reason:           Unauthorized",
-    "Status message:   Client error: (401) Unauthorized",
-    "Response message: ",
-    sep = "\n"
-  )
-  expect_error(.check_response_for_error(result_03, cont_parsed_03_both_null), exp_error, fixed = TRUE)
-})
-
-
-test_that(".parse_datetime returns POSIXlt object", {
-  expect_true(inherits(.parse_datetime("2119-09-10T13:06:34.161Z"), "POSIXlt"))
-})
