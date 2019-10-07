@@ -1,27 +1,26 @@
-
+# setup for tests
 
 # results used in test_get_measurements.R
 result_01 <- get_measurements(
   device_id = .get_cumulocity_device_id(),
   date_from = "2019-09-30T20:00:00Z",
-  num_rows = 2
-)
+  num_rows = 2)
+
 result_02 <- get_measurements(
   device_id = .get_cumulocity_device_id(),
   date_from = "2019-09-30T20:00:00Z",
-  num_rows = 11, parse_datetime = FALSE
-)
+  num_rows = 11, parse_datetime = FALSE)
+
 result_08 <- get_measurements(
   device_id = .get_cumulocity_device_id(),
   date_from = "2019-09-30T20:00:00Z",
-  num_rows = 7, parse_json = FALSE
-)
+  num_rows = 7, parse_json = FALSE)
 
 # results used in test_utils.R
 url_01 <- paste0(.get_cumulocity_base_url(),
   "/inventory/managedObjects?fragmentType=c8y_IsDevice",
-  collapse = ""
-)
+  collapse = "")
+
 result_03 <- httr::GET(url = url_01, httr::authenticate("foo", "bar"))
 cont_03 <- httr::content(result_03, "text")
 cont_parsed_03 <- jsonlite::fromJSON(cont_03)

@@ -1,11 +1,13 @@
 context("test get_devices")
 
 test_that("get_devices returns data.frame", {
+  skip_on_cran("skip on cran")
   expect_equal(is.data.frame(get_devices(page_size = 3)), TRUE)
 })
 
 
 test_that("time is parsed or not depending on parse_datetime", {
+  skip_on_cran("skip on cran")
   expect_true(inherits(result_04$creationTime[1], "POSIXlt"))
   expect_true(inherits(result_04$lastUpdated[1], "POSIXlt"))
   expect_true(inherits(result_04$c8y_Availability$lastMessage[1], "POSIXlt"))
@@ -19,5 +21,6 @@ test_that("time is parsed or not depending on parse_datetime", {
 
 
 test_that("parse_json = FALSE returns character string", {
+  skip_on_cran("skip on cran")
   expect_true(inherits(result_09[[1]], "character"))
 })
