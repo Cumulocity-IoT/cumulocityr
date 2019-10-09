@@ -40,10 +40,13 @@ test_that("time is parsed or not depending on parse_datetime", {
 })
 
 
-# test_that("what happens when num_rows is NULL?", {
-#   get_measurements(device_id = .get_cumulocity_device_id(),
-#                    date_from = "2019-09-30T20:00:00Z")
-# })
+test_that("when num_rows is NULL, return all records between two dates", {
+  result_10 <- get_measurements(
+    device_id = .get_cumulocity_device_id(),
+    date_from = "2019-10-01T00:00:00Z", date_to = "2019-10-01T00:00:10Z"
+  )
+  expect_equal(NROW(result_10), 2)
+})
 
 # test_that("what happens when num_rows is very large but there is only data on page 1?", {
 #   get_measurements(device_id = .get_cumulocity_device_id(),

@@ -181,7 +181,67 @@
 
 
 .check_if_logical <- function(x) {
-  if(!is.logical(x)) {
+  if (!is.logical(x)) {
     stop(paste(x, "must be a logical."))
   }
+}
+
+
+.get_em_response <- function(device_id, date_from, date_to, num_rows,
+                             parse_json, parse_datetime) {
+  # Used by get_measurements to get the measurements
+
+  url <- paste0(.get_cumulocity_base_url(),
+    "/measurement/measurements",
+    collapse = ""
+  )
+
+  # Get data
+  df_list <- list()
+  page_size <- 2000
+
+  if (is.null(num_rows)) {
+    cur_page <- 1
+    while (TRUE) {
+      query <- list(
+        source = device_id, pageSize = page_size,
+        currentPage = cur_page, dateFrom = date_from,
+        dateTo = date_to
+      )
+
+      response <- .get_with_query(url, query)
+
+      cont <- .get_content_from_response(response, cur_page, "meas")
+
+      if (grepl("measurements\\\":\\[]", cont)) {
+        break # If there are no measurements, exit the loop.
+      } else {
+        df_list[[cur_page]] <- cont
+        cur_page <- cur_page + 1
+      }
+    }
+  } else {
+    pages_per_query <- ceiling(num_rows / page_size)
+    page_sizes <- .create_page_sizes(num_rows, pages_per_query)
+
+    for (cur_page in c(1:pages_per_query)) {
+      query <- list(
+        source = device_id, pageSize = page_sizes[cur_page],
+        currentPage = cur_page, dateFrom = date_from,
+        dateTo = date_to
+      )
+
+      response <- .get_with_query(url, query)
+
+      cont <- .get_content_from_response(response, cur_page, "meas")
+
+      if (grepl("measurements\\\":\\[]", cont)) {
+        break # If there are no measurements, exit the loop.
+      } else {
+        df_list[[cur_page]] <- cont
+        cur_page <- cur_page + 1
+      }
+    }
+  }
+  return(df_list)
 }
