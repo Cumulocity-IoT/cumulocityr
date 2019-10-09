@@ -4,15 +4,12 @@
 \alias{get_devices}
 \title{Get the devices or for a tenant.}
 \usage{
-get_devices(num_rows = NULL, parse_json = TRUE,
-  parse_datetime = TRUE)
+get_devices(num_rows = NULL, parse_json = TRUE)
 }
 \arguments{
 \item{num_rows}{The number of records to return.}
 
 \item{parse_json}{If TRUE, parse the JSON object into a data frame.}
-
-\item{parse_datetime}{If TRUE, parse datetime fields from char to POSIXlt.}
 }
 \value{
 A \code{data.frame} if \code{parse_json = TRUE},
@@ -29,11 +26,7 @@ If \code{num_rows = NULL} (default), all devices are returned.
 If \code{parse_json} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
 before being returned. The data is converted to a single flattened data frame.
 
-If \code{parse_json} is FALSE, the JSON object is returned as a JSON string. The
-parameter \code{parse_datetime} has no effect.
-
-If \code{parse_datetime = TRUE}, the following fields are parsed from char to
-POSIXlt: \code{creationTime, lastUpdated, c8y_Availability.lastMessage}.
+If \code{parse_json} is FALSE, the JSON object is returned as a JSON string.
 }
 \examples{
 \dontrun{

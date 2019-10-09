@@ -25,7 +25,6 @@
 #' @param date_to The ending datetime.
 #' @param num_rows The number of records to return.
 #' @param parse_json If TRUE, parse the JSON object into a data frame.
-#' @param parse_datetime If TRUE, parse datetime fields from char to POSIXlt.
 #'
 #' @return A \code{data.frame} if \code{parse_json = TRUE},
 #' and a character string otherwise.
@@ -42,8 +41,7 @@
 #'
 #' If \code{parse_json} is FALSE, the JSON object is returned as a JSON string.
 #' For queries with multiple pages, a list of such objects is returned. Each
-#' element in this list contains up to 2000 records. The parameter \code{parse_datetime}
-#' has no effect.
+#' element in this list contains up to 2000 records.
 #'
 #' @details
 #' Get the measurements for a device for a time period.
@@ -63,13 +61,11 @@ get_measurements <- function(device_id,
                              date_from,
                              date_to = NULL,
                              num_rows = NULL,
-                             parse_json = TRUE,
-                             parse_datetime = TRUE) {
+                             parse_json = TRUE) {
   .check_date(date_from)
   .check_date(date_to)
 
   .check_if_logical(parse_json)
-  .check_if_logical(parse_datetime)
 
 
   if (is.null(date_to)) {
@@ -79,7 +75,7 @@ get_measurements <- function(device_id,
   df_list <- .get_m_response(
     device_id, date_from,
     date_to, num_rows,
-    parse_json, parse_datetime
+    parse_json
   )
 
   # If no measurements, return empty list
@@ -96,10 +92,6 @@ get_measurements <- function(device_id,
     }
 
     the_data <- do.call("rbind", df_list)
-
-    if (parse_datetime) {
-      the_data$time <- .parse_datetime(the_data$time)
-    }
 
     return(the_data)
   }

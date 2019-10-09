@@ -105,7 +105,7 @@
 <div id="get-measurements" class="section level3">
 <h3 class="hasAnchor">
 <a href="#get-measurements" class="anchor"></a>Get measurements</h3>
-<p>Get measurements for device “Temperature #1” and plot the result.</p>
+<p>Get measurements for device “Temperature #1” and plot the result. Datetimes are returned as character strings; we first convert to <code>POSIXct</code> before plotting.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">meas &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_measurements.html">get_measurements</a></span>(<span class="dt">device_id =</span> <span class="dv">53700</span>,</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">                         <span class="dt">num_rows =</span> <span class="dv">100</span>,</a>
@@ -119,40 +119,42 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">2019-09-30 19:59:00</td>
+<td align="left">2019-09-30T19:59:00.850Z</td>
 <td align="left">c8y_Temperature</td>
 <td align="right">2.079117</td>
 </tr>
 <tr class="even">
-<td align="left">2019-09-30 19:59:05</td>
+<td align="left">2019-09-30T19:59:05.851Z</td>
 <td align="left">c8y_Temperature</td>
 <td align="right">9.135455</td>
 </tr>
 <tr class="odd">
-<td align="left">2019-09-30 19:59:10</td>
+<td align="left">2019-09-30T19:59:10.850Z</td>
 <td align="left">c8y_Temperature</td>
 <td align="right">8.090170</td>
 </tr>
 <tr class="even">
-<td align="left">2019-09-30 19:59:15</td>
+<td align="left">2019-09-30T19:59:15.851Z</td>
 <td align="left">c8y_Temperature</td>
 <td align="right">6.691306</td>
 </tr>
 <tr class="odd">
-<td align="left">2019-09-30 19:59:20</td>
+<td align="left">2019-09-30T19:59:20.853Z</td>
 <td align="left">c8y_Temperature</td>
 <td align="right">5.000000</td>
 </tr>
 <tr class="even">
-<td align="left">2019-09-30 19:59:25</td>
+<td align="left">2019-09-30T19:59:25.851Z</td>
 <td align="left">c8y_Temperature</td>
 <td align="right">3.090170</td>
 </tr>
 </tbody>
 </table>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(meas<span class="op">$</span>time, meas<span class="op">$</span>c8y_Temperature.T.value, <span class="dt">type =</span> <span class="st">"l"</span>,</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">     <span class="dt">xlab =</span> <span class="st">"Time"</span>, <span class="dt">ylab =</span> <span class="st">"Temperature (deg C)"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb4-2" data-line-number="2">time_parsed &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span>(meas<span class="op">$</span>time, <span class="dt">format =</span> <span class="st">"%Y-%m-%dT%H:%M:%OSZ"</span>, <span class="dt">tz =</span> <span class="st">"Z"</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(time_parsed, meas<span class="op">$</span>c8y_Temperature.T.value, <span class="dt">type =</span> <span class="st">"l"</span>,</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">     <span class="dt">xlab =</span> <span class="st">"Time"</span>, <span class="dt">ylab =</span> <span class="st">"Temperature (deg C)"</span>)</a></code></pre></div>
 <p><img src="cumulocityr_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
 <div id="get-events" class="section level3">
@@ -175,37 +177,37 @@
 <tbody>
 <tr class="odd">
 <td align="left">c8y_LocationUpdate</td>
-<td align="left">2019-10-01 04:53:57</td>
+<td align="left">2019-10-01T04:53:57.435Z</td>
 <td align="right">77</td>
 <td align="right">88</td>
 </tr>
 <tr class="even">
 <td align="left">c8y_LocationUpdate</td>
-<td align="left">2019-10-01 04:53:52</td>
+<td align="left">2019-10-01T04:53:52.435Z</td>
 <td align="right">33</td>
 <td align="right">44</td>
 </tr>
 <tr class="odd">
 <td align="left">c8y_LocationUpdate</td>
-<td align="left">2019-10-01 04:53:47</td>
+<td align="left">2019-10-01T04:53:47.434Z</td>
 <td align="right">22</td>
 <td align="right">33</td>
 </tr>
 <tr class="even">
 <td align="left">3</td>
-<td align="left">2019-10-01 04:53:42</td>
+<td align="left">2019-10-01T04:53:42.432Z</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">c8y_LocationUpdate</td>
-<td align="left">2019-10-01 04:51:27</td>
+<td align="left">2019-10-01T04:51:27.419Z</td>
 <td align="right">77</td>
 <td align="right">88</td>
 </tr>
 <tr class="even">
 <td align="left">c8y_LocationUpdate</td>
-<td align="left">2019-10-01 04:51:22</td>
+<td align="left">2019-10-01T04:51:22.418Z</td>
 <td align="right">33</td>
 <td align="right">44</td>
 </tr>
@@ -223,7 +225,7 @@
 <a class="sourceLine" id="cb6-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(meas_<span class="dv">03</span>)</a>
 <a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; [1] "{\"next\":\"https://mg.cumulocity.com/measurement/measurements?dateTo=2019-10-09T15:17:20Z&amp;pageSize=2&amp;source=53700&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=2\",\"self\":\"https://mg.cumulocity.com/measurement/measurements?dateTo=2019-10-09T15:17:20Z&amp;pageSize=2&amp;source=53700&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=1\",\"statistics\":{\"totalPages\":null,\"currentPage\":1,\"pageSize\":2},\"measurements\":[{\"self\":\"https://mg.cumulocity.com/measurement/measurements/53701\",\"time\":\"2019-09-30T19:59:00.850Z\",\"id\":\"53701\",\"source\":{\"self\":\"https://mg.cumulocity.com/inventory/managedObjects/53700\",\"id\":\"53700\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":2.0791169082</span><span class="re">}}}</span><span class="co">,{\"self\":\"https://mg.cumulocity.com/measurement/measurements/53702\",\"time\":\"2019-09-30T19:59:05.851Z\",\"id\":\"53702\",\"source\":{\"self\":\"https://mg.cumulocity.com/inventory/managedObjects/53700\",\"id\":\"53700\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":9.1354545764</span><span class="re">}}}</span><span class="co">]}"</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; [1] "{\"next\":\"https://mg.cumulocity.com/measurement/measurements?dateTo=2019-10-09T16:31:36Z&amp;pageSize=2&amp;source=53700&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=2\",\"self\":\"https://mg.cumulocity.com/measurement/measurements?dateTo=2019-10-09T16:31:36Z&amp;pageSize=2&amp;source=53700&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=1\",\"statistics\":{\"totalPages\":null,\"currentPage\":1,\"pageSize\":2},\"measurements\":[{\"self\":\"https://mg.cumulocity.com/measurement/measurements/53701\",\"time\":\"2019-09-30T19:59:00.850Z\",\"id\":\"53701\",\"source\":{\"self\":\"https://mg.cumulocity.com/inventory/managedObjects/53700\",\"id\":\"53700\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":2.0791169082</span><span class="re">}}}</span><span class="co">,{\"self\":\"https://mg.cumulocity.com/measurement/measurements/53702\",\"time\":\"2019-09-30T19:59:05.851Z\",\"id\":\"53702\",\"source\":{\"self\":\"https://mg.cumulocity.com/inventory/managedObjects/53700\",\"id\":\"53700\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":9.1354545764</span><span class="re">}}}</span><span class="co">]}"</span></a></code></pre></div>
 </div>
   </div>
 

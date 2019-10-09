@@ -5,7 +5,7 @@
 \title{Get the events for a device.}
 \usage{
 get_events(device_id, date_from, date_to = NULL, num_rows = NULL,
-  parse_json = TRUE, parse_datetime = TRUE)
+  parse_json = TRUE)
 }
 \arguments{
 \item{device_id}{The device id.}
@@ -17,8 +17,6 @@ get_events(device_id, date_from, date_to = NULL, num_rows = NULL,
 \item{num_rows}{The number of records to return.}
 
 \item{parse_json}{If TRUE, parse the JSON object into a data frame.}
-
-\item{parse_datetime}{If TRUE, parse datetime fields from char to POSIXlt.}
 }
 \value{
 A \code{data.frame} if \code{parse_json = TRUE},
@@ -36,8 +34,7 @@ If a page does not contain any events, it does not get added to the data frame.
 
 If \code{parse_json} is FALSE, the JSON object is returned as a JSON string.
 For queries with multiple pages, a list of such objects is returned. Each
-element in this list contains up to 2000 records. The parameter \code{parse_datetime}
-has no effect.
+element in this list contains up to 2000 records.
 }
 \description{
 Get the events for a device.

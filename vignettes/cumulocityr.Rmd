@@ -46,7 +46,7 @@ print(devices[,c("type", "name", "id")])
 
 ### Get measurements
 
-Get measurements for device "Temperature #1" and plot the result.
+Get measurements for device "Temperature #1" and plot the result. Datetimes are returned as character strings; we first convert to `POSIXct` before plotting.
 ```{r}
 
 meas <- get_measurements(device_id = 53700,
@@ -54,7 +54,9 @@ meas <- get_measurements(device_id = 53700,
                          date_from = "2019-09-30T19:59:00Z")
 kable(head(meas[c("time", "type", "c8y_Temperature.T.value")]))
 
-plot(meas$time, meas$c8y_Temperature.T.value, type = "l",
+time_parsed <- as.POSIXct(meas$time, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "Z")
+
+plot(time_parsed, meas$c8y_Temperature.T.value, type = "l",
      xlab = "Time", ylab = "Temperature (deg C)")
 
 ```

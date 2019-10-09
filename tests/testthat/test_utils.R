@@ -115,9 +115,9 @@ test_that(".check_response_for_error returns blank for
 })
 
 
-test_that(".parse_datetime returns POSIXlt object", {
-  expect_true(inherits(.parse_datetime("2119-09-10T13:06:34.161Z"), "POSIXlt"))
-})
+# test_that(".parse_datetime returns POSIXlt object", {
+#   expect_true(inherits(.parse_datetime("2119-09-10T13:06:34.161Z"), "POSIXlt"))
+# })
 
 
 

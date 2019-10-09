@@ -120,8 +120,7 @@
     <p>Get the devices or for a tenant.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_devices</span>(<span class='kw'>num_rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parse_json</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>parse_datetime</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_devices</span>(<span class='kw'>num_rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parse_json</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -133,10 +132,6 @@
     <tr>
       <th>parse_json</th>
       <td><p>If TRUE, parse the JSON object into a data frame.</p></td>
-    </tr>
-    <tr>
-      <th>parse_datetime</th>
-      <td><p>If TRUE, parse datetime fields from char to POSIXlt.</p></td>
     </tr>
     </table>
 
@@ -150,10 +145,7 @@ and a character string otherwise.</p>
 <p>If <code>num_rows = NULL</code> (default), all devices are returned.</p>
 <p>If <code>parse_json</code> is TRUE, the JSON object is parsed using <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::fromJSON</a></code>
 before being returned. The data is converted to a single flattened data frame.</p>
-<p>If <code>parse_json</code> is FALSE, the JSON object is returned as a JSON string. The
-parameter <code>parse_datetime</code> has no effect.</p>
-<p>If <code>parse_datetime = TRUE</code>, the following fields are parsed from char to
-POSIXlt: <code>creationTime, lastUpdated, c8y_Availability.lastMessage</code>.</p>
+<p>If <code>parse_json</code> is FALSE, the JSON object is returned as a JSON string.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://cumulocity.com/guides/reference/inventory/'>Cumulocity Inventory API</a></p>

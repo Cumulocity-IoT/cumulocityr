@@ -88,10 +88,11 @@
 
 
 
-.parse_datetime <- function(the_time) {
-  # Parse datetime from char to POSIXlt.
-  strptime(the_time, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "Z")
-}
+# .parse_datetime <- function(the_time) {
+#   # Parse datetime from char to POSIXct.
+#   # strptime(the_time, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "Z") #POSIXlt
+#   as.POSIXct(the_time, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "Z")
+# }
 
 
 .issue_em_warning <- function(cur_page, type) {
@@ -174,7 +175,7 @@
 
 
 .get_m_response <- function(device_id, date_from, date_to, num_rows,
-                            parse_json, parse_datetime) {
+                            parse_json) {
   # Used by get_measurements to get the measurements
 
   url <- paste0(.get_cumulocity_base_url(),
@@ -233,7 +234,7 @@
 }
 
 .get_e_response <- function(device_id, date_from, date_to, num_rows,
-                            parse_json, parse_datetime) {
+                            parse_json) {
   # Used by get_events to get the events
 
   url <- paste0(.get_cumulocity_base_url(),
@@ -292,7 +293,7 @@
 }
 
 
-.get_dev_response <- function(num_rows, parse_json, parse_datetime) {
+.get_dev_response <- function(num_rows, parse_json) {
   # Used by get_devices to get the devices
 
   url <- paste0(.get_cumulocity_base_url(),

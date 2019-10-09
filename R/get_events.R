@@ -37,8 +37,7 @@
 #'
 #' If \code{parse_json} is FALSE, the JSON object is returned as a JSON string.
 #' For queries with multiple pages, a list of such objects is returned. Each
-#' element in this list contains up to 2000 records. The parameter \code{parse_datetime}
-#' has no effect.
+#' element in this list contains up to 2000 records.
 #'
 #' @details
 #' Get the events for a device for a time period.
@@ -58,13 +57,11 @@ get_events <- function(device_id,
                        date_from,
                        date_to = NULL,
                        num_rows = NULL,
-                       parse_json = TRUE,
-                       parse_datetime = TRUE) {
+                       parse_json = TRUE) {
   .check_date(date_from)
   .check_date(date_to)
 
   .check_if_logical(parse_json)
-  .check_if_logical(parse_datetime)
 
 
   if (is.null(date_to)) {
@@ -74,7 +71,7 @@ get_events <- function(device_id,
   df_list <- .get_e_response(
     device_id, date_from,
     date_to, num_rows,
-    parse_json, parse_datetime
+    parse_json
   )
 
   # If no events, return empty list
@@ -92,87 +89,6 @@ get_events <- function(device_id,
 
     the_data <- do.call("rbind", df_list)
 
-    if (parse_datetime) {
-      the_data$time <- .parse_datetime(the_data$time)
-    }
-
     return(the_data)
   }
-
-
-
-
-
-
-  # if (is.null(num_rows)) {
-  #   num_rows <- 1000000
-  # }
-  #
-  # url <- paste0(.get_cumulocity_base_url(),
-  #   "/event/events",
-  #   collapse = ""
-  # )
-  #
-  #
-  # df_list <- list()
-  # df_list_counter <- 1
-  # page_size <- 2000
-  # pages_per_query <- ceiling(num_rows / page_size)
-  # page_sizes <- .create_page_sizes(num_rows, pages_per_query)
-  #
-  #
-  # if (parse_json == FALSE) { # do not parse result
-  #
-  #   for (cur_page in c(1:pages_per_query)) {
-  #     query <- list(
-  #       source = device_id, pageSize = page_sizes[cur_page],
-  #       currentPage = cur_page, dateFrom = date_from,
-  #       dateTo = date_to
-  #     )
-  #
-  #     response <- .get_with_query(url, query)
-  #
-  #     cont <- .get_content_from_response(response, cur_page, "event")
-  #
-  #     if (grepl("events\\\":\\[]", cont)) {
-  #       # If there are no events, exit the loop
-  #       break
-  #     } else {
-  #       df_list[[df_list_counter]] <- cont
-  #       df_list_counter <- df_list_counter + 1
-  #     }
-  #   }
-  #
-  #   return(df_list)
-  # } else { # parse result
-  #
-  #   for (cur_page in c(1:pages_per_query)) {
-  #     query <- list(
-  #       source = device_id, pageSize = page_sizes[cur_page],
-  #       currentPage = cur_page, dateFrom = date_from,
-  #       dateTo = date_to
-  #     )
-  #
-  #     response <- .get_with_query(url, query)
-  #
-  #     dat <- .get_em_from_response(response, cur_page, "event")
-  #
-  #     if (length(dat) > 0) {
-  #       # Flatten to avoid error when stacking nested data frames.
-  #       df_list[[df_list_counter]] <- jsonlite::flatten(dat)
-  #       df_list_counter <- df_list_counter + 1
-  #     } else {
-  #       break
-  #     }
-  #   }
-  #
-  #   the_data <- do.call("rbind", df_list)
-  #
-  #   if (parse_datetime) {
-  #     the_data$time <- .parse_datetime(the_data$time)
-  #     the_data$creationTime <- .parse_datetime(the_data$creationTime)
-  #   }
-  #
-  #   return(the_data)
-  # }
 }

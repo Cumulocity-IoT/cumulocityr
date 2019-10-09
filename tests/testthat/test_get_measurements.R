@@ -13,31 +13,31 @@ test_that("page_size controls number of records returned", {
   result_02 <- get_measurements(
     device_id = .get_cumulocity_device_id(),
     date_from = "2019-09-30T20:00:00Z",
-    num_rows = 11, parse_datetime = FALSE
+    num_rows = 11
   )
 
   expect_equal(NROW(result_01), 2)
   expect_equal(NROW(result_02), 11)
 })
 
-test_that("time is parsed or not depending on parse_datetime", {
-  skip_on_cran()
-
-  result_01 <- get_measurements(
-    device_id = .get_cumulocity_device_id(),
-    date_from = "2019-09-30T20:00:00Z",
-    num_rows = 2
-  )
-
-  result_02 <- get_measurements(
-    device_id = .get_cumulocity_device_id(),
-    date_from = "2019-09-30T20:00:00Z",
-    num_rows = 11, parse_datetime = FALSE
-  )
-
-  expect_true(inherits(result_01$time[1], "POSIXlt"))
-  expect_true(is.character(result_02$time[1]))
-})
+# test_that("time is parsed or not depending on parse_datetime", {
+#   skip_on_cran()
+#
+#   result_01 <- get_measurements(
+#     device_id = .get_cumulocity_device_id(),
+#     date_from = "2019-09-30T20:00:00Z",
+#     num_rows = 2
+#   )
+#
+#   result_02 <- get_measurements(
+#     device_id = .get_cumulocity_device_id(),
+#     date_from = "2019-09-30T20:00:00Z",
+#     num_rows = 11, parse_datetime = FALSE
+#   )
+#
+#   expect_true(inherits(result_01$time[1], "POSIXlt"))
+#   expect_true(is.character(result_02$time[1]))
+# })
 
 
 test_that("when num_rows is NULL, return all records between two dates", {

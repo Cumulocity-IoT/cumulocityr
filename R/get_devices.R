@@ -22,7 +22,6 @@
 #'
 #' @param num_rows The number of records to return.
 #' @param parse_json If TRUE, parse the JSON object into a data frame.
-#' @param parse_datetime If TRUE, parse datetime fields from char to POSIXlt.
 #'
 #' @return A \code{data.frame} if \code{parse_json = TRUE},
 #' and a character string otherwise.
@@ -35,12 +34,7 @@
 #' If \code{parse_json} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
 #' before being returned. The data is converted to a single flattened data frame.
 #'
-#' If \code{parse_json} is FALSE, the JSON object is returned as a JSON string. The
-#' parameter \code{parse_datetime} has no effect.
-#'
-#' If \code{parse_datetime = TRUE}, the following fields are parsed from char to
-#' POSIXlt: \code{creationTime, lastUpdated, c8y_Availability.lastMessage}.
-#'
+#' If \code{parse_json} is FALSE, the JSON object is returned as a JSON string.
 #'
 #' @author Dmitriy Bolotov
 #'
@@ -55,16 +49,13 @@
 #'
 #' @export
 get_devices <- function(num_rows = NULL,
-                        parse_json = TRUE,
-                        parse_datetime = TRUE) {
+                        parse_json = TRUE) {
   .check_if_logical(parse_json)
-  .check_if_logical(parse_datetime)
 
 
   df_list <- .get_dev_response(
     num_rows,
-    parse_json,
-    parse_datetime
+    parse_json
   )
 
 
@@ -84,11 +75,11 @@ get_devices <- function(num_rows = NULL,
 
     the_data <- do.call("rbind", df_list)
 
-    if (parse_datetime) {
-      the_data$creationTime <- .parse_datetime(the_data$creationTime)
-      the_data$lastUpdated <- .parse_datetime(the_data$lastUpdated)
-      the_data$c8y_Availability$lastMessage <- .parse_datetime(the_data$c8y_Availability$lastMessage)
-    }
+    # if (parse_datetime) {
+    #   the_data$creationTime <- .parse_datetime(the_data$creationTime)
+    #   the_data$lastUpdated <- .parse_datetime(the_data$lastUpdated)
+    #   the_data$c8y_Availability$lastMessage <- .parse_datetime(the_data$c8y_Availability.lastMessage)
+    # }
 
     return(the_data)
   }
