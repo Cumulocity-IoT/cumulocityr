@@ -17,10 +17,10 @@
 # GNU General Public License for details (http://www.gnu.org/licenses/).
 # #############################################################################
 
-#' Get the devices or group of devices for a tenant.
+#' Get the devices or for a tenant.
 #'
 #'
-#' @param page_size The page size, set to 2000 (maximum) by default.
+#' @param num_rows The number of records to return.
 #' @param parse_json If TRUE, parse the JSON object into a data frame.
 #' @param parse_datetime If TRUE, parse datetime fields from char to POSIXlt.
 #'
@@ -28,16 +28,18 @@
 #' and a character string otherwise.
 #'
 #' @details
-#' Get the devices or group of devices for a tenant.
+#' Get the devices for a tenant.
 #'
-#' If \code{parse_datetime = TRUE}, the following fields are parsed from char to
-#' POSIXlt: \code{creationTime, lastUpdated, c8y_Availability.lastMessage}.
+#' If \code{num_rows = NULL} (default), all devices are returned.
 #'
 #' If \code{parse_json} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
 #' before being returned. The data is converted to a single flattened data frame.
 #'
-#' If \code{parse_json} is FALSE, the JSON object is returned as a JSON string.
-#' The parameter \code{parse_datetime} has no effect.
+#' If \code{parse_json} is FALSE, the JSON object is returned as a JSON string. The
+#' parameter \code{parse_datetime} has no effect.
+#'
+#' If \code{parse_datetime = TRUE}, the following fields are parsed from char to
+#' POSIXlt: \code{creationTime, lastUpdated, c8y_Availability.lastMessage}.
 #'
 #'
 #' @author Dmitriy Bolotov
@@ -52,29 +54,42 @@
 #' }
 #'
 #' @export
-get_devices <- function(page_size = 2000,
+get_devices <- function(num_rows = NULL,
                         parse_json = TRUE,
                         parse_datetime = TRUE) {
-  response <- .get_devices(page_size)
+  .check_if_logical(parse_json)
+  .check_if_logical(parse_datetime)
 
-  cont <- httr::content(response, "text")
 
+  df_list <- .get_dev_response(
+    num_rows,
+    parse_json,
+    parse_datetime
+  )
+
+
+  # If no devices, return empty list
+  if (length(df_list) == 0) {
+    return(df_list)
+  }
+
+
+  # Parse data or not
   if (parse_json == FALSE) {
-    .check_response_for_error(response)
-    return(cont)
+    return(df_list)
   } else {
-    cont_parsed <- jsonlite::fromJSON(cont, flatten = TRUE)
-
-    .check_response_for_error(response, cont_parsed)
-
-    managed_objects <- cont_parsed$managedObjects
-
-    if (parse_datetime) {
-      managed_objects$creationTime <- .parse_datetime(managed_objects$creationTime)
-      managed_objects$lastUpdated <- .parse_datetime(managed_objects$lastUpdated)
-      managed_objects$c8y_Availability$lastMessage <- .parse_datetime(managed_objects$c8y_Availability$lastMessage)
+    for (x in c(1:length(df_list))) {
+      df_list[[x]] <- jsonlite::fromJSON(df_list[[x]], flatten = TRUE)$managedObjects
     }
 
-    return(managed_objects)
+    the_data <- do.call("rbind", df_list)
+
+    if (parse_datetime) {
+      the_data$creationTime <- .parse_datetime(the_data$creationTime)
+      the_data$lastUpdated <- .parse_datetime(the_data$lastUpdated)
+      the_data$c8y_Availability$lastMessage <- .parse_datetime(the_data$c8y_Availability$lastMessage)
+    }
+
+    return(the_data)
   }
 }

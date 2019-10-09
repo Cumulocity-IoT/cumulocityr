@@ -31,11 +31,11 @@ test_that(".check_date throws error if input is not of character class", {
   )
 })
 
-test_that(".get_devices does not throw error", {
-  skip_on_cran()
-  expect_error(.get_devices(page_size = 3), NA)
-  expect_equal(.get_devices(page_size = 20)$status_code, 200)
-})
+# test_that(".get_devices does not throw error", {
+#   skip_on_cran()
+#   expect_error(.get_devices(page_size = 3), NA)
+#   expect_equal(.get_devices(page_size = 20)$status_code, 200)
+# })
 
 
 test_that(".check_response_for_error returns error for bad credentials", {

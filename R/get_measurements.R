@@ -23,9 +23,9 @@
 #' @param device_id The device id.
 #' @param date_from The starting datetime.
 #' @param date_to The ending datetime.
-#' @param num_rows Number of rows of data to return.
+#' @param num_rows The number of records to return.
 #' @param parse_json If TRUE, parse the JSON object into a data frame.
-#' @param parse_datetime If TRUE, parse "time" field from char to POSIXlt.
+#' @param parse_datetime If TRUE, parse datetime fields from char to POSIXlt.
 #'
 #' @return A \code{data.frame} if \code{parse_json = TRUE},
 #' and a character string otherwise.
@@ -76,7 +76,7 @@ get_measurements <- function(device_id,
     date_to <- format(Sys.time(), format = "%Y-%m-%dT%H:%M:%OSZ")
   }
 
-  df_list <- .get_em_response(
+  df_list <- .get_m_response(
     device_id, date_from,
     date_to, num_rows,
     parse_json, parse_datetime

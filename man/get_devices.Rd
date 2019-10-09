@@ -2,13 +2,13 @@
 % Please edit documentation in R/get_devices.R
 \name{get_devices}
 \alias{get_devices}
-\title{Get the devices or group of devices for a tenant.}
+\title{Get the devices or for a tenant.}
 \usage{
-get_devices(page_size = 2000, parse_json = TRUE,
+get_devices(num_rows = NULL, parse_json = TRUE,
   parse_datetime = TRUE)
 }
 \arguments{
-\item{page_size}{The page size, set to 2000 (maximum) by default.}
+\item{num_rows}{The number of records to return.}
 
 \item{parse_json}{If TRUE, parse the JSON object into a data frame.}
 
@@ -19,19 +19,21 @@ A \code{data.frame} if \code{parse_json = TRUE},
 and a character string otherwise.
 }
 \description{
-Get the devices or group of devices for a tenant.
+Get the devices or for a tenant.
 }
 \details{
-Get the devices or group of devices for a tenant.
+Get the devices for a tenant.
 
-If \code{parse_datetime = TRUE}, the following fields are parsed from char to
-POSIXlt: \code{creationTime, lastUpdated, c8y_Availability.lastMessage}.
+If \code{num_rows = NULL} (default), all devices are returned.
 
 If \code{parse_json} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}
 before being returned. The data is converted to a single flattened data frame.
 
-If \code{parse_json} is FALSE, the JSON object is returned as a JSON string.
-The parameter \code{parse_datetime} has no effect.
+If \code{parse_json} is FALSE, the JSON object is returned as a JSON string. The
+parameter \code{parse_datetime} has no effect.
+
+If \code{parse_datetime = TRUE}, the following fields are parsed from char to
+POSIXlt: \code{creationTime, lastUpdated, c8y_Availability.lastMessage}.
 }
 \examples{
 \dontrun{

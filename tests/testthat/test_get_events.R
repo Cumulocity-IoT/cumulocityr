@@ -39,13 +39,13 @@ test_that("time is parsed or not depending on parse_datetime", {
   expect_true(is.character(result_07$time[1]))
 })
 
-test_that("warning message is issued when measurements list is empty", {
-  skip_on_cran()
-  expect_warning(get_events(123, date_from = "2019-09-30T20:00:00Z"),
-    "No events found on page 1.",
-    fixed = TRUE
-  )
-})
+# test_that("warning message is issued when measurements list is empty", {
+#   skip_on_cran()
+#   expect_warning(get_events(123, date_from = "2019-09-30T20:00:00Z"),
+#     "No events found on page 1.",
+#     fixed = TRUE
+#   )
+# })
 
 test_that("parse_json = FALSE returns character string", {
   skip_on_cran()
@@ -57,4 +57,13 @@ test_that("parse_json = FALSE returns character string", {
   )
 
   expect_true(inherits(result_10[[1]], "character"))
+})
+
+
+test_that("when num_rows is NULL, return all records between two dates", {
+  result_11 <- get_events(
+    device_id = .get_cumulocity_device_id(),
+    date_from = "2019-09-30T00:00:00Z", date_to = "2019-10-01T04:40:10Z"
+  )
+  expect_equal(NROW(result_11), 1)
 })

@@ -26,20 +26,6 @@
 }
 
 
-.get_devices <- function(page_size) {
-  # Get object with devices.
-  url <- paste0(.get_cumulocity_base_url(),
-    "/inventory/managedObjects?fragmentType=c8y_IsDevice",
-    collapse = ""
-  )
-
-  query <- list(pageSize = page_size)
-  response <- .get_with_query(url, query)
-
-  return(response)
-}
-
-
 .get_with_query <- function(url, query) {
   response <- httr::GET(
     url = url,
@@ -122,47 +108,47 @@
   }
 }
 
-.get_em_from_response <- function(response, cur_page, type) {
-  # Get events or measurements from response
-  # parse content, check response for error, and issue warning if empty
+# .get_em_from_response <- function(response, cur_page, type) {
+#   # Get events or measurements from response
+#   # parse content, check response for error, and issue warning if empty
+#
+#   cont <- httr::content(response, "text")
+#   cont_parsed <- jsonlite::fromJSON(cont)
+#
+#   .check_response_for_error(response, cont_parsed)
+#
+#   if (type == "meas") {
+#     dat <- cont_parsed$measurements
+#     if (!length(dat)) {
+#       .issue_em_warning(cur_page, "meas")
+#     }
+#   } else if (type == "event") {
+#     dat <- cont_parsed$events
+#     if (!length(dat)) {
+#       .issue_em_warning(cur_page, "event")
+#     }
+#   }
+#
+#
+#
+#   return(dat)
+# }
 
-  cont <- httr::content(response, "text")
-  cont_parsed <- jsonlite::fromJSON(cont)
 
-  .check_response_for_error(response, cont_parsed)
-
-  if (type == "meas") {
-    dat <- cont_parsed$measurements
-    if (!length(dat)) {
-      .issue_em_warning(cur_page, "meas")
-    }
-  } else if (type == "event") {
-    dat <- cont_parsed$events
-    if (!length(dat)) {
-      .issue_em_warning(cur_page, "event")
-    }
-  }
-
-
-
-  return(dat)
-}
-
-
-.get_content_from_response <- function(response, cur_page, type) {
+.get_content_from_response <- function(response) {
   # Check repsponse for error, get content without parsing, and issue warning if empty
 
   .check_response_for_error(response = response)
 
   cont <- httr::content(response, "text")
 
-  if ((type == "meas") & grepl("measurements\\\":\\[]", cont)) {
-    .issue_em_warning(cur_page, type)
-  }
-
-  if ((type == "event") & grepl("events\\\":\\[]", cont)) {
-    .issue_em_warning(cur_page, type)
-  }
+  # if ((type == "meas") & grepl("measurements\\\":\\[]", cont)) {
+  #   .issue_em_warning(cur_page, type)
+  # }
+  #
+  # if ((type == "event") & grepl("events\\\":\\[]", cont)) {
+  #   .issue_em_warning(cur_page, type)
+  # }
 
   return(cont)
 }
@@ -187,8 +173,8 @@
 }
 
 
-.get_em_response <- function(device_id, date_from, date_to, num_rows,
-                             parse_json, parse_datetime) {
+.get_m_response <- function(device_id, date_from, date_to, num_rows,
+                            parse_json, parse_datetime) {
   # Used by get_measurements to get the measurements
 
   url <- paste0(.get_cumulocity_base_url(),
@@ -211,7 +197,7 @@
 
       response <- .get_with_query(url, query)
 
-      cont <- .get_content_from_response(response, cur_page, "meas")
+      cont <- .get_content_from_response(response)
 
       if (grepl("measurements\\\":\\[]", cont)) {
         break # If there are no measurements, exit the loop.
@@ -233,7 +219,7 @@
 
       response <- .get_with_query(url, query)
 
-      cont <- .get_content_from_response(response, cur_page, "meas")
+      cont <- .get_content_from_response(response)
 
       if (grepl("measurements\\\":\\[]", cont)) {
         break # If there are no measurements, exit the loop.
@@ -245,3 +231,132 @@
   }
   return(df_list)
 }
+
+.get_e_response <- function(device_id, date_from, date_to, num_rows,
+                            parse_json, parse_datetime) {
+  # Used by get_events to get the events
+
+  url <- paste0(.get_cumulocity_base_url(),
+    "/event/events",
+    collapse = ""
+  )
+
+  # Get data
+  df_list <- list()
+  page_size <- 2000
+
+  if (is.null(num_rows)) {
+    cur_page <- 1
+    while (TRUE) {
+      query <- list(
+        source = device_id, pageSize = page_size,
+        currentPage = cur_page, dateFrom = date_from,
+        dateTo = date_to
+      )
+
+      response <- .get_with_query(url, query)
+
+      cont <- .get_content_from_response(response)
+
+      if (grepl("events\\\":\\[]", cont)) {
+        break # If there are no events, exit the loop.
+      } else {
+        df_list[[cur_page]] <- cont
+        cur_page <- cur_page + 1
+      }
+    }
+  } else {
+    pages_per_query <- ceiling(num_rows / page_size)
+    page_sizes <- .create_page_sizes(num_rows, pages_per_query)
+
+    for (cur_page in c(1:pages_per_query)) {
+      query <- list(
+        source = device_id, pageSize = page_sizes[cur_page],
+        currentPage = cur_page, dateFrom = date_from,
+        dateTo = date_to
+      )
+
+      response <- .get_with_query(url, query)
+
+      cont <- .get_content_from_response(response)
+
+      if (grepl("events\\\":\\[]", cont)) {
+        break # If there are no events, exit the loop.
+      } else {
+        df_list[[cur_page]] <- cont
+        cur_page <- cur_page + 1
+      }
+    }
+  }
+  return(df_list)
+}
+
+
+.get_dev_response <- function(num_rows, parse_json, parse_datetime) {
+  # Used by get_devices to get the devices
+
+  url <- paste0(.get_cumulocity_base_url(),
+    "/inventory/managedObjects?fragmentType=c8y_IsDevice",
+    collapse = ""
+  )
+
+  # Get data
+  df_list <- list()
+  page_size <- 2000
+
+  if (is.null(num_rows)) {
+    cur_page <- 1
+    while (TRUE) {
+      query <- list(
+        pageSize = page_size,
+        currentPage = cur_page
+      )
+
+      response <- .get_with_query(url, query)
+
+      cont <- .get_content_from_response(response)
+
+      if (grepl("managedObjects\\\":\\[]", cont)) {
+        break # If there are no managedObjects, exit the loop.
+      } else {
+        df_list[[cur_page]] <- cont
+        cur_page <- cur_page + 1
+      }
+    }
+  } else {
+    pages_per_query <- ceiling(num_rows / page_size)
+    page_sizes <- .create_page_sizes(num_rows, pages_per_query)
+
+    for (cur_page in c(1:pages_per_query)) {
+      query <- list(
+        pageSize = page_sizes[cur_page],
+        currentPage = cur_page
+      )
+
+      response <- .get_with_query(url, query)
+
+      cont <- .get_content_from_response(response)
+
+      if (grepl("managedObjects\\\":\\[]", cont)) {
+        break # If there are no managedObjects, exit the loop.
+      } else {
+        df_list[[cur_page]] <- cont
+        cur_page <- cur_page + 1
+      }
+    }
+  }
+  return(df_list)
+}
+
+# .get_devices <- function(page_size) {
+#   # Get object with devices.
+#   url <- paste0(.get_cumulocity_base_url(),
+#                 "/inventory/managedObjects?fragmentType=c8y_IsDevice",
+#                 collapse = ""
+#   )
+#
+#   query <- list(pageSize = page_size)
+#   response <- .get_with_query(url, query)
+#
+#   return(response)
+# }

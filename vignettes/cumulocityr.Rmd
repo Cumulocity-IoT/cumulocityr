@@ -36,7 +36,7 @@ Credentials and url for cumulocity are stored in a user's private `.Renviron` fi
 
 ### Get devices
 
-Get devices for the tenant and display a few columns
+Get devices for the tenant and display a few columns. If no arguments are passed, `get_devices()` returns all devices.
 
 ```{r}
 devices <- get_devices()

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the devices or group of devices for a tenant. — get_devices • cumulocityr</title>
+<title>Get the devices or for a tenant. — get_devices • cumulocityr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Get the devices or group of devices for a tenant. — get_devices" />
-<meta property="og:description" content="Get the devices or group of devices for a tenant." />
+<meta property="og:title" content="Get the devices or for a tenant. — get_devices" />
+<meta property="og:description" content="Get the devices or for a tenant." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,24 +111,24 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the devices or group of devices for a tenant.</h1>
+    <h1>Get the devices or for a tenant.</h1>
     <small class="dont-index">Source: <a href='https://github.com/SoftwareAG/cumulocityr/blob/master/R/get_devices.R'><code>R/get_devices.R</code></a></small>
     <div class="hidden name"><code>get_devices.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get the devices or group of devices for a tenant.</p>
+    <p>Get the devices or for a tenant.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_devices</span>(<span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>parse_json</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+    <pre class="usage"><span class='fu'>get_devices</span>(<span class='kw'>num_rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parse_json</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>parse_datetime</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>page_size</th>
-      <td><p>The page size, set to 2000 (maximum) by default.</p></td>
+      <th>num_rows</th>
+      <td><p>The number of records to return.</p></td>
     </tr>
     <tr>
       <th>parse_json</th>
@@ -146,13 +146,14 @@
 and a character string otherwise.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Get the devices or group of devices for a tenant.</p>
-<p>If <code>parse_datetime = TRUE</code>, the following fields are parsed from char to
-POSIXlt: <code>creationTime, lastUpdated, c8y_Availability.lastMessage</code>.</p>
+    <p>Get the devices for a tenant.</p>
+<p>If <code>num_rows = NULL</code> (default), all devices are returned.</p>
 <p>If <code>parse_json</code> is TRUE, the JSON object is parsed using <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::fromJSON</a></code>
 before being returned. The data is converted to a single flattened data frame.</p>
-<p>If <code>parse_json</code> is FALSE, the JSON object is returned as a JSON string.
-The parameter <code>parse_datetime</code> has no effect.</p>
+<p>If <code>parse_json</code> is FALSE, the JSON object is returned as a JSON string. The
+parameter <code>parse_datetime</code> has no effect.</p>
+<p>If <code>parse_datetime = TRUE</code>, the following fields are parsed from char to
+POSIXlt: <code>creationTime, lastUpdated, c8y_Availability.lastMessage</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://cumulocity.com/guides/reference/inventory/'>Cumulocity Inventory API</a></p>

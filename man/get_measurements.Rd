@@ -14,11 +14,11 @@ get_measurements(device_id, date_from, date_to = NULL, num_rows = NULL,
 
 \item{date_to}{The ending datetime.}
 
-\item{num_rows}{Number of rows of data to return.}
+\item{num_rows}{The number of records to return.}
 
 \item{parse_json}{If TRUE, parse the JSON object into a data frame.}
 
-\item{parse_datetime}{If TRUE, parse "time" field from char to POSIXlt.}
+\item{parse_datetime}{If TRUE, parse datetime fields from char to POSIXlt.}
 }
 \value{
 A \code{data.frame} if \code{parse_json = TRUE},

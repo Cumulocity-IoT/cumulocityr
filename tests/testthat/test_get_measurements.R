@@ -55,17 +55,17 @@ test_that("when num_rows is NULL, return all records between two dates", {
 
 
 
-test_that("warning message is issued when measurements list is empty", {
-  skip_on_cran()
-  # Measurements list is empty because the device_id does not exist.
-  expect_warning(get_measurements(
-    device_id = 123,
-    date_from = "2019-09-30T20:00:00Z"
-  ),
-  "No measurements found on page 1.",
-  fixed = TRUE
-  )
-})
+# test_that("warning message is issued when measurements list is empty", {
+#   skip_on_cran()
+#   # Measurements list is empty because the device_id does not exist.
+#   expect_warning(get_measurements(
+#     device_id = 123,
+#     date_from = "2019-09-30T20:00:00Z"
+#   ),
+#   "No measurements found on page 1.",
+#   fixed = TRUE
+#   )
+# })
 
 test_that("parse_json = FALSE returns character string", {
   skip_on_cran()
