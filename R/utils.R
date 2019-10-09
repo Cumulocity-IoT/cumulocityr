@@ -178,3 +178,10 @@
   }
   return(page_sizes)
 }
+
+
+.check_if_logical <- function(x) {
+  if(!is.logical(x)) {
+    stop(paste(x, "must be a logical."))
+  }
+}
