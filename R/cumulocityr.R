@@ -17,7 +17,7 @@
 # GNU General Public License for details (http://www.gnu.org/licenses/).
 # #############################################################################
 
-#' R client for the Cumulocity API
+#' R Client for the Cumulocity API
 #'
 #' This package contains functions to interact with the Cumulocity API.
 #'
