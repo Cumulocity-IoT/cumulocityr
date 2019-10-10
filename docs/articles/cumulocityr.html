@@ -88,29 +88,35 @@
 <div id="authentication" class="section level3">
 <h3 class="hasAnchor">
 <a href="#authentication" class="anchor"></a>Authentication</h3>
-<p>Credentials and url for cumulocity are stored in a user’s private <code>.Renviron</code> file.</p>
+<p>Credentials and base url for cumulocity are stored in a user’s private <code>.Renviron</code> file.</p>
+<p>The credentials defined as follows:</p>
+<pre><code>CUMULOCITY_base_url = "[tenant url]"
+CUMULOCITY_usr = "[username]"
+CUMULOCITY_pwd = "[password]"
+CUMULOCITY_device_id = "[an example device id]"</code></pre>
+<p>The tenant url should be of the form “<a href="https://tenant_name.cumulocity.com" class="uri">https://tenant_name.cumulocity.com</a>”. <code>CUMULOCITY_device_id</code> is provided for convenience, but is not required by any of the main functions.</p>
+<p>The file <code>.Renviron</code> can be edited with <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code>.</p>
 </div>
 <div id="get-devices" class="section level3">
 <h3 class="hasAnchor">
 <a href="#get-devices" class="anchor"></a>Get devices</h3>
 <p>Get devices for the tenant and display a few columns. If no arguments are passed, <code><a href="../reference/get_devices.html">get_devices()</a></code> returns all devices.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devices &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_devices.html">get_devices</a></span>()</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(devices[,<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"type"</span>, <span class="st">"name"</span>, <span class="st">"id"</span>)])</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;              type           name    id</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; 1 c8y_SensorPhone     Pixel 2 XL  1200</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; 2        c8y_Demo  A demo device   200</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; 3            &lt;NA&gt;     DemoDevice 51868</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; 4  c8y_MQTTDevice Temperature #1 53700</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">devices &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_devices.html">get_devices</a></span>()</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(devices[,<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"type"</span>, <span class="st">"name"</span>, <span class="st">"id"</span>)])</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;              type           name    id</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; 1 c8y_SensorPhone     Pixel 2 XL  1200</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; 2        c8y_Demo  A demo device   200</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; 3            &lt;NA&gt;     DemoDevice 51868</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; 4  c8y_MQTTDevice Temperature #1 53700</span></a></code></pre></div>
 </div>
 <div id="get-measurements" class="section level3">
 <h3 class="hasAnchor">
 <a href="#get-measurements" class="anchor"></a>Get measurements</h3>
 <p>Get measurements for device “Temperature #1” and plot the result. Datetimes are returned as character strings; we first convert to <code>POSIXct</code> before plotting.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">meas &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_measurements.html">get_measurements</a></span>(<span class="dt">device_id =</span> <span class="dv">53700</span>,</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">                         <span class="dt">num_rows =</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">                         <span class="dt">date_from =</span> <span class="st">"2019-09-30T19:59:00Z"</span>)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(meas[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"time"</span>, <span class="st">"type"</span>, <span class="st">"c8y_Temperature.T.value"</span>)]))</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">meas &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_measurements.html">get_measurements</a></span>(<span class="dt">device_id =</span> <span class="dv">53700</span>,</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">                         <span class="dt">num_rows =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">                         <span class="dt">date_from =</span> <span class="st">"2019-09-30T19:59:00Z"</span>)</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(meas[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"time"</span>, <span class="st">"type"</span>, <span class="st">"c8y_Temperature.T.value"</span>)]))</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">time</th>
@@ -150,23 +156,22 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">time_parsed &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span>(meas<span class="op">$</span>time, <span class="dt">format =</span> <span class="st">"%Y-%m-%dT%H:%M:%OSZ"</span>, <span class="dt">tz =</span> <span class="st">"Z"</span>)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(time_parsed, meas<span class="op">$</span>c8y_Temperature.T.value, <span class="dt">type =</span> <span class="st">"l"</span>,</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">     <span class="dt">xlab =</span> <span class="st">"Time"</span>, <span class="dt">ylab =</span> <span class="st">"Temperature (deg C)"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">time_parsed &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span>(meas<span class="op">$</span>time, <span class="dt">format =</span> <span class="st">"%Y-%m-%dT%H:%M:%OSZ"</span>, <span class="dt">tz =</span> <span class="st">"Z"</span>)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(time_parsed, meas<span class="op">$</span>c8y_Temperature.T.value, <span class="dt">type =</span> <span class="st">"l"</span>,</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">     <span class="dt">xlab =</span> <span class="st">"Time"</span>, <span class="dt">ylab =</span> <span class="st">"Temperature (deg C)"</span>)</a></code></pre></div>
 <p><img src="cumulocityr_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
 <div id="get-events" class="section level3">
 <h3 class="hasAnchor">
 <a href="#get-events" class="anchor"></a>Get events</h3>
 <p>Similarly, we can get events for the same device:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">events &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_events.html">get_events</a></span>(<span class="dt">device_id =</span> <span class="dv">53700</span>,</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">                     <span class="dt">num_rows =</span> <span class="dv">6</span>,</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">                     <span class="dt">date_from =</span> <span class="st">"2019-09-30T19:59:00Z"</span>)</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(events[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"type"</span>, <span class="st">"time"</span>, <span class="st">"c8y_Position.lng"</span>, <span class="st">"c8y_Position.alt"</span>)])</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">events &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_events.html">get_events</a></span>(<span class="dt">device_id =</span> <span class="dv">53700</span>,</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">                     <span class="dt">num_rows =</span> <span class="dv">6</span>,</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">                     <span class="dt">date_from =</span> <span class="st">"2019-09-30T19:59:00Z"</span>)</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(events[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"type"</span>, <span class="st">"time"</span>, <span class="st">"c8y_Position.lng"</span>, <span class="st">"c8y_Position.alt"</span>)])</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">type</th>
@@ -218,14 +223,14 @@
 <h3 class="hasAnchor">
 <a href="#unparsed-data" class="anchor"></a>Unparsed data</h3>
 <p>By default, the content is parsed, but it is possible to return a list of JSON objects.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">meas_<span class="dv">03</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_measurements.html">get_measurements</a></span>(<span class="dt">device_id =</span> <span class="dv">53700</span>,</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">                            <span class="dt">num_rows =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">                            <span class="dt">date_from =</span> <span class="st">"2019-09-30T19:59:00Z"</span>,</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">                            <span class="dt">parse_json =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(meas_<span class="dv">03</span>)</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; [1] "{\"next\":\"https://mg.cumulocity.com/measurement/measurements?dateTo=2019-10-09T16:31:36Z&amp;pageSize=2&amp;source=53700&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=2\",\"self\":\"https://mg.cumulocity.com/measurement/measurements?dateTo=2019-10-09T16:31:36Z&amp;pageSize=2&amp;source=53700&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=1\",\"statistics\":{\"totalPages\":null,\"currentPage\":1,\"pageSize\":2},\"measurements\":[{\"self\":\"https://mg.cumulocity.com/measurement/measurements/53701\",\"time\":\"2019-09-30T19:59:00.850Z\",\"id\":\"53701\",\"source\":{\"self\":\"https://mg.cumulocity.com/inventory/managedObjects/53700\",\"id\":\"53700\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":2.0791169082</span><span class="re">}}}</span><span class="co">,{\"self\":\"https://mg.cumulocity.com/measurement/measurements/53702\",\"time\":\"2019-09-30T19:59:05.851Z\",\"id\":\"53702\",\"source\":{\"self\":\"https://mg.cumulocity.com/inventory/managedObjects/53700\",\"id\":\"53700\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":9.1354545764</span><span class="re">}}}</span><span class="co">]}"</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">meas_<span class="dv">03</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_measurements.html">get_measurements</a></span>(<span class="dt">device_id =</span> <span class="dv">53700</span>,</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">                            <span class="dt">num_rows =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">                            <span class="dt">date_from =</span> <span class="st">"2019-09-30T19:59:00Z"</span>,</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">                            <span class="dt">parse_json =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(meas_<span class="dv">03</span>)</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; [1] "{\"next\":\"https://mg.cumulocity.com/measurement/measurements?dateTo=2019-10-09T16:58:29Z&amp;pageSize=2&amp;source=53700&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=2\",\"self\":\"https://mg.cumulocity.com/measurement/measurements?dateTo=2019-10-09T16:58:29Z&amp;pageSize=2&amp;source=53700&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=1\",\"statistics\":{\"totalPages\":null,\"currentPage\":1,\"pageSize\":2},\"measurements\":[{\"self\":\"https://mg.cumulocity.com/measurement/measurements/53701\",\"time\":\"2019-09-30T19:59:00.850Z\",\"id\":\"53701\",\"source\":{\"self\":\"https://mg.cumulocity.com/inventory/managedObjects/53700\",\"id\":\"53700\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":2.0791169082</span><span class="re">}}}</span><span class="co">,{\"self\":\"https://mg.cumulocity.com/measurement/measurements/53702\",\"time\":\"2019-09-30T19:59:05.851Z\",\"id\":\"53702\",\"source\":{\"self\":\"https://mg.cumulocity.com/inventory/managedObjects/53700\",\"id\":\"53700\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":9.1354545764</span><span class="re">}}}</span><span class="co">]}"</span></a></code></pre></div>
 </div>
   </div>
 

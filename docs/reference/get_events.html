@@ -152,7 +152,10 @@
 
     <p>A <code>data.frame</code> if <code>parse_json = TRUE</code>,
 and a character string otherwise.</p>
-<p><code>date_from</code> and <code>date_from</code> are expected to be strings in the format "YYYY-MM-DDTHH:MM:SSZ".</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The datetime fields <code>date_from</code> and <code>date_from</code> are expected to be
+strings in the format "YYYY-MM-DDTHH:MM:SSZ".</p>
 <p>If <code>date_to</code> is null, it is set to the current time.</p>
 <p>If num_rows and both dates are specified, the lesser of the two ranges is returned.</p>
 <p>If <code>parse_json</code> is TRUE, the JSON object is parsed using <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::fromJSON</a></code>
@@ -161,9 +164,7 @@ If a page does not contain any events, it does not get added to the data frame.<
 <p>If <code>parse_json</code> is FALSE, the JSON object is returned as a JSON string.
 For queries with multiple pages, a list of such objects is returned. Each
 element in this list contains up to 2000 records.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Get the events for a device for a time period.</p>
+<p>Get the events for a device for a time period.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://cumulocity.com/guides/reference/events/'>Cumulocity Events API</a></p>

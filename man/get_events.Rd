@@ -21,8 +21,13 @@ get_events(device_id, date_from, date_to = NULL, num_rows = NULL,
 \value{
 A \code{data.frame} if \code{parse_json = TRUE},
 and a character string otherwise.
-
-\code{date_from} and \code{date_from} are expected to be strings in the format "YYYY-MM-DDTHH:MM:SSZ".
+}
+\description{
+Get the events for a device.
+}
+\details{
+The datetime fields \code{date_from} and \code{date_from} are expected to be
+strings in the format "YYYY-MM-DDTHH:MM:SSZ".
 
 If \code{date_to} is null, it is set to the current time.
 
@@ -35,11 +40,7 @@ If a page does not contain any events, it does not get added to the data frame.
 If \code{parse_json} is FALSE, the JSON object is returned as a JSON string.
 For queries with multiple pages, a list of such objects is returned. Each
 element in this list contains up to 2000 records.
-}
-\description{
-Get the events for a device.
-}
-\details{
+
 Get the events for a device for a time period.
 }
 \examples{
