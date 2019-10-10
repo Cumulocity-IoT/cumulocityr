@@ -8,7 +8,6 @@
 ^_pkgdown\.yml$
 ^\.travis\.yml$
 ^codecov\.yml$
-^vignettes/cumulocityr\.Rmd$
 ^\.github$
 ^cran-comments\.md$
 ^CRAN-RELEASE$

@@ -85,11 +85,16 @@
     
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(cumulocityr)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(knitr)</a></code></pre></div>
+<div id="introduction" class="section level3">
+<h3 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h3>
+<p>This vignette introduces the main functions with a few examples.</p>
+</div>
 <div id="authentication" class="section level3">
 <h3 class="hasAnchor">
 <a href="#authentication" class="anchor"></a>Authentication</h3>
 <p>Credentials and base url for cumulocity are stored in a user’s private <code>.Renviron</code> file.</p>
-<p>The credentials defined as follows:</p>
+<p>The credentials are defined as follows:</p>
 <pre><code>CUMULOCITY_base_url = "[tenant url]"
 CUMULOCITY_usr = "[username]"
 CUMULOCITY_pwd = "[password]"
@@ -161,7 +166,7 @@ CUMULOCITY_device_id = "[an example device id]"</code></pre>
 <a class="sourceLine" id="cb5-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(time_parsed, meas<span class="op">$</span>c8y_Temperature.T.value, <span class="dt">type =</span> <span class="st">"l"</span>,</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5">     <span class="dt">xlab =</span> <span class="st">"Time"</span>, <span class="dt">ylab =</span> <span class="st">"Temperature (deg C)"</span>)</a></code></pre></div>
-<p><img src="cumulocityr_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<p><img src="cumulocityr_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 </div>
 <div id="get-events" class="section level3">
 <h3 class="hasAnchor">
@@ -230,7 +235,7 @@ CUMULOCITY_device_id = "[an example device id]"</code></pre>
 <a class="sourceLine" id="cb7-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(meas_<span class="dv">03</span>)</a>
 <a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; [1] "{\"next\":\"https://mg.cumulocity.com/measurement/measurements?dateTo=2019-10-10T00:02:09Z&amp;pageSize=2&amp;source=53700&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=2\",\"self\":\"https://mg.cumulocity.com/measurement/measurements?dateTo=2019-10-10T00:02:09Z&amp;pageSize=2&amp;source=53700&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=1\",\"statistics\":{\"totalPages\":null,\"currentPage\":1,\"pageSize\":2},\"measurements\":[{\"self\":\"https://mg.cumulocity.com/measurement/measurements/53701\",\"time\":\"2019-09-30T19:59:00.850Z\",\"id\":\"53701\",\"source\":{\"self\":\"https://mg.cumulocity.com/inventory/managedObjects/53700\",\"id\":\"53700\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":2.0791169082</span><span class="re">}}}</span><span class="co">,{\"self\":\"https://mg.cumulocity.com/measurement/measurements/53702\",\"time\":\"2019-09-30T19:59:05.851Z\",\"id\":\"53702\",\"source\":{\"self\":\"https://mg.cumulocity.com/inventory/managedObjects/53700\",\"id\":\"53700\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":9.1354545764</span><span class="re">}}}</span><span class="co">]}"</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; [1] "{\"next\":\"https://mg.cumulocity.com/measurement/measurements?dateTo=2019-10-10T11:22:31Z&amp;pageSize=2&amp;source=53700&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=2\",\"self\":\"https://mg.cumulocity.com/measurement/measurements?dateTo=2019-10-10T11:22:31Z&amp;pageSize=2&amp;source=53700&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=1\",\"statistics\":{\"totalPages\":null,\"currentPage\":1,\"pageSize\":2},\"measurements\":[{\"self\":\"https://mg.cumulocity.com/measurement/measurements/53701\",\"time\":\"2019-09-30T19:59:00.850Z\",\"id\":\"53701\",\"source\":{\"self\":\"https://mg.cumulocity.com/inventory/managedObjects/53700\",\"id\":\"53700\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":2.0791169082</span><span class="re">}}}</span><span class="co">,{\"self\":\"https://mg.cumulocity.com/measurement/measurements/53702\",\"time\":\"2019-09-30T19:59:05.851Z\",\"id\":\"53702\",\"source\":{\"self\":\"https://mg.cumulocity.com/inventory/managedObjects/53700\",\"id\":\"53700\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":9.1354545764</span><span class="re">}}}</span><span class="co">]}"</span></a></code></pre></div>
 </div>
   </div>
 

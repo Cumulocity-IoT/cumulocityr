@@ -14,25 +14,31 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r setup, echo = FALSE}
+NOT_CRAN <- identical(Sys.getenv("NOT_CRAN"), "TRUE")
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = NOT_CRAN
 )
 ```
 
-```{r setup}
+
+
+```{r load-package}
 library(cumulocityr)
 library(knitr)
-
 ```
 
+### Introduction
+
+This vignette introduces the main functions with a few examples.
 
 ### Authentication
 
 Credentials and base url for cumulocity are stored in a user's private `.Renviron` file.
 
-The credentials defined as follows:
+The credentials are defined as follows:
 
 ```
 CUMULOCITY_base_url = "[tenant url]"
