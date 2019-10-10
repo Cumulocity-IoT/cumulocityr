@@ -36,8 +36,8 @@ get_measurements(device_id = 1234, date_from = "2019-09-30T20:00:00Z")
 -----
 
 Please note that this project is released with a [Contributor Code of
-Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree
-to abide by its terms.
+Conduct](https://github.com/SoftwareAG/cumulocityr/blob/master/.github/CODE_OF_CONDUCT.md).
+By contributing to this project, you agree to abide by its terms.
 
 These tools are provided as-is and without warranty or support. They do
 not constitute part of the Software AG product suite. Users are free to

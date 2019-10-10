@@ -5,8 +5,8 @@
 ^docs$
 ^pkgdown$
 ^README\.Rmd$
-^CODE_OF_CONDUCT\.md$
 ^_pkgdown\.yml$
 ^\.travis\.yml$
 ^codecov\.yml$
 ^vignettes/cumulocityr\.Rmd$
+^\.github$
