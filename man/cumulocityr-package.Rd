@@ -4,7 +4,7 @@
 \name{cumulocityr-package}
 \alias{cumulocityr-package}
 \alias{_PACKAGE}
-\title{R client for the Cumulocity API}
+\title{R Client for the Cumulocity API}
 \description{
 This package contains functions to interact with the Cumulocity API.
 }
