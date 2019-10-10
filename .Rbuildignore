@@ -10,3 +10,4 @@
 ^codecov\.yml$
 ^vignettes/cumulocityr\.Rmd$
 ^\.github$
+^cran-comments\.md$
