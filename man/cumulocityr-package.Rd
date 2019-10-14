@@ -4,9 +4,9 @@
 \name{cumulocityr-package}
 \alias{cumulocityr-package}
 \alias{_PACKAGE}
-\title{R Client for the Cumulocity API}
+\title{Client for the Cumulocity API}
 \description{
-This package contains functions to interact with the Cumulocity API.
+Access the 'Cumulocity' API and retrieve data on devices, measurements, and events.
 }
 \section{Functions}{
 

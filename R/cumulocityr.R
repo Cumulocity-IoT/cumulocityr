@@ -17,9 +17,9 @@
 # GNU General Public License for details (http://www.gnu.org/licenses/).
 # #############################################################################
 
-#' R Client for the Cumulocity API
+#' Client for the Cumulocity API
 #'
-#' This package contains functions to interact with the Cumulocity API.
+#' Access the 'Cumulocity' API and retrieve data on devices, measurements, and events.
 #'
 #' @section Functions:
 #' \itemize{

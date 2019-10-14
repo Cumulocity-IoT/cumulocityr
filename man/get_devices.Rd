@@ -29,7 +29,7 @@ before being returned. The data is converted to a single flattened data frame.
 If \code{parse_json} is FALSE, the JSON object is returned as a JSON string.
 }
 \examples{
-\dontrun{
+\donttest{
 get_devices()
 }
 

@@ -151,9 +151,154 @@ before being returned. The data is converted to a single flattened data frame.</
     <p><a href='https://cumulocity.com/guides/reference/inventory/'>Cumulocity Inventory API</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>get_devices</span>()
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='fu'>get_devices</span>()</div><div class='output co'>#&gt;                          owner             creationTime            type
+#&gt; 1 maulin.gajjar@softwareag.com 2018-07-24T22:12:19.378Z c8y_SensorPhone
+#&gt; 2 maulin.gajjar@softwareag.com 2018-05-10T19:12:14.718Z        c8y_Demo
+#&gt; 3 maulin.gajjar@softwareag.com 2019-07-19T06:35:00.757Z            &lt;NA&gt;
+#&gt; 4     service_device-simulator 2019-09-30T19:58:59.838Z  c8y_MQTTDevice
+#&gt;                lastUpdated           name
+#&gt; 1 2018-09-05T18:16:13.936Z     Pixel 2 XL
+#&gt; 2 2019-08-26T22:39:22.016Z  A demo device
+#&gt; 3 2019-07-19T06:35:00.757Z     DemoDevice
+#&gt; 4 2019-10-01T04:53:57.447Z Temperature #1
+#&gt;                                                       self    id
+#&gt; 1  https://mg.cumulocity.com/inventory/managedObjects/1200  1200
+#&gt; 2   https://mg.cumulocity.com/inventory/managedObjects/200   200
+#&gt; 3 https://mg.cumulocity.com/inventory/managedObjects/51868 51868
+#&gt; 4 https://mg.cumulocity.com/inventory/managedObjects/53700 53700
+#&gt;                                                              c8y_SupportedOperations
+#&gt; 1                                          c8y_Message, c8y_Relay, c8y_Configuration
+#&gt; 2 c8y.Message, c8y.Relay, c8y_Restart, c8y_Configuration, c8y_Software, c8y_Firmware
+#&gt; 3                                                                               NULL
+#&gt; 4                                                     c8y_Restart, c8y_Configuration
+#&gt;                                                                                                                                                          c8y_Notes
+#&gt; 1                                                                                                                                                             &lt;NA&gt;
+#&gt; 2 This shows how a device looks like in Cumulocity. The data is static, so you will not see much of a change and you cannot run any remote control commands on it.
+#&gt; 3                                                                                                                                                             &lt;NA&gt;
+#&gt; 4                                                                                                                                                             &lt;NA&gt;
+#&gt;                                                                            c8y_SupportedMeasurements
+#&gt; 1                                                                                               NULL
+#&gt; 2                                                          c8y_SignalStrength, c8y_TemperatureSensor
+#&gt; 3 c8y_SignalStrengthWifi, c8y_Acceleration, c8y_Barometer, c8y_Gyroscope, c8y_Luxometer, c8y_Compass
+#&gt; 4                                                                                               NULL
+#&gt;                                                       additionParents.self
+#&gt; 1  https://mg.cumulocity.com/inventory/managedObjects/1200/additionParents
+#&gt; 2   https://mg.cumulocity.com/inventory/managedObjects/200/additionParents
+#&gt; 3 https://mg.cumulocity.com/inventory/managedObjects/51868/additionParents
+#&gt; 4 https://mg.cumulocity.com/inventory/managedObjects/53700/additionParents
+#&gt;   additionParents.references
+#&gt; 1                       NULL
+#&gt; 2                       NULL
+#&gt; 3                       NULL
+#&gt; 4                       NULL
+#&gt;                                                       childDevices.self
+#&gt; 1  https://mg.cumulocity.com/inventory/managedObjects/1200/childDevices
+#&gt; 2   https://mg.cumulocity.com/inventory/managedObjects/200/childDevices
+#&gt; 3 https://mg.cumulocity.com/inventory/managedObjects/51868/childDevices
+#&gt; 4 https://mg.cumulocity.com/inventory/managedObjects/53700/childDevices
+#&gt;   childDevices.references
+#&gt; 1                    NULL
+#&gt; 2                    NULL
+#&gt; 3                    NULL
+#&gt; 4                    NULL
+#&gt;                                                       childAssets.self
+#&gt; 1  https://mg.cumulocity.com/inventory/managedObjects/1200/childAssets
+#&gt; 2   https://mg.cumulocity.com/inventory/managedObjects/200/childAssets
+#&gt; 3 https://mg.cumulocity.com/inventory/managedObjects/51868/childAssets
+#&gt; 4 https://mg.cumulocity.com/inventory/managedObjects/53700/childAssets
+#&gt;   childAssets.references
+#&gt; 1                   NULL
+#&gt; 2                   NULL
+#&gt; 3                   NULL
+#&gt; 4                   NULL
+#&gt;                                                       childAdditions.self
+#&gt; 1  https://mg.cumulocity.com/inventory/managedObjects/1200/childAdditions
+#&gt; 2   https://mg.cumulocity.com/inventory/managedObjects/200/childAdditions
+#&gt; 3 https://mg.cumulocity.com/inventory/managedObjects/51868/childAdditions
+#&gt; 4 https://mg.cumulocity.com/inventory/managedObjects/53700/childAdditions
+#&gt;   childAdditions.references
+#&gt; 1                      NULL
+#&gt; 2                      NULL
+#&gt; 3                      NULL
+#&gt; 4                      NULL
+#&gt;                                                       assetParents.self
+#&gt; 1  https://mg.cumulocity.com/inventory/managedObjects/1200/assetParents
+#&gt; 2   https://mg.cumulocity.com/inventory/managedObjects/200/assetParents
+#&gt; 3 https://mg.cumulocity.com/inventory/managedObjects/51868/assetParents
+#&gt; 4 https://mg.cumulocity.com/inventory/managedObjects/53700/assetParents
+#&gt;   assetParents.references
+#&gt; 1                    NULL
+#&gt; 2                    NULL
+#&gt; 3                    NULL
+#&gt; 4                    NULL
+#&gt;                                                       deviceParents.self
+#&gt; 1  https://mg.cumulocity.com/inventory/managedObjects/1200/deviceParents
+#&gt; 2   https://mg.cumulocity.com/inventory/managedObjects/200/deviceParents
+#&gt; 3 https://mg.cumulocity.com/inventory/managedObjects/51868/deviceParents
+#&gt; 4 https://mg.cumulocity.com/inventory/managedObjects/53700/deviceParents
+#&gt;   deviceParents.references c8y_Mobile.mnc c8y_Mobile.currentBand
+#&gt; 1                     NULL            480                Unknown
+#&gt; 2                     NULL           &lt;NA&gt;                   &lt;NA&gt;
+#&gt; 3                     NULL           &lt;NA&gt;                   &lt;NA&gt;
+#&gt; 4                     NULL           &lt;NA&gt;                   &lt;NA&gt;
+#&gt;   c8y_Mobile.connType c8y_Mobile.currentOperator c8y_Mobile.tac c8y_Mobile.imei
+#&gt; 1             Unknown                                     13826 358035086702820
+#&gt; 2                &lt;NA&gt;                       &lt;NA&gt;           &lt;NA&gt; 861145013087177
+#&gt; 3                &lt;NA&gt;                       &lt;NA&gt;           &lt;NA&gt;            &lt;NA&gt;
+#&gt; 4                &lt;NA&gt;                       &lt;NA&gt;           &lt;NA&gt;            &lt;NA&gt;
+#&gt;   c8y_Mobile.cellId c8y_Mobile.mcc     c8y_Mobile.iccid
+#&gt; 1          13903894            311                 &lt;NA&gt;
+#&gt; 2         4904-A496           &lt;NA&gt; 89490200000876620613
+#&gt; 3              &lt;NA&gt;           &lt;NA&gt;                 &lt;NA&gt;
+#&gt; 4              &lt;NA&gt;           &lt;NA&gt;                 &lt;NA&gt;
+#&gt;   c8y_Availability.lastMessage c8y_Availability.status
+#&gt; 1     2018-09-05T18:16:14.035Z             UNAVAILABLE
+#&gt; 2     2019-04-05T09:24:52.691Z             MAINTENANCE
+#&gt; 3                         &lt;NA&gt;                    &lt;NA&gt;
+#&gt; 4                         &lt;NA&gt;                    &lt;NA&gt;
+#&gt;   c8y_ActiveAlarmsStatus.major c8y_ActiveAlarmsStatus.critical
+#&gt; 1                            0                              NA
+#&gt; 2                            1                               0
+#&gt; 3                           NA                               0
+#&gt; 4                           NA                              NA
+#&gt;   c8y_RequiredAvailability.responseInterval c8y_Connection.status
+#&gt; 1                                         5          DISCONNECTED
+#&gt; 2                                       -15           MAINTENANCE
+#&gt; 3                                        NA                  &lt;NA&gt;
+#&gt; 4                                        NA                  &lt;NA&gt;
+#&gt;   c8y_Position.lng c8y_Position.alt c8y_Position.lat c8y_Position.accuracy
+#&gt; 1      -117.233149            21.30         32.91942                    NA
+#&gt; 2         6.769786           102.47         51.26744                    NA
+#&gt; 3               NA               NA               NA                    NA
+#&gt; 4        77.000000            88.00         66.00000                    99
+#&gt;   c8y_Hardware.serialNumber c8y_Hardware.model c8y_Hardware.revision
+#&gt; 1            801KPTM1359769         Pixel 2 XL                taimen
+#&gt; 2          0000000017b769d5     Demo model XYZ                  000e
+#&gt; 3                      &lt;NA&gt;               &lt;NA&gt;                  &lt;NA&gt;
+#&gt; 4                      &lt;NA&gt;               &lt;NA&gt;                  &lt;NA&gt;
+#&gt;   c8y_Firmware.name c8y_Firmware.version c8y_Geofence.lng c8y_Geofence.active
+#&gt; 1              &lt;NA&gt;                 &lt;NA&gt;               NA                  NA
+#&gt; 2      demofirmware         1.20130207-1         8.627466                TRUE
+#&gt; 3              &lt;NA&gt;                 &lt;NA&gt;               NA                  NA
+#&gt; 4              &lt;NA&gt;                 &lt;NA&gt;               NA                  NA
+#&gt;   c8y_Geofence.radius c8y_Geofence.lat c8y_Software.driverSoftware
+#&gt; 1                  NA               NA                        &lt;NA&gt;
+#&gt; 2                 400         49.89469        driverSoftware-1.0.2
+#&gt; 3                  NA               NA                        &lt;NA&gt;
+#&gt; 4                  NA               NA                        &lt;NA&gt;
+#&gt;                                                     c8y_Configuration.config
+#&gt; 1                                                                       &lt;NA&gt;
+#&gt; 2 aConfigurationProperty: aConfigurationValue\nanotherProperty: anotherValue
+#&gt; 3                                                                       &lt;NA&gt;
+#&gt; 4                                                                       &lt;NA&gt;
+#&gt;   c8y_MotionTracking.active
+#&gt; 1                        NA
+#&gt; 2                     FALSE
+#&gt; 3                        NA
+#&gt; 4                        NA</div><div class='input'># }
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

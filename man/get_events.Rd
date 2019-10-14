@@ -44,7 +44,7 @@ element in this list contains up to 2000 records.
 Get the events for a device for a time period.
 }
 \examples{
-\dontrun{
+\donttest{
 get_events(device_id, date_from = "2019-09-30T20:00:00Z")
 }
 }
