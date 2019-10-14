@@ -56,7 +56,7 @@
 #'
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' get_measurements(device_id, date_from = "2019-09-30T20:00:00Z")
 #' }
 #' @export
