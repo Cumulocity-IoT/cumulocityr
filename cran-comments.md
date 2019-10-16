@@ -1,6 +1,8 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
+* Updated the maintainer email address.
+
 * Provided a link to the used API in the Description field of DESCRIPTION.
 
 * Added single quotes to software and API names in the Title and Description.
