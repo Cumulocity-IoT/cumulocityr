@@ -3,7 +3,7 @@ Type: Package
 Title: Client for the 'Cumulocity' API
 Version: 0.1.0
 Authors@R: c(
-    person("Dmitriy", "Bolotov", email = "rpmmlsupport@softwareag.com", role = c("aut", "cre")),
+    person("Dmitriy", "Bolotov", email = "dmitriy.bolotov@softwareag.com", role = c("aut", "cre")),
     person("Software AG", role = c("cph")))
 Imports: httr,
     jsonlite
