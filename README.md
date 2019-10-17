@@ -42,7 +42,11 @@ events <- get_events(device_id = 1234,
 Please note that this project is released with a [Contributor Code of
 Conduct](https://github.com/SoftwareAG/cumulocityr/blob/master/.github/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
+________________
+For more information you can Ask a Question in the [TECHcommunity Forums](http://tech.forums.softwareag.com/techjforum/forums/list.page?product=cumulocity).
 
+You can find additional information in the [Software AG TECHcommunity](http://techcommunity.softwareag.com/home/-/product/name/cumulocity).
+_____________
 These tools are provided as-is and without warranty or support. They do
 not constitute part of the Software AG product suite. Users are free to
 use, fork and modify them, subject to the license agreement. While
