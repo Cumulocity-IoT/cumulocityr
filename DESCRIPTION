@@ -1,7 +1,7 @@
 Package: cumulocityr
 Type: Package
 Title: Client for the 'Cumulocity' API
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: c(
     person("Dmitriy", "Bolotov", email = "dmitriy.bolotov@softwareag.com", role = c("aut", "cre")),
     person("Software AG", role = c("cph")))

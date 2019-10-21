@@ -24,7 +24,13 @@ R client for the Cumulocity API.
 
 ## Installation
 
-You can install the released version of cumulocityr from GitHub with devtools:
+You can install the released version of cumulocityr from [CRAN](https://CRAN.R-project.org/package=cumulocityr) with:
+
+``` r
+install.packages("cumulocityr")
+```
+
+You can install the development version from GitHub with devtools:
 
 ``` r
 # install.packages("devtools)
