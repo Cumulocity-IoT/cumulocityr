@@ -4,8 +4,13 @@
 \alias{get_measurements}
 \title{Get the measurements for a device.}
 \usage{
-get_measurements(device_id, date_from, date_to = NULL, num_rows = NULL,
-  parse_json = TRUE)
+get_measurements(
+  device_id,
+  date_from,
+  date_to = NULL,
+  num_rows = NULL,
+  parse_json = TRUE
+)
 }
 \arguments{
 \item{device_id}{The device id.}

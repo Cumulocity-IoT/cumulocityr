@@ -8,6 +8,13 @@
 
 <title>Get the devices or for a tenant. — get_devices • cumulocityr</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -37,6 +44,7 @@
 
 <meta property="og:title" content="Get the devices or for a tenant. — get_devices" />
 <meta property="og:description" content="Get the devices or for a tenant." />
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cumulocityr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -152,151 +160,150 @@ before being returned. The data is converted to a single flattened data frame.</
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>get_devices</span>()</div><div class='output co'>#&gt;                          owner             creationTime            type
-#&gt; 1 maulin.gajjar@softwareag.com 2018-07-24T22:12:19.378Z c8y_SensorPhone
-#&gt; 2 maulin.gajjar@softwareag.com 2018-05-10T19:12:14.718Z        c8y_Demo
-#&gt; 3 maulin.gajjar@softwareag.com 2019-07-19T06:35:00.757Z            &lt;NA&gt;
-#&gt; 4     service_device-simulator 2019-09-30T19:58:59.838Z  c8y_MQTTDevice
-#&gt;                lastUpdated           name
-#&gt; 1 2018-09-05T18:16:13.936Z     Pixel 2 XL
-#&gt; 2 2019-08-26T22:39:22.016Z  A demo device
-#&gt; 3 2019-07-19T06:35:00.757Z     DemoDevice
-#&gt; 4 2019-10-01T04:53:57.447Z Temperature #1
-#&gt;                                                       self    id
-#&gt; 1  https://mg.cumulocity.com/inventory/managedObjects/1200  1200
-#&gt; 2   https://mg.cumulocity.com/inventory/managedObjects/200   200
-#&gt; 3 https://mg.cumulocity.com/inventory/managedObjects/51868 51868
-#&gt; 4 https://mg.cumulocity.com/inventory/managedObjects/53700 53700
-#&gt;                                                              c8y_SupportedOperations
-#&gt; 1                                          c8y_Message, c8y_Relay, c8y_Configuration
-#&gt; 2 c8y.Message, c8y.Relay, c8y_Restart, c8y_Configuration, c8y_Software, c8y_Firmware
-#&gt; 3                                                                               NULL
-#&gt; 4                                                     c8y_Restart, c8y_Configuration
-#&gt;                                                                                                                                                          c8y_Notes
-#&gt; 1                                                                                                                                                             &lt;NA&gt;
-#&gt; 2 This shows how a device looks like in Cumulocity. The data is static, so you will not see much of a change and you cannot run any remote control commands on it.
-#&gt; 3                                                                                                                                                             &lt;NA&gt;
-#&gt; 4                                                                                                                                                             &lt;NA&gt;
-#&gt;                                                                            c8y_SupportedMeasurements
-#&gt; 1                                                                                               NULL
-#&gt; 2                                                          c8y_SignalStrength, c8y_TemperatureSensor
-#&gt; 3 c8y_SignalStrengthWifi, c8y_Acceleration, c8y_Barometer, c8y_Gyroscope, c8y_Luxometer, c8y_Compass
-#&gt; 4                                                                                               NULL
-#&gt;                                                       additionParents.self
-#&gt; 1  https://mg.cumulocity.com/inventory/managedObjects/1200/additionParents
-#&gt; 2   https://mg.cumulocity.com/inventory/managedObjects/200/additionParents
-#&gt; 3 https://mg.cumulocity.com/inventory/managedObjects/51868/additionParents
-#&gt; 4 https://mg.cumulocity.com/inventory/managedObjects/53700/additionParents
+<span class='fu'>get_devices</span>()</div><div class='output co'>#&gt;                      owner             creationTime           type
+#&gt; 1 service_device-simulator 2019-12-31T01:07:27.731Z c8y_MQTTDevice
+#&gt; 2                simulator 2019-12-31T07:27:58.340Z c8y_MQTTdevice
+#&gt; 3                simulator 2019-12-31T07:27:59.625Z c8y_MQTTdevice
+#&gt; 4                simulator 2019-12-31T07:28:01.936Z c8y_MQTTdevice
+#&gt; 5                simulator 2019-12-31T07:28:03.216Z c8y_MQTTdevice
+#&gt; 6                simulator 2019-12-31T07:28:04.590Z c8y_MQTTdevice
+#&gt; 7 service_device-simulator 2020-01-02T06:19:23.643Z c8y_MQTTDevice
+#&gt;                lastUpdated            name
+#&gt; 1 2019-12-31T01:07:28.730Z     temp_001 #1
+#&gt; 2 2019-12-31T07:27:58.722Z   dm0Device1000
+#&gt; 3 2019-12-31T07:28:00.603Z   dm0Device1001
+#&gt; 4 2019-12-31T07:28:02.308Z   dm0Device1002
+#&gt; 5 2019-12-31T07:28:03.584Z   dm0Device1003
+#&gt; 6 2019-12-31T07:28:04.980Z   dm0Device9999
+#&gt; 7 2020-01-02T06:40:04.749Z Position 001 #1
+#&gt;                                                                 self    id
+#&gt; 1   https://db.eu-latest.cumulocity.com/inventory/managedObjects/208   208
+#&gt; 2  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4981  4981
+#&gt; 3  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4982  4982
+#&gt; 4  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4984  4984
+#&gt; 5  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4985  4985
+#&gt; 6  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4986  4986
+#&gt; 7 https://db.eu-latest.cumulocity.com/inventory/managedObjects/95637 95637
+#&gt;   c8y_SupportedOperations
+#&gt; 1                    NULL
+#&gt; 2                    NULL
+#&gt; 3                    NULL
+#&gt; 4                    NULL
+#&gt; 5                    NULL
+#&gt; 6                    NULL
+#&gt; 7                    NULL
+#&gt;                                                                 additionParents.self
+#&gt; 1   https://db.eu-latest.cumulocity.com/inventory/managedObjects/208/additionParents
+#&gt; 2  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4981/additionParents
+#&gt; 3  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4982/additionParents
+#&gt; 4  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4984/additionParents
+#&gt; 5  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4985/additionParents
+#&gt; 6  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4986/additionParents
+#&gt; 7 https://db.eu-latest.cumulocity.com/inventory/managedObjects/95637/additionParents
 #&gt;   additionParents.references
 #&gt; 1                       NULL
 #&gt; 2                       NULL
 #&gt; 3                       NULL
 #&gt; 4                       NULL
-#&gt;                                                       childDevices.self
-#&gt; 1  https://mg.cumulocity.com/inventory/managedObjects/1200/childDevices
-#&gt; 2   https://mg.cumulocity.com/inventory/managedObjects/200/childDevices
-#&gt; 3 https://mg.cumulocity.com/inventory/managedObjects/51868/childDevices
-#&gt; 4 https://mg.cumulocity.com/inventory/managedObjects/53700/childDevices
+#&gt; 5                       NULL
+#&gt; 6                       NULL
+#&gt; 7                       NULL
+#&gt;                                                                 childDevices.self
+#&gt; 1   https://db.eu-latest.cumulocity.com/inventory/managedObjects/208/childDevices
+#&gt; 2  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4981/childDevices
+#&gt; 3  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4982/childDevices
+#&gt; 4  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4984/childDevices
+#&gt; 5  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4985/childDevices
+#&gt; 6  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4986/childDevices
+#&gt; 7 https://db.eu-latest.cumulocity.com/inventory/managedObjects/95637/childDevices
 #&gt;   childDevices.references
 #&gt; 1                    NULL
 #&gt; 2                    NULL
 #&gt; 3                    NULL
 #&gt; 4                    NULL
-#&gt;                                                       childAssets.self
-#&gt; 1  https://mg.cumulocity.com/inventory/managedObjects/1200/childAssets
-#&gt; 2   https://mg.cumulocity.com/inventory/managedObjects/200/childAssets
-#&gt; 3 https://mg.cumulocity.com/inventory/managedObjects/51868/childAssets
-#&gt; 4 https://mg.cumulocity.com/inventory/managedObjects/53700/childAssets
+#&gt; 5                    NULL
+#&gt; 6                    NULL
+#&gt; 7                    NULL
+#&gt;                                                                 childAssets.self
+#&gt; 1   https://db.eu-latest.cumulocity.com/inventory/managedObjects/208/childAssets
+#&gt; 2  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4981/childAssets
+#&gt; 3  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4982/childAssets
+#&gt; 4  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4984/childAssets
+#&gt; 5  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4985/childAssets
+#&gt; 6  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4986/childAssets
+#&gt; 7 https://db.eu-latest.cumulocity.com/inventory/managedObjects/95637/childAssets
 #&gt;   childAssets.references
 #&gt; 1                   NULL
 #&gt; 2                   NULL
 #&gt; 3                   NULL
 #&gt; 4                   NULL
-#&gt;                                                       childAdditions.self
-#&gt; 1  https://mg.cumulocity.com/inventory/managedObjects/1200/childAdditions
-#&gt; 2   https://mg.cumulocity.com/inventory/managedObjects/200/childAdditions
-#&gt; 3 https://mg.cumulocity.com/inventory/managedObjects/51868/childAdditions
-#&gt; 4 https://mg.cumulocity.com/inventory/managedObjects/53700/childAdditions
+#&gt; 5                   NULL
+#&gt; 6                   NULL
+#&gt; 7                   NULL
+#&gt;                                                                 childAdditions.self
+#&gt; 1   https://db.eu-latest.cumulocity.com/inventory/managedObjects/208/childAdditions
+#&gt; 2  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4981/childAdditions
+#&gt; 3  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4982/childAdditions
+#&gt; 4  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4984/childAdditions
+#&gt; 5  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4985/childAdditions
+#&gt; 6  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4986/childAdditions
+#&gt; 7 https://db.eu-latest.cumulocity.com/inventory/managedObjects/95637/childAdditions
 #&gt;   childAdditions.references
 #&gt; 1                      NULL
 #&gt; 2                      NULL
 #&gt; 3                      NULL
 #&gt; 4                      NULL
-#&gt;                                                       assetParents.self
-#&gt; 1  https://mg.cumulocity.com/inventory/managedObjects/1200/assetParents
-#&gt; 2   https://mg.cumulocity.com/inventory/managedObjects/200/assetParents
-#&gt; 3 https://mg.cumulocity.com/inventory/managedObjects/51868/assetParents
-#&gt; 4 https://mg.cumulocity.com/inventory/managedObjects/53700/assetParents
+#&gt; 5                      NULL
+#&gt; 6                      NULL
+#&gt; 7                      NULL
+#&gt;                                                                 assetParents.self
+#&gt; 1   https://db.eu-latest.cumulocity.com/inventory/managedObjects/208/assetParents
+#&gt; 2  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4981/assetParents
+#&gt; 3  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4982/assetParents
+#&gt; 4  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4984/assetParents
+#&gt; 5  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4985/assetParents
+#&gt; 6  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4986/assetParents
+#&gt; 7 https://db.eu-latest.cumulocity.com/inventory/managedObjects/95637/assetParents
 #&gt;   assetParents.references
 #&gt; 1                    NULL
 #&gt; 2                    NULL
 #&gt; 3                    NULL
 #&gt; 4                    NULL
-#&gt;                                                       deviceParents.self
-#&gt; 1  https://mg.cumulocity.com/inventory/managedObjects/1200/deviceParents
-#&gt; 2   https://mg.cumulocity.com/inventory/managedObjects/200/deviceParents
-#&gt; 3 https://mg.cumulocity.com/inventory/managedObjects/51868/deviceParents
-#&gt; 4 https://mg.cumulocity.com/inventory/managedObjects/53700/deviceParents
-#&gt;   deviceParents.references c8y_Mobile.mnc c8y_Mobile.currentBand
-#&gt; 1                     NULL            480                Unknown
-#&gt; 2                     NULL           &lt;NA&gt;                   &lt;NA&gt;
-#&gt; 3                     NULL           &lt;NA&gt;                   &lt;NA&gt;
-#&gt; 4                     NULL           &lt;NA&gt;                   &lt;NA&gt;
-#&gt;   c8y_Mobile.connType c8y_Mobile.currentOperator c8y_Mobile.tac c8y_Mobile.imei
-#&gt; 1             Unknown                                     13826 358035086702820
-#&gt; 2                &lt;NA&gt;                       &lt;NA&gt;           &lt;NA&gt; 861145013087177
-#&gt; 3                &lt;NA&gt;                       &lt;NA&gt;           &lt;NA&gt;            &lt;NA&gt;
-#&gt; 4                &lt;NA&gt;                       &lt;NA&gt;           &lt;NA&gt;            &lt;NA&gt;
-#&gt;   c8y_Mobile.cellId c8y_Mobile.mcc     c8y_Mobile.iccid
-#&gt; 1          13903894            311                 &lt;NA&gt;
-#&gt; 2         4904-A496           &lt;NA&gt; 89490200000876620613
-#&gt; 3              &lt;NA&gt;           &lt;NA&gt;                 &lt;NA&gt;
-#&gt; 4              &lt;NA&gt;           &lt;NA&gt;                 &lt;NA&gt;
-#&gt;   c8y_Availability.lastMessage c8y_Availability.status
-#&gt; 1     2018-09-05T18:16:14.035Z             UNAVAILABLE
-#&gt; 2     2019-04-05T09:24:52.691Z             MAINTENANCE
-#&gt; 3                         &lt;NA&gt;                    &lt;NA&gt;
-#&gt; 4                         &lt;NA&gt;                    &lt;NA&gt;
-#&gt;   c8y_ActiveAlarmsStatus.major c8y_ActiveAlarmsStatus.critical
-#&gt; 1                            0                              NA
-#&gt; 2                            1                               0
-#&gt; 3                           NA                               0
-#&gt; 4                           NA                              NA
-#&gt;   c8y_RequiredAvailability.responseInterval c8y_Connection.status
-#&gt; 1                                         5          DISCONNECTED
-#&gt; 2                                       -15           MAINTENANCE
-#&gt; 3                                        NA                  &lt;NA&gt;
-#&gt; 4                                        NA                  &lt;NA&gt;
-#&gt;   c8y_Position.lng c8y_Position.alt c8y_Position.lat c8y_Position.accuracy
-#&gt; 1      -117.233149            21.30         32.91942                    NA
-#&gt; 2         6.769786           102.47         51.26744                    NA
-#&gt; 3               NA               NA               NA                    NA
-#&gt; 4        77.000000            88.00         66.00000                    99
-#&gt;   c8y_Hardware.serialNumber c8y_Hardware.model c8y_Hardware.revision
-#&gt; 1            801KPTM1359769         Pixel 2 XL                taimen
-#&gt; 2          0000000017b769d5     Demo model XYZ                  000e
-#&gt; 3                      &lt;NA&gt;               &lt;NA&gt;                  &lt;NA&gt;
-#&gt; 4                      &lt;NA&gt;               &lt;NA&gt;                  &lt;NA&gt;
-#&gt;   c8y_Firmware.name c8y_Firmware.version c8y_Geofence.lng c8y_Geofence.active
-#&gt; 1              &lt;NA&gt;                 &lt;NA&gt;               NA                  NA
-#&gt; 2      demofirmware         1.20130207-1         8.627466                TRUE
-#&gt; 3              &lt;NA&gt;                 &lt;NA&gt;               NA                  NA
-#&gt; 4              &lt;NA&gt;                 &lt;NA&gt;               NA                  NA
-#&gt;   c8y_Geofence.radius c8y_Geofence.lat c8y_Software.driverSoftware
-#&gt; 1                  NA               NA                        &lt;NA&gt;
-#&gt; 2                 400         49.89469        driverSoftware-1.0.2
-#&gt; 3                  NA               NA                        &lt;NA&gt;
-#&gt; 4                  NA               NA                        &lt;NA&gt;
-#&gt;                                                     c8y_Configuration.config
-#&gt; 1                                                                       &lt;NA&gt;
-#&gt; 2 aConfigurationProperty: aConfigurationValue\nanotherProperty: anotherValue
-#&gt; 3                                                                       &lt;NA&gt;
-#&gt; 4                                                                       &lt;NA&gt;
-#&gt;   c8y_MotionTracking.active
-#&gt; 1                        NA
-#&gt; 2                     FALSE
-#&gt; 3                        NA
-#&gt; 4                        NA</div><div class='input'># }
+#&gt; 5                    NULL
+#&gt; 6                    NULL
+#&gt; 7                    NULL
+#&gt;                                                                 deviceParents.self
+#&gt; 1   https://db.eu-latest.cumulocity.com/inventory/managedObjects/208/deviceParents
+#&gt; 2  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4981/deviceParents
+#&gt; 3  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4982/deviceParents
+#&gt; 4  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4984/deviceParents
+#&gt; 5  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4985/deviceParents
+#&gt; 6  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4986/deviceParents
+#&gt; 7 https://db.eu-latest.cumulocity.com/inventory/managedObjects/95637/deviceParents
+#&gt;   deviceParents.references c8y_Hardware.serialNumber c8y_Hardware.model
+#&gt; 1                     NULL                      &lt;NA&gt;                 NA
+#&gt; 2                     NULL              simA-00-1000                 NA
+#&gt; 3                     NULL              simA-00-1001                 NA
+#&gt; 4                     NULL              simA-00-1002                 NA
+#&gt; 5                     NULL              simA-00-1003                 NA
+#&gt; 6                     NULL              simA-00-9999                 NA
+#&gt; 7                     NULL                      &lt;NA&gt;                 NA
+#&gt;   c8y_Hardware.revision c8y_Position.lng c8y_Position.alt c8y_Position.accuracy
+#&gt; 1                    NA               NA               NA                    NA
+#&gt; 2                    NA               NA               NA                    NA
+#&gt; 3                    NA               NA               NA                    NA
+#&gt; 4                    NA               NA               NA                    NA
+#&gt; 5                    NA               NA               NA                    NA
+#&gt; 6                    NA               NA               NA                    NA
+#&gt; 7                    NA         6.733761                0                    10
+#&gt;   c8y_Position.lat
+#&gt; 1               NA
+#&gt; 2               NA
+#&gt; 3               NA
+#&gt; 4               NA
+#&gt; 5               NA
+#&gt; 6               NA
+#&gt; 7         51.23532</div><div class='input'># }
 
 </div></pre>
   </div>
