@@ -26,11 +26,9 @@ The package expects a local .Renviron file with credentials defined as follows:
 CUMULOCITY_base_url = "[tenant url]"
 CUMULOCITY_usr = "[username]"
 CUMULOCITY_pwd = "[password]"
-CUMULOCITY_device_id = "[an example device id]"
 }
 
 The tenant url should be of the form \code{"https://tenant_name.cumulocity.com"}.
-\code{CUMULOCITY_device_id} is not required by any of the main functions.
 
 \code{.Renviron} can be edited with \code{usethis::edit_r_environ()}.
 }

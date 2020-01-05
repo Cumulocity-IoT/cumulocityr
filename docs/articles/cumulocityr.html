@@ -104,9 +104,8 @@
 <p>The credentials are defined as follows:</p>
 <pre><code>CUMULOCITY_base_url = "[tenant url]"
 CUMULOCITY_usr = "[username]"
-CUMULOCITY_pwd = "[password]"
-CUMULOCITY_device_id = "[an example device id]"</code></pre>
-<p>The tenant url should be of the form “<a href="https://tenant_name.cumulocity.com" class="uri">https://tenant_name.cumulocity.com</a>”. <code>CUMULOCITY_device_id</code> is provided for convenience, but is not required by any of the main functions.</p>
+CUMULOCITY_pwd = "[password]"</code></pre>
+<p>The tenant url should be of the form “<a href="https://tenant_name.cumulocity.com" class="uri">https://tenant_name.cumulocity.com</a>”.</p>
 <p>The file <code>.Renviron</code> can be edited with <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code>.</p>
 </div>
 <div id="get-devices" class="section level3">
@@ -225,7 +224,7 @@ CUMULOCITY_device_id = "[an example device id]"</code></pre>
 <a class="sourceLine" id="cb7-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(meas_<span class="dv">03</span>)</a>
 <a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; [1] "{\"next\":\"https://db.eu-latest.cumulocity.com/measurement/measurements?dateTo=2020-01-01T22:40:22Z&amp;pageSize=2&amp;source=208&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=2\",\"self\":\"https://db.eu-latest.cumulocity.com/measurement/measurements?dateTo=2020-01-01T22:40:22Z&amp;pageSize=2&amp;source=208&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=1\",\"statistics\":{\"totalPages\":null,\"currentPage\":1,\"pageSize\":2},\"measurements\":[{\"self\":\"https://db.eu-latest.cumulocity.com/measurement/measurements/209\",\"time\":\"2019-12-31T01:07:28.751Z\",\"id\":\"209\",\"source\":{\"self\":\"https://db.eu-latest.cumulocity.com/inventory/managedObjects/208\",\"id\":\"208\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":2.0791169082</span><span class="re">}}}</span><span class="co">,{\"self\":\"https://db.eu-latest.cumulocity.com/measurement/measurements/210\",\"time\":\"2019-12-31T01:07:33.763Z\",\"id\":\"210\",\"source\":{\"self\":\"https://db.eu-latest.cumulocity.com/inventory/managedObjects/208\",\"id\":\"208\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":9.1354545764</span><span class="re">}}}</span><span class="co">]}"</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; [1] "{\"next\":\"https://db.eu-latest.cumulocity.com/measurement/measurements?dateTo=2020-01-05T15:51:32Z&amp;pageSize=2&amp;source=208&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=2\",\"self\":\"https://db.eu-latest.cumulocity.com/measurement/measurements?dateTo=2020-01-05T15:51:32Z&amp;pageSize=2&amp;source=208&amp;dateFrom=2019-09-30T19:59:00Z&amp;currentPage=1\",\"statistics\":{\"totalPages\":null,\"currentPage\":1,\"pageSize\":2},\"measurements\":[{\"self\":\"https://db.eu-latest.cumulocity.com/measurement/measurements/209\",\"time\":\"2019-12-31T01:07:28.751Z\",\"id\":\"209\",\"source\":{\"self\":\"https://db.eu-latest.cumulocity.com/inventory/managedObjects/208\",\"id\":\"208\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":2.0791169082</span><span class="re">}}}</span><span class="co">,{\"self\":\"https://db.eu-latest.cumulocity.com/measurement/measurements/210\",\"time\":\"2019-12-31T01:07:33.763Z\",\"id\":\"210\",\"source\":{\"self\":\"https://db.eu-latest.cumulocity.com/inventory/managedObjects/208\",\"id\":\"208\"},\"type\":\"c8y_Temperature\",\"c8y_Temperature\":{\"T\":{\"unit\":\"\\u00baC\",\"value\":9.1354545764</span><span class="re">}}}</span><span class="co">]}"</span></a></code></pre></div>
 </div>
   </div>
 

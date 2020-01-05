@@ -44,10 +44,9 @@ The credentials are defined as follows:
 CUMULOCITY_base_url = "[tenant url]"
 CUMULOCITY_usr = "[username]"
 CUMULOCITY_pwd = "[password]"
-CUMULOCITY_device_id = "[an example device id]"
 ```
 
-The tenant url should be of the form "https://tenant_name.cumulocity.com". `CUMULOCITY_device_id` is provided for convenience, but is not required by any of the main functions.
+The tenant url should be of the form "https://tenant_name.cumulocity.com".
 
 The file `.Renviron` can be edited with `usethis::edit_r_environ()`.
 
