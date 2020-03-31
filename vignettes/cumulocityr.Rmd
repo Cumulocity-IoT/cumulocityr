@@ -64,9 +64,9 @@ print(devices[,c("type", "name", "id")])
 
 ### Get measurements
 
-Get measurements for device "Temperature #1" and plot the result. Datetimes are returned as character strings; we first convert to `POSIXct` before plotting.
+Get measurements for device "temp_001 #1" and plot the result. Datetimes are returned as character strings; we first convert to `POSIXct` before plotting.
 ```{r}
-device_id <- 208
+device_id <- 141
 meas <- get_measurements(device_id = device_id,
                          num_rows = 100,
                          date_from = "2019-09-30T19:59:00Z")
@@ -82,9 +82,9 @@ plot(time_parsed, meas$c8y_Temperature.T.value, type = "l",
 
 ### Get events
 
-Similarly, we can get events for the same device:
+We can get events for the other device:
 ```{r}
-events <- get_events(device_id = device_id,
+events <- get_events(device_id = 147,
                      num_rows = 6,
                      date_from = "2019-09-30T19:59:00Z")
 
