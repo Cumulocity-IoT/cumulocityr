@@ -25,7 +25,7 @@ test_that("when num_rows is NULL, return all records between two dates", {
   skip_on_cran()
   result_10 <- get_measurements(
     device_id = temp_device_id,
-    date_from = "2020-01-26T00:00:00Z", date_to = "2020-01-26T00:00:10Z"
+    date_from = "2020-02-26T00:00:00Z", date_to = "2020-02-26T00:00:10Z"
   )
   expect_equal(NROW(result_10), 2)
 })
