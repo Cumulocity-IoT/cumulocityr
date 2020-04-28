@@ -19,8 +19,6 @@ and a character string otherwise.
 Get the devices or for a tenant.
 }
 \details{
-Get the devices for a tenant.
-
 If \code{num_rows = NULL} (default), all devices are returned.
 
 If \code{parse_json} is TRUE, the JSON object is parsed using \code{jsonlite::fromJSON}

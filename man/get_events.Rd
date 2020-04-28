@@ -45,8 +45,6 @@ If a page does not contain any events, it does not get added to the data frame.
 If \code{parse_json} is FALSE, the JSON object is returned as a JSON string.
 For queries with multiple pages, a list of such objects is returned. Each
 element in this list contains up to 2000 records.
-
-Get the events for a device for a time period.
 }
 \examples{
 \donttest{

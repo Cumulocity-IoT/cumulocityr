@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -45,7 +49,6 @@
 <meta property="og:title" content="Get the devices or for a tenant. — get_devices" />
 <meta property="og:description" content="Get the devices or for a tenant." />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -63,7 +66,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -101,7 +104,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/SoftwareAG/cumulocityr">
+  <a href="https://github.com/SoftwareAG/cumulocityr/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -149,9 +152,8 @@
 and a character string otherwise.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Get the devices for a tenant.</p>
-<p>If <code>num_rows = NULL</code> (default), all devices are returned.</p>
-<p>If <code>parse_json</code> is TRUE, the JSON object is parsed using <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::fromJSON</a></code>
+    <p>If <code>num_rows = NULL</code> (default), all devices are returned.</p>
+<p>If <code>parse_json</code> is TRUE, the JSON object is parsed using <code><a href='https://jeroen.cran.dev/jsonlite/reference/fromJSON.html'>jsonlite::fromJSON</a></code>
 before being returned. The data is converted to a single flattened data frame.</p>
 <p>If <code>parse_json</code> is FALSE, the JSON object is returned as a JSON string.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
@@ -161,29 +163,35 @@ before being returned. The data is converted to a single flattened data frame.</
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='fu'>get_devices</span>()</div><div class='output co'>#&gt;                      owner             creationTime           type
-#&gt; 1 service_device-simulator 2019-12-31T01:07:27.731Z c8y_MQTTDevice
-#&gt; 2                simulator 2019-12-31T07:27:58.340Z c8y_MQTTdevice
-#&gt; 3                simulator 2019-12-31T07:27:59.625Z c8y_MQTTdevice
-#&gt; 4                simulator 2019-12-31T07:28:01.936Z c8y_MQTTdevice
-#&gt; 5                simulator 2019-12-31T07:28:03.216Z c8y_MQTTdevice
-#&gt; 6                simulator 2019-12-31T07:28:04.590Z c8y_MQTTdevice
-#&gt; 7 service_device-simulator 2020-01-02T06:19:23.643Z c8y_MQTTDevice
-#&gt;                lastUpdated            name
-#&gt; 1 2019-12-31T01:07:28.730Z     temp_001 #1
-#&gt; 2 2019-12-31T07:27:58.722Z   dm0Device1000
-#&gt; 3 2019-12-31T07:28:00.603Z   dm0Device1001
-#&gt; 4 2019-12-31T07:28:02.308Z   dm0Device1002
-#&gt; 5 2019-12-31T07:28:03.584Z   dm0Device1003
-#&gt; 6 2019-12-31T07:28:04.980Z   dm0Device9999
-#&gt; 7 2020-01-05T23:51:21.988Z Position 001 #1
-#&gt;                                                                 self    id
-#&gt; 1   https://db.eu-latest.cumulocity.com/inventory/managedObjects/208   208
-#&gt; 2  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4981  4981
-#&gt; 3  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4982  4982
-#&gt; 4  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4984  4984
-#&gt; 5  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4985  4985
-#&gt; 6  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4986  4986
-#&gt; 7 https://db.eu-latest.cumulocity.com/inventory/managedObjects/95637 95637
+#&gt; 1 service_device-simulator 2020-01-25T01:03:47.763Z c8y_MQTTDevice
+#&gt; 2                simulator 2020-04-07T02:32:17.145Z c8y_MQTTDevice
+#&gt; 3                simulator 2020-04-07T02:32:17.505Z c8y_MQTTDevice
+#&gt; 4                simulator 2020-04-07T02:32:17.753Z c8y_MQTTDevice
+#&gt; 5                simulator 2020-04-07T02:32:17.824Z c8y_MQTTDevice
+#&gt; 6                simulator 2020-04-07T02:32:17.995Z c8y_MQTTDevice
+#&gt; 7                simulator 2020-04-07T02:32:18.091Z c8y_MQTTDevice
+#&gt; 8                simulator 2020-04-07T02:32:18.249Z c8y_MQTTDevice
+#&gt; 9 service_device-simulator 2020-01-25T01:04:13.283Z c8y_MQTTDevice
+#&gt;                lastUpdated                 name
+#&gt; 1 2020-03-05T20:02:07.280Z          temp_001 #1
+#&gt; 2 2020-04-07T02:32:17.145Z MQTT Device simA1000
+#&gt; 3 2020-04-07T02:32:17.505Z MQTT Device simA1001
+#&gt; 4 2020-04-07T02:32:17.753Z MQTT Device simA1002
+#&gt; 5 2020-04-07T02:32:17.824Z MQTT Device simA1003
+#&gt; 6 2020-04-07T02:32:17.995Z MQTT Device simA1004
+#&gt; 7 2020-04-07T02:32:18.091Z MQTT Device simA1005
+#&gt; 8 2020-04-07T02:32:18.249Z MQTT Device simA9999
+#&gt; 9 2020-03-26T21:21:09.114Z           pos_001 #1
+#&gt;                                                            self      id
+#&gt; 1     https://db.us.cumulocity.com/inventory/managedObjects/141     141
+#&gt; 2 https://db.us.cumulocity.com/inventory/managedObjects/1416318 1416318
+#&gt; 3 https://db.us.cumulocity.com/inventory/managedObjects/1416323 1416323
+#&gt; 4 https://db.us.cumulocity.com/inventory/managedObjects/1416328 1416328
+#&gt; 5 https://db.us.cumulocity.com/inventory/managedObjects/1416333 1416333
+#&gt; 6 https://db.us.cumulocity.com/inventory/managedObjects/1416338 1416338
+#&gt; 7 https://db.us.cumulocity.com/inventory/managedObjects/1416341 1416341
+#&gt; 8 https://db.us.cumulocity.com/inventory/managedObjects/1416348 1416348
+#&gt; 9     https://db.us.cumulocity.com/inventory/managedObjects/147     147
 #&gt;   c8y_SupportedOperations
 #&gt; 1                    NULL
 #&gt; 2                    NULL
@@ -192,14 +200,18 @@ before being returned. The data is converted to a single flattened data frame.</
 #&gt; 5                    NULL
 #&gt; 6                    NULL
 #&gt; 7                    NULL
-#&gt;                                                                 additionParents.self
-#&gt; 1   https://db.eu-latest.cumulocity.com/inventory/managedObjects/208/additionParents
-#&gt; 2  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4981/additionParents
-#&gt; 3  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4982/additionParents
-#&gt; 4  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4984/additionParents
-#&gt; 5  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4985/additionParents
-#&gt; 6  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4986/additionParents
-#&gt; 7 https://db.eu-latest.cumulocity.com/inventory/managedObjects/95637/additionParents
+#&gt; 8                    NULL
+#&gt; 9                    NULL
+#&gt;                                                            additionParents.self
+#&gt; 1     https://db.us.cumulocity.com/inventory/managedObjects/141/additionParents
+#&gt; 2 https://db.us.cumulocity.com/inventory/managedObjects/1416318/additionParents
+#&gt; 3 https://db.us.cumulocity.com/inventory/managedObjects/1416323/additionParents
+#&gt; 4 https://db.us.cumulocity.com/inventory/managedObjects/1416328/additionParents
+#&gt; 5 https://db.us.cumulocity.com/inventory/managedObjects/1416333/additionParents
+#&gt; 6 https://db.us.cumulocity.com/inventory/managedObjects/1416338/additionParents
+#&gt; 7 https://db.us.cumulocity.com/inventory/managedObjects/1416341/additionParents
+#&gt; 8 https://db.us.cumulocity.com/inventory/managedObjects/1416348/additionParents
+#&gt; 9     https://db.us.cumulocity.com/inventory/managedObjects/147/additionParents
 #&gt;   additionParents.references
 #&gt; 1                       NULL
 #&gt; 2                       NULL
@@ -208,14 +220,18 @@ before being returned. The data is converted to a single flattened data frame.</
 #&gt; 5                       NULL
 #&gt; 6                       NULL
 #&gt; 7                       NULL
-#&gt;                                                                 childDevices.self
-#&gt; 1   https://db.eu-latest.cumulocity.com/inventory/managedObjects/208/childDevices
-#&gt; 2  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4981/childDevices
-#&gt; 3  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4982/childDevices
-#&gt; 4  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4984/childDevices
-#&gt; 5  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4985/childDevices
-#&gt; 6  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4986/childDevices
-#&gt; 7 https://db.eu-latest.cumulocity.com/inventory/managedObjects/95637/childDevices
+#&gt; 8                       NULL
+#&gt; 9                       NULL
+#&gt;                                                            childDevices.self
+#&gt; 1     https://db.us.cumulocity.com/inventory/managedObjects/141/childDevices
+#&gt; 2 https://db.us.cumulocity.com/inventory/managedObjects/1416318/childDevices
+#&gt; 3 https://db.us.cumulocity.com/inventory/managedObjects/1416323/childDevices
+#&gt; 4 https://db.us.cumulocity.com/inventory/managedObjects/1416328/childDevices
+#&gt; 5 https://db.us.cumulocity.com/inventory/managedObjects/1416333/childDevices
+#&gt; 6 https://db.us.cumulocity.com/inventory/managedObjects/1416338/childDevices
+#&gt; 7 https://db.us.cumulocity.com/inventory/managedObjects/1416341/childDevices
+#&gt; 8 https://db.us.cumulocity.com/inventory/managedObjects/1416348/childDevices
+#&gt; 9     https://db.us.cumulocity.com/inventory/managedObjects/147/childDevices
 #&gt;   childDevices.references
 #&gt; 1                    NULL
 #&gt; 2                    NULL
@@ -224,14 +240,18 @@ before being returned. The data is converted to a single flattened data frame.</
 #&gt; 5                    NULL
 #&gt; 6                    NULL
 #&gt; 7                    NULL
-#&gt;                                                                 childAssets.self
-#&gt; 1   https://db.eu-latest.cumulocity.com/inventory/managedObjects/208/childAssets
-#&gt; 2  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4981/childAssets
-#&gt; 3  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4982/childAssets
-#&gt; 4  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4984/childAssets
-#&gt; 5  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4985/childAssets
-#&gt; 6  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4986/childAssets
-#&gt; 7 https://db.eu-latest.cumulocity.com/inventory/managedObjects/95637/childAssets
+#&gt; 8                    NULL
+#&gt; 9                    NULL
+#&gt;                                                            childAssets.self
+#&gt; 1     https://db.us.cumulocity.com/inventory/managedObjects/141/childAssets
+#&gt; 2 https://db.us.cumulocity.com/inventory/managedObjects/1416318/childAssets
+#&gt; 3 https://db.us.cumulocity.com/inventory/managedObjects/1416323/childAssets
+#&gt; 4 https://db.us.cumulocity.com/inventory/managedObjects/1416328/childAssets
+#&gt; 5 https://db.us.cumulocity.com/inventory/managedObjects/1416333/childAssets
+#&gt; 6 https://db.us.cumulocity.com/inventory/managedObjects/1416338/childAssets
+#&gt; 7 https://db.us.cumulocity.com/inventory/managedObjects/1416341/childAssets
+#&gt; 8 https://db.us.cumulocity.com/inventory/managedObjects/1416348/childAssets
+#&gt; 9     https://db.us.cumulocity.com/inventory/managedObjects/147/childAssets
 #&gt;   childAssets.references
 #&gt; 1                   NULL
 #&gt; 2                   NULL
@@ -240,14 +260,18 @@ before being returned. The data is converted to a single flattened data frame.</
 #&gt; 5                   NULL
 #&gt; 6                   NULL
 #&gt; 7                   NULL
-#&gt;                                                                 childAdditions.self
-#&gt; 1   https://db.eu-latest.cumulocity.com/inventory/managedObjects/208/childAdditions
-#&gt; 2  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4981/childAdditions
-#&gt; 3  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4982/childAdditions
-#&gt; 4  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4984/childAdditions
-#&gt; 5  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4985/childAdditions
-#&gt; 6  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4986/childAdditions
-#&gt; 7 https://db.eu-latest.cumulocity.com/inventory/managedObjects/95637/childAdditions
+#&gt; 8                   NULL
+#&gt; 9                   NULL
+#&gt;                                                            childAdditions.self
+#&gt; 1     https://db.us.cumulocity.com/inventory/managedObjects/141/childAdditions
+#&gt; 2 https://db.us.cumulocity.com/inventory/managedObjects/1416318/childAdditions
+#&gt; 3 https://db.us.cumulocity.com/inventory/managedObjects/1416323/childAdditions
+#&gt; 4 https://db.us.cumulocity.com/inventory/managedObjects/1416328/childAdditions
+#&gt; 5 https://db.us.cumulocity.com/inventory/managedObjects/1416333/childAdditions
+#&gt; 6 https://db.us.cumulocity.com/inventory/managedObjects/1416338/childAdditions
+#&gt; 7 https://db.us.cumulocity.com/inventory/managedObjects/1416341/childAdditions
+#&gt; 8 https://db.us.cumulocity.com/inventory/managedObjects/1416348/childAdditions
+#&gt; 9     https://db.us.cumulocity.com/inventory/managedObjects/147/childAdditions
 #&gt;   childAdditions.references
 #&gt; 1                      NULL
 #&gt; 2                      NULL
@@ -256,14 +280,18 @@ before being returned. The data is converted to a single flattened data frame.</
 #&gt; 5                      NULL
 #&gt; 6                      NULL
 #&gt; 7                      NULL
-#&gt;                                                                 assetParents.self
-#&gt; 1   https://db.eu-latest.cumulocity.com/inventory/managedObjects/208/assetParents
-#&gt; 2  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4981/assetParents
-#&gt; 3  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4982/assetParents
-#&gt; 4  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4984/assetParents
-#&gt; 5  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4985/assetParents
-#&gt; 6  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4986/assetParents
-#&gt; 7 https://db.eu-latest.cumulocity.com/inventory/managedObjects/95637/assetParents
+#&gt; 8                      NULL
+#&gt; 9                      NULL
+#&gt;                                                            assetParents.self
+#&gt; 1     https://db.us.cumulocity.com/inventory/managedObjects/141/assetParents
+#&gt; 2 https://db.us.cumulocity.com/inventory/managedObjects/1416318/assetParents
+#&gt; 3 https://db.us.cumulocity.com/inventory/managedObjects/1416323/assetParents
+#&gt; 4 https://db.us.cumulocity.com/inventory/managedObjects/1416328/assetParents
+#&gt; 5 https://db.us.cumulocity.com/inventory/managedObjects/1416333/assetParents
+#&gt; 6 https://db.us.cumulocity.com/inventory/managedObjects/1416338/assetParents
+#&gt; 7 https://db.us.cumulocity.com/inventory/managedObjects/1416341/assetParents
+#&gt; 8 https://db.us.cumulocity.com/inventory/managedObjects/1416348/assetParents
+#&gt; 9     https://db.us.cumulocity.com/inventory/managedObjects/147/assetParents
 #&gt;   assetParents.references
 #&gt; 1                    NULL
 #&gt; 2                    NULL
@@ -272,53 +300,45 @@ before being returned. The data is converted to a single flattened data frame.</
 #&gt; 5                    NULL
 #&gt; 6                    NULL
 #&gt; 7                    NULL
-#&gt;                                                                 deviceParents.self
-#&gt; 1   https://db.eu-latest.cumulocity.com/inventory/managedObjects/208/deviceParents
-#&gt; 2  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4981/deviceParents
-#&gt; 3  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4982/deviceParents
-#&gt; 4  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4984/deviceParents
-#&gt; 5  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4985/deviceParents
-#&gt; 6  https://db.eu-latest.cumulocity.com/inventory/managedObjects/4986/deviceParents
-#&gt; 7 https://db.eu-latest.cumulocity.com/inventory/managedObjects/95637/deviceParents
-#&gt;   deviceParents.references c8y_Hardware.serialNumber c8y_Hardware.model
-#&gt; 1                     NULL                      &lt;NA&gt;                 NA
-#&gt; 2                     NULL              simA-00-1000                 NA
-#&gt; 3                     NULL              simA-00-1001                 NA
-#&gt; 4                     NULL              simA-00-1002                 NA
-#&gt; 5                     NULL              simA-00-1003                 NA
-#&gt; 6                     NULL              simA-00-9999                 NA
-#&gt; 7                     NULL                      &lt;NA&gt;                 NA
-#&gt;   c8y_Hardware.revision c8y_Position.lng c8y_Position.alt c8y_Position.accuracy
-#&gt; 1                    NA               NA               NA                    NA
-#&gt; 2                    NA               NA               NA                    NA
-#&gt; 3                    NA               NA               NA                    NA
-#&gt; 4                    NA               NA               NA                    NA
-#&gt; 5                    NA               NA               NA                    NA
-#&gt; 6                    NA               NA               NA                    NA
-#&gt; 7                    NA         6.755905                0                    10
-#&gt;   c8y_Position.lat
-#&gt; 1               NA
-#&gt; 2               NA
-#&gt; 3               NA
-#&gt; 4               NA
-#&gt; 5               NA
-#&gt; 6               NA
-#&gt; 7         51.24515</div><div class='input'># }
+#&gt; 8                    NULL
+#&gt; 9                    NULL
+#&gt;                                                            deviceParents.self
+#&gt; 1     https://db.us.cumulocity.com/inventory/managedObjects/141/deviceParents
+#&gt; 2 https://db.us.cumulocity.com/inventory/managedObjects/1416318/deviceParents
+#&gt; 3 https://db.us.cumulocity.com/inventory/managedObjects/1416323/deviceParents
+#&gt; 4 https://db.us.cumulocity.com/inventory/managedObjects/1416328/deviceParents
+#&gt; 5 https://db.us.cumulocity.com/inventory/managedObjects/1416333/deviceParents
+#&gt; 6 https://db.us.cumulocity.com/inventory/managedObjects/1416338/deviceParents
+#&gt; 7 https://db.us.cumulocity.com/inventory/managedObjects/1416341/deviceParents
+#&gt; 8 https://db.us.cumulocity.com/inventory/managedObjects/1416348/deviceParents
+#&gt; 9     https://db.us.cumulocity.com/inventory/managedObjects/147/deviceParents
+#&gt;   deviceParents.references c8y_Position.lng c8y_Position.alt
+#&gt; 1                     NULL               NA               NA
+#&gt; 2                     NULL               NA               NA
+#&gt; 3                     NULL               NA               NA
+#&gt; 4                     NULL               NA               NA
+#&gt; 5                     NULL               NA               NA
+#&gt; 6                     NULL               NA               NA
+#&gt; 7                     NULL               NA               NA
+#&gt; 8                     NULL               NA               NA
+#&gt; 9                     NULL         6.758051                0
+#&gt;   c8y_Position.accuracy c8y_Position.lat
+#&gt; 1                    NA               NA
+#&gt; 2                    NA               NA
+#&gt; 3                    NA               NA
+#&gt; 4                    NA               NA
+#&gt; 5                    NA               NA
+#&gt; 6                    NA               NA
+#&gt; 7                    NA               NA
+#&gt; 8                    NA               NA
+#&gt; 9                    10         51.22532</div><div class='input'># }
 
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Dmitriy Bolotov</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -329,7 +349,7 @@ before being returned. The data is converted to a single flattened data frame.</
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
