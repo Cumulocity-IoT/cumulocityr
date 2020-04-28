@@ -1,5 +1,3 @@
-context("test get_measurements")
-
 temp_device_id <- 141
 
 test_that("num_rows controls number of records returned", {

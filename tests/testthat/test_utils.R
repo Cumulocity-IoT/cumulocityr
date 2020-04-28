@@ -1,6 +1,3 @@
-context("test utils")
-
-
 test_that(".get_cumulocity_* does not result in error", {
   skip_on_cran()
   expect_error(.get_cumulocity_base_url(), NA)

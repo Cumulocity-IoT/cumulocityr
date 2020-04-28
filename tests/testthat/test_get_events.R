@@ -1,5 +1,3 @@
-context("test get_events")
-
 loc_device_id <- 147
 
 test_that("num_rows controls number of records returned", {

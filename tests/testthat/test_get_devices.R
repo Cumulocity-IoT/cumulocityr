@@ -1,6 +1,3 @@
-context("test get_devices")
-
-
 test_that("get_devices returns data.frame", {
   skip_on_cran()
   expect_equal(is.data.frame(get_devices(num_rows = 3)), TRUE)
