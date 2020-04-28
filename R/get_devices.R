@@ -42,7 +42,7 @@
 #'
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' get_devices()
 #' }
 #'

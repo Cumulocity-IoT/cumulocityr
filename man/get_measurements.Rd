@@ -47,7 +47,7 @@ For queries with multiple pages, a list of such objects is returned. Each
 element in this list contains up to 2000 records.
 }
 \examples{
-\donttest{
+\dontrun{
 get_measurements(device_id, date_from = "2019-09-30T20:00:00Z")
 }
 }
