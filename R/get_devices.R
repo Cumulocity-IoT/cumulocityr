@@ -1,6 +1,6 @@
 # CUMULOCITYR
 #
-# Copyright (c) 2019, Software AG, Darmstadt, Germany and/or Software AG
+# Copyright (c) 2020, Software AG, Darmstadt, Germany and/or Software AG
 # USA Inc., Reston, VA, USA, and/or its subsidiaries and/or its affiliates
 # and/or their licensors.
 #
@@ -27,7 +27,6 @@
 #' and a character string otherwise.
 #'
 #' @details
-#' Get the devices for a tenant.
 #'
 #' If \code{num_rows = NULL} (default), all devices are returned.
 #'

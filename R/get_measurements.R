@@ -1,6 +1,6 @@
 # CUMULOCITYR
 #
-# Copyright (c) 2019, Software AG, Darmstadt, Germany and/or Software AG
+# Copyright (c) 2020, Software AG, Darmstadt, Germany and/or Software AG
 # USA Inc., Reston, VA, USA, and/or its subsidiaries and/or its affiliates
 # and/or their licensors.
 #
@@ -45,9 +45,6 @@
 #' If \code{parse_json} is FALSE, the JSON object is returned as a JSON string.
 #' For queries with multiple pages, a list of such objects is returned. Each
 #' element in this list contains up to 2000 records.
-#'
-#' @details
-#' Get the measurements for a device for a time period.
 #'
 #' @author Dmitriy Bolotov
 #'
