@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/cumulocityr)](https://cran.r-project.org/package=cumulocityr)
 [![Travis build
 status](https://travis-ci.org/SoftwareAG/cumulocityr.svg?branch=master)](https://travis-ci.org/SoftwareAG/cumulocityr)
 [![Codecov test
