@@ -1,4 +1,4 @@
-
+# !!! Archived -- this repository is archived and currently not actively maintained!
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # cumulocityr <img src='man/figures/logo.png' align="right" height="138" />
